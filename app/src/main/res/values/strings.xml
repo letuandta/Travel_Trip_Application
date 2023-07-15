@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Travel Trip Application</string>
+    <string name="login">Đăng nhập</string>
+    <string name="register">Đăng kí tài khoảng</string>
+</resources>
