@@ -2,6 +2,7 @@ package com.example.traveltripapplication;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import com.example.traveltripapplication.databinding.ActivityMainBinding;
 
@@ -16,11 +17,13 @@ public class MainActivity extends AppCompatActivity {
         setContentView(mActivityMainBinding.getRoot());
 
         mActivityMainBinding.loginBtn.setOnClickListener(view -> {
-
+            Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+            startActivity(intent);
         });
 
         mActivityMainBinding.registerBtn.setOnClickListener(view -> {
-
+            Intent intent = new Intent(MainActivity.this, RegisterActivity.class);
+            startActivity(intent);
         });
     }
 }
