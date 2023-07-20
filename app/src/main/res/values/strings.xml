@@ -2,4 +2,12 @@
     <string name="app_name">Travel Trip Application</string>
     <string name="login">Đăng nhập</string>
     <string name="register">Đăng kí tài khoảng</string>
+    <string name="email_or_phone">Nhập email/số điện thoại</string>
+    <string name="hint_enter_email"><i>Nhập email/số điện thoại</i></string>
+    <string name="hint_enter_password"><i>Mật khẩu</i></string>
+    <string name="password">Mật khẩu</string>
+    <string name="others_way_to_login">Hoặc đăng nhập</string>
+    <string name="you_have_not_account"><i><b>Bạn chưa có tài khoảng?</b></i></string>
+    <string name="register_2"><b>Đăng ký</b></string>
+    <string name="skip"><b>Bỏ qua</b></string>
 </resources>
