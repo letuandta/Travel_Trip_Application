@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 import com.example.traveltripapplication.database.DatabaseInformation;
 import com.example.traveltripapplication.database.position.PositionContract.PositionEntry;
@@ -31,6 +32,7 @@ public class PositionHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
+        Log.d("create position", "onCreate: position");
         db.execSQL("CREATE TABLE IF NOT EXISTS " + TABLE_NAME + " ("
                 + PositionEntry._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
                 + PositionEntry.POSITION_NAME + " TEXT NOT NULL);");
