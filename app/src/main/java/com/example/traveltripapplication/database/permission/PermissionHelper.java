@@ -7,11 +7,11 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 import androidx.annotation.Nullable;
 
 import com.example.traveltripapplication.database.DatabaseInformation;
-import com.example.traveltripapplication.database.position.PositionContract;
 
 public class PermissionHelper extends SQLiteOpenHelper {
 
@@ -35,6 +35,7 @@ public class PermissionHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
+        Log.d("create peemission", "onCreate: permission");
         db.execSQL("CREATE TABLE IF NOT EXISTS " + TABLE_NAME + " ("
                 + PermissionEntry._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
                 + PermissionEntry.PERMISSION__NAME + " TEXT NOT NULL);");
