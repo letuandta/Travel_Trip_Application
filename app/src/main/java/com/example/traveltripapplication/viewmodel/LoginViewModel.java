@@ -7,6 +7,7 @@ import androidx.databinding.Bindable;
 import androidx.databinding.ObservableField;
 
 import com.example.traveltripapplication.BR;
+import com.example.traveltripapplication.model.UserModel;
 import com.example.traveltripapplication.presenter.AuthPresenter;
 import com.example.traveltripapplication.enumapp.LoginEnum;
 import com.example.traveltripapplication.interfaceviewmodel.LoginViewModelInterface;
@@ -32,26 +33,28 @@ public class LoginViewModel extends BaseObservable {
     }
 
     public void onClickLoginButton(LoginViewModelInterface loginViewModelInterface)  {
-        if((getLoginModel().isEmailValid() || getLoginModel().isPhoneValid()) && getLoginModel().isPasswordValid()) {
+        if((getLoginModel().isEmailValid() || getLoginModel().isUserNameValid()) && getLoginModel().isPasswordValid()) {
             Log.d("LOGIN", getLoginModel().getUsername() + getLoginModel().getPassword());
-            CompletableFuture<Boolean> checkLogin = AuthPresenter.Login(getLoginModel().getUsername(), getLoginModel().getPassword(),
-                    getLoginModel().isEmailValid() ? LoginEnum.EMAIL : LoginEnum.PHONE);
-            checkLogin.thenAccept(result -> {
-                if(result){
+            CompletableFuture<UserModel> loginFuture = AuthPresenter.Login(getLoginModel().getUsername(), getLoginModel().getPassword(),
+                    getLoginModel().isEmailValid() ? LoginEnum.EMAIL : LoginEnum.USERNAME);
+            loginFuture.thenAcceptAsync(result -> {
+                if(result.get_ID() != -1){
                     message.set("Login success !!");
                     //Gan gia tri cho user
+                    //Dua thong tin user ra cho activity truyen qua activity khac
+                    loginViewModelInterface.onClickLogin();
                 }
                 else {
                     message.set("login fail !!");
                 }
             });
+            loginFuture.thenRun(() -> {
+                message.set("Processing.......");
+            });
         }
         else {
             message.set("username or password invalid");
         }
-
-        //Dua thong tin user ra cho activity truyen qua activity khac
-        loginViewModelInterface.onClickLogin();
     }
 
 }
