@@ -2,7 +2,7 @@ package com.example.traveltripapplication.enumapp;
 
 public enum LoginEnum {
     EMAIL(1),
-    PHONE(2);
+    USERNAME(2);
 
     private final int value;
 

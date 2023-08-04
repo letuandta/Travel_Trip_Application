@@ -31,8 +31,8 @@ public class LoginModel {
         return !TextUtils.isEmpty(username) && Patterns.EMAIL_ADDRESS.matcher(username).matches();
     }
 
-    public boolean isPhoneValid() {
-        return !TextUtils.isEmpty(username) && username.matches("^(?=0)(\\d{10})");//Bat dau bang so 0 va cos 10 so
+    public boolean isUserNameValid() {
+        return !TextUtils.isEmpty(username);
     }
 
     public boolean isPasswordValid() {

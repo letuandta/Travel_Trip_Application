@@ -2,6 +2,7 @@ package com.example.traveltripapplication.database.user;
 
 import static com.example.traveltripapplication.database.user.UserContract.*;
 
+import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -13,6 +14,7 @@ import com.example.traveltripapplication.database.DatabaseInformation;
 import com.example.traveltripapplication.database.contacts.ContactsContract;
 import com.example.traveltripapplication.database.contacts.ContactsHelper;
 import com.example.traveltripapplication.database.state.StateContract;
+import com.example.traveltripapplication.model.UserModel;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -72,7 +74,7 @@ public class UserHelper extends SQLiteOpenHelper {
                 + UserEntry.LAST_NAME + ", "
                 + UserEntry.BIRTHDAY + " ) "
                 + "VALUES ('admin', "
-                + "'admin', "
+                + "'admin123456', "
                 + "'admin.traveltrip@gmail.com', "
                 + "1, "
                 + "'https://i.pinimg.com/564x/40/98/2a/40982a8167f0a53dedce3731178f2ef5.jpg', "
@@ -94,22 +96,78 @@ public class UserHelper extends SQLiteOpenHelper {
         }
     }
 
-    //Tạo model User để làm
-//    public long insert(User user) {
-//        SQLiteDatabase db = getWritableDatabase();
-//        ContentValues values = new ContentValues();
-//        values.put(UserEntry., phone);
-//        values.put(UserEntry.EMAIL, email);
-//        values.put(UserEntry.CURRENT_ADDRESS, currentAddress);
-//        values.put(UserEntry.MORE_INFORMATION, moreInformation);
-//        long id = db.insert(TABLE_NAME, ContactsContract.ContactsEntry._ID, values);
-//        db.close();
-//        return id;
-//    }
+    public long createAccount(String username, String email, String password){
+        SQLiteDatabase db = getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(UserEntry.USERNAME, username);
+        values.put(UserEntry.PASSWORD, password);
+        values.put(UserEntry.EMAIL, email);
+        long id = db.insert(TABLE_NAME, UserEntry._ID, values);
+        return id;
+    }
 
-    public Cursor getContactsById(long id) {
+    public int updateUser(UserModel user) {
+        SQLiteDatabase db = getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(UserEntry.USERNAME, user.getUsername());
+        values.put(UserEntry.PASSWORD, user.getPassword());
+        values.put(UserEntry.AVATAR, user.getAvatar());
+        values.put(UserEntry.EMAIL, user.getEmail());
+        values.put(UserEntry.LAST_NAME, user.getLast_name());
+        values.put(UserEntry.FIRST_NAME, user.getFirst_name());
+        values.put(UserEntry.CONTACTS, user.getContacts_id());
+        values.put(UserEntry.STATE, user.getState());
+        values.put(UserEntry.IS_SUPER_USER, user.getIs_super_user());
+        values.put(UserEntry.BIRTHDAY, user.getBirthday());
+        values.put(UserEntry.CREATED_DATE, dtf.format(now));
+        values.put(UserEntry.LAST_LOGIN, dtf.format(now));
+        int id = db.update(TABLE_NAME, values, null, null);
+        db.close();
+        return id;
+    }
+
+    @SuppressLint("Range")
+    public UserModel getUserByUsernameAndPassword(String username, String password) {
         SQLiteDatabase db = getReadableDatabase();
-        return db.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE id = ?;" , new String[]{String.valueOf(id)});
+        UserModel user = new UserModel();
+        Cursor result = db.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE state_id = 1 AND username = ? AND password = ?;" ,
+                new String[]{username, password});
+        if(result.moveToFirst()) {
+            user.set_ID(result.getLong(result.getColumnIndex(UserEntry._ID)));
+            user.setAvatar(result.getString(result.getColumnIndex(UserEntry.AVATAR)));
+            user.setBirthday(result.getString(result.getColumnIndex(UserEntry.BIRTHDAY)));
+            user.setIs_super_user(result.getLong(result.getColumnIndex(UserEntry.IS_SUPER_USER)));
+            user.setContacts_id(result.getLong(result.getColumnIndex(UserEntry.CONTACTS)));
+            user.setCreated_date(result.getString(result.getColumnIndex(UserEntry.CREATED_DATE)));
+            user.setLats_name(result.getString(result.getColumnIndex(UserEntry.LAST_NAME)));
+            user.setFirst_name(result.getString(result.getColumnIndex(UserEntry.FIRST_NAME)));
+        }
+        else {
+           user.set_ID(-1);
+        }
+        return user;
+    }
+
+    @SuppressLint("Range")
+    public UserModel getUserByEmailAndPassword(String email, String password) {
+        SQLiteDatabase db = getReadableDatabase();
+        UserModel user = new UserModel();
+        Cursor result = db.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE state_id = 1 AND username = ? AND password = ?;" ,
+                new String[]{email, password});
+        if(result.moveToFirst()) {
+            user.set_ID(result.getLong(result.getColumnIndex(UserEntry._ID)));
+            user.setAvatar(result.getString(result.getColumnIndex(UserEntry.AVATAR)));
+            user.setBirthday(result.getString(result.getColumnIndex(UserEntry.BIRTHDAY)));
+            user.setIs_super_user(result.getLong(result.getColumnIndex(UserEntry.IS_SUPER_USER)));
+            user.setContacts_id(result.getLong(result.getColumnIndex(UserEntry.CONTACTS)));
+            user.setCreated_date(result.getString(result.getColumnIndex(UserEntry.CREATED_DATE)));
+            user.setLats_name(result.getString(result.getColumnIndex(UserEntry.LAST_NAME)));
+            user.setFirst_name(result.getString(result.getColumnIndex(UserEntry.FIRST_NAME)));
+        }
+        else {
+            user.set_ID(-1);
+        }
+        return user;
     }
 
     public void delete(long id) {
