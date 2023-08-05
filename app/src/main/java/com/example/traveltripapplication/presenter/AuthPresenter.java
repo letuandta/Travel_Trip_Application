@@ -37,4 +37,13 @@ public class AuthPresenter {
         logoutFuture.complete(true);
         return logoutFuture;
     }
+
+    public static CompletableFuture<Long> Register(String fullName, String username, String password) {
+        CompletableFuture<Long> registerFuture = new CompletableFuture<>();
+        registerFuture = CompletableFuture.supplyAsync(() -> {
+            return DatabaseHelper.mUserHelper().createAccount(fullName, username, password);
+        });
+
+        return registerFuture;
+    }
 }

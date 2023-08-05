@@ -1,0 +1,53 @@
+package com.example.traveltripapplication.viewmodel;
+
+import android.util.Log;
+
+import androidx.databinding.BaseObservable;
+import androidx.databinding.Bindable;
+import androidx.databinding.ObservableField;
+
+import com.example.traveltripapplication.BR;
+import com.example.traveltripapplication.interfaceviewmodel.RegisterViewModelInterface;
+import com.example.traveltripapplication.model.RegisterModel;
+import com.example.traveltripapplication.presenter.AuthPresenter;
+
+import java.util.concurrent.CompletableFuture;
+
+public class RegisterViewModel extends BaseObservable {
+    private RegisterModel mRegisterModel = new RegisterModel();
+    public ObservableField<String> message = new ObservableField<>();
+
+    @Bindable
+    public RegisterModel getRegisterModel() {
+        return mRegisterModel;
+    }
+
+    public void setRegisterModel(RegisterModel mRegisterModel) {
+        this.mRegisterModel = mRegisterModel;
+        notifyPropertyChanged(BR.registerModel);
+    }
+
+    public void onClickButtonRegister(RegisterViewModelInterface registerViewModelInterface) {
+        if ((getRegisterModel().checkPassword()) && getRegisterModel().isUserNameValid() && getRegisterModel().isPasswordValid() && getRegisterModel().isConfirmPasswordValid()) {
+            Log.d("Account", getRegisterModel().getFullName() + getRegisterModel().getPassword() + getRegisterModel().getUsername() + getRegisterModel().getConfirmPassword());
+            CompletableFuture<Long> registerFuture = AuthPresenter.Register(getRegisterModel().getFullName(), getRegisterModel().getUsername(), getRegisterModel().getPassword());
+
+            registerFuture.thenAcceptAsync(result -> {
+                if (result >= 0) {
+                    message.set("Dang ky thanh cong");
+                    registerViewModelInterface.successRegister();
+                } else {
+                    message.set("Tai khoan da ton tai");
+                }
+            });
+            registerFuture.thenRun(() -> {
+                message.set("Cho doi");
+            });
+        }
+        else {
+            message.set("username or password invalid");
+        }
+    }
+
+
+}

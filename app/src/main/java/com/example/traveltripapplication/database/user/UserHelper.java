@@ -54,8 +54,7 @@ public class UserHelper extends SQLiteOpenHelper {
                 + UserEntry.IS_SUPER_USER + " INTEGER, "
                 + UserEntry.LAST_LOGIN + " TEXT, "
                 + UserEntry.CREATED_DATE + " TEXT, "
-                + UserEntry.FIRST_NAME + " TEXT, "
-                + UserEntry.LAST_NAME + " TEXT, "
+                + UserEntry.FULL_NAME + " TEXT, "
                 + UserEntry.BIRTHDAY + " TEXT, "
                 + "FOREIGN KEY ("+UserEntry.CONTACTS+") REFERENCES "+ContactsContract.ContactsEntry.TABLE_NAME+" ("+ ContactsContract.ContactsEntry._ID +"), "
                 + "FOREIGN KEY ("+UserEntry.CONTACTS+") REFERENCES "+ StateContract.StateRetry.TABLE_NAME+" ("+ StateContract.StateRetry._ID +") "
@@ -70,8 +69,7 @@ public class UserHelper extends SQLiteOpenHelper {
                 + UserEntry.IS_SUPER_USER + ", "
                 + UserEntry.LAST_LOGIN + ", "
                 + UserEntry.CREATED_DATE + ", "
-                + UserEntry.FIRST_NAME + ", "
-                + UserEntry.LAST_NAME + ", "
+                + UserEntry.FULL_NAME + ", "
                 + UserEntry.BIRTHDAY + " ) "
                 + "VALUES ('admin', "
                 + "'admin123456', "
@@ -83,7 +81,6 @@ public class UserHelper extends SQLiteOpenHelper {
                 + " '" + String.valueOf(dtf.format(now)) + "', "
                 + " '" + String.valueOf(dtf.format(now)) + "', "
                 + "'admin', "
-                + "'traveltrip', "
                 + "'" + String.valueOf(dtf.format(now)) + "'"
                 + ");");
     }
@@ -96,13 +93,56 @@ public class UserHelper extends SQLiteOpenHelper {
         }
     }
 
+    public Boolean insertData(String email, String password) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put("email", email);
+        values.put("password", password);
+        long result = db.insert(TABLE_NAME, null, values);
+
+        if (result == -1) {
+            return  false;
+        }
+        else {
+            return true;
+        }
+    }
+
+    public Boolean checkUserName(String username) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE username = ?", new String[]{username});
+        if (cursor.getCount() > 0) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
+    public Boolean checkEmailPassword(String email, String password) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE email = ? and password = ?", new String[]{email});
+        if (cursor.getCount() > 0) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
     public long createAccount(String username, String email, String password){
         SQLiteDatabase db = getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(UserEntry.USERNAME, username);
         values.put(UserEntry.PASSWORD, password);
         values.put(UserEntry.EMAIL, email);
-        long id = db.insert(TABLE_NAME, UserEntry._ID, values);
+        long id;
+        if (checkUserName(username)){
+            id = db.insert(TABLE_NAME, UserEntry._ID, values);
+        }
+        else {
+            id=-1;
+        }
         return id;
     }
 
@@ -113,8 +153,7 @@ public class UserHelper extends SQLiteOpenHelper {
         values.put(UserEntry.PASSWORD, user.getPassword());
         values.put(UserEntry.AVATAR, user.getAvatar());
         values.put(UserEntry.EMAIL, user.getEmail());
-        values.put(UserEntry.LAST_NAME, user.getLast_name());
-        values.put(UserEntry.FIRST_NAME, user.getFirst_name());
+        values.put(UserEntry.FULL_NAME, user.getFull_name());
         values.put(UserEntry.CONTACTS, user.getContacts_id());
         values.put(UserEntry.STATE, user.getState());
         values.put(UserEntry.IS_SUPER_USER, user.getIs_super_user());
@@ -139,8 +178,7 @@ public class UserHelper extends SQLiteOpenHelper {
             user.setIs_super_user(result.getLong(result.getColumnIndex(UserEntry.IS_SUPER_USER)));
             user.setContacts_id(result.getLong(result.getColumnIndex(UserEntry.CONTACTS)));
             user.setCreated_date(result.getString(result.getColumnIndex(UserEntry.CREATED_DATE)));
-            user.setLats_name(result.getString(result.getColumnIndex(UserEntry.LAST_NAME)));
-            user.setFirst_name(result.getString(result.getColumnIndex(UserEntry.FIRST_NAME)));
+            user.setFull_name(result.getString(result.getColumnIndex(UserEntry.FULL_NAME)));
         }
         else {
            user.set_ID(-1);
@@ -161,8 +199,7 @@ public class UserHelper extends SQLiteOpenHelper {
             user.setIs_super_user(result.getLong(result.getColumnIndex(UserEntry.IS_SUPER_USER)));
             user.setContacts_id(result.getLong(result.getColumnIndex(UserEntry.CONTACTS)));
             user.setCreated_date(result.getString(result.getColumnIndex(UserEntry.CREATED_DATE)));
-            user.setLats_name(result.getString(result.getColumnIndex(UserEntry.LAST_NAME)));
-            user.setFirst_name(result.getString(result.getColumnIndex(UserEntry.FIRST_NAME)));
+            user.setFull_name(result.getString(result.getColumnIndex(UserEntry.FULL_NAME)));
         }
         else {
             user.set_ID(-1);

@@ -43,11 +43,11 @@
                 android:id="@+id/username"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp"
+                android:layout_margin="5dp"
                 android:background="@drawable/edit_text_label"
                 android:hint="@string/hint_enter_email"
                 android:text="@={LoginViewModel.loginModel.username}"
-                android:padding="20dp" />
+                android:padding="15dp" />
         </LinearLayout>
 
         <LinearLayout
@@ -76,10 +76,10 @@
                 android:layout_height="wrap_content"
                 android:inputType="textPassword"
                 android:text="@={LoginViewModel.loginModel.password}"
-                android:layout_margin="10dp"
+                android:layout_margin="5dp"
                 android:background="@drawable/edit_text_label"
                 android:hint="@string/hint_enter_password"
-                android:padding="20dp" />
+                android:padding="15dp" />
         </LinearLayout>
 
         <RelativeLayout
@@ -98,7 +98,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:layout_centerVertical="true"
-                android:layout_margin="3dp"
+                android:layout_marginStart="3dp"
+                android:layout_marginTop="3dp"
+                android:layout_marginEnd="3dp"
+                android:layout_marginBottom="3dp"
                 android:layout_toStartOf="@+id/tv_textview"
                 android:background="@color/gray_custom" />
 

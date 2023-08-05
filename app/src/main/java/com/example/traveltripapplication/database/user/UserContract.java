@@ -14,8 +14,7 @@ public final class UserContract {
         public static final String AVATAR = "avatar";
         public static final String LAST_LOGIN = "last_login";
         public static final String CREATED_DATE = "created_date";
-        public static final String FIRST_NAME = "first_name";
-        public static final String LAST_NAME = "last_name";
+        public static final String FULL_NAME = "full_name";
         public static final String BIRTHDAY = "birthday";
         public static final String CONTACTS = "contacts_id";
         public static final String STATE = "state_id";
