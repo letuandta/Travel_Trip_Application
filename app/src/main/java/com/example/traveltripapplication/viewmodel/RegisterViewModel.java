@@ -9,6 +9,7 @@ import androidx.databinding.ObservableField;
 import com.example.traveltripapplication.BR;
 import com.example.traveltripapplication.interfaceviewmodel.RegisterViewModelInterface;
 import com.example.traveltripapplication.model.RegisterModel;
+import com.example.traveltripapplication.model.UserModel;
 import com.example.traveltripapplication.presenter.AuthPresenter;
 
 import java.util.concurrent.CompletableFuture;
@@ -35,7 +36,11 @@ public class RegisterViewModel extends BaseObservable {
             registerFuture.thenAcceptAsync(result -> {
                 if (result >= 0) {
                     message.set("Dang ky thanh cong");
-                    registerViewModelInterface.successRegister();
+                    UserModel user = new UserModel();
+                    user.set_ID(result);
+                    user.setFull_name(getRegisterModel().getFullName());
+                    user.setAvatar("https://i.pinimg.com/564x/40/98/2a/40982a8167f0a53dedce3731178f2ef5.jpg");
+                    registerViewModelInterface.successRegister(user);
                 } else {
                     message.set("Tai khoan da ton tai");
                 }

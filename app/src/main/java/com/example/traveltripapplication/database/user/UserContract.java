@@ -19,5 +19,6 @@ public final class UserContract {
         public static final String CONTACTS = "contacts_id";
         public static final String STATE = "state_id";
         public static final String IS_SUPER_USER = "is_super_user";
+        public static final String IS_ENOUGH = "is_enough";
     }
 }

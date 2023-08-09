@@ -10,6 +10,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
 import com.example.traveltripapplication.database.DatabaseInformation;
+import com.example.traveltripapplication.model.ContactsModel;
 
 public class ContactsHelper extends SQLiteOpenHelper {
 
@@ -59,13 +60,12 @@ public class ContactsHelper extends SQLiteOpenHelper {
         }
     }
 
-    public long insert(String phone, String email, String currentAddress, String moreInformation) {
+    public long insert(ContactsModel contactsModel) {
         SQLiteDatabase db = getWritableDatabase();
         ContentValues values = new ContentValues();
-        values.put(ContactsEntry.PHONE_NUMBER, phone);
-        values.put(ContactsEntry.EMAIL, email);
-        values.put(ContactsEntry.CURRENT_ADDRESS, currentAddress);
-        values.put(ContactsEntry.MORE_INFORMATION, moreInformation);
+        values.put(ContactsEntry.PHONE_NUMBER, contactsModel.getPhone_number());
+        values.put(ContactsEntry.CURRENT_ADDRESS, contactsModel.getAddress());
+        values.put(ContactsEntry.MORE_INFORMATION, contactsModel.getMore());
         long id = db.insert(TABLE_NAME, ContactsEntry._ID, values);
         db.close();
         return id;

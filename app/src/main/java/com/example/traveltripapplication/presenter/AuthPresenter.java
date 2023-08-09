@@ -2,6 +2,7 @@ package com.example.traveltripapplication.presenter;
 
 import com.example.traveltripapplication.database.DatabaseHelper;
 import com.example.traveltripapplication.enumapp.LoginEnum;
+import com.example.traveltripapplication.model.ContactsModel;
 import com.example.traveltripapplication.model.UserModel;
 
 import java.util.concurrent.CompletableFuture;
@@ -36,6 +37,17 @@ public class AuthPresenter {
 
         logoutFuture.complete(true);
         return logoutFuture;
+    }
+
+    public static CompletableFuture<Integer> CompleteUserInfo(UserModel user, ContactsModel contactsModel){
+        CompletableFuture<Integer> completableFuture = new CompletableFuture<Integer>();
+
+        completableFuture = CompletableFuture.supplyAsync(() ->{
+            long contacts_id = DatabaseHelper.mContactsHelper().insert(contactsModel);
+            user.setContacts_id(contacts_id);
+            return DatabaseHelper.mUserHelper().updateUser(user);
+        });
+        return completableFuture;
     }
 
     public static CompletableFuture<Long> Register(String fullName, String username, String password) {

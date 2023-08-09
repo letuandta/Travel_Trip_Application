@@ -12,7 +12,6 @@ import android.util.Log;
 
 import com.example.traveltripapplication.database.DatabaseInformation;
 import com.example.traveltripapplication.database.contacts.ContactsContract;
-import com.example.traveltripapplication.database.contacts.ContactsHelper;
 import com.example.traveltripapplication.database.state.StateContract;
 import com.example.traveltripapplication.model.UserModel;
 
@@ -56,8 +55,9 @@ public class UserHelper extends SQLiteOpenHelper {
                 + UserEntry.CREATED_DATE + " TEXT, "
                 + UserEntry.FULL_NAME + " TEXT, "
                 + UserEntry.BIRTHDAY + " TEXT, "
+                + UserEntry.IS_ENOUGH + " INTEGER, "
                 + "FOREIGN KEY ("+UserEntry.CONTACTS+") REFERENCES "+ContactsContract.ContactsEntry.TABLE_NAME+" ("+ ContactsContract.ContactsEntry._ID +"), "
-                + "FOREIGN KEY ("+UserEntry.CONTACTS+") REFERENCES "+ StateContract.StateRetry.TABLE_NAME+" ("+ StateContract.StateRetry._ID +") "
+                + "FOREIGN KEY ("+UserEntry.STATE+") REFERENCES "+ StateContract.StateRetry.TABLE_NAME+" ("+ StateContract.StateRetry._ID +") "
                 + ");");
         db.execSQL("INSERT INTO " + TABLE_NAME + " ( "
                 + UserEntry.USERNAME + ", "
@@ -70,18 +70,20 @@ public class UserHelper extends SQLiteOpenHelper {
                 + UserEntry.LAST_LOGIN + ", "
                 + UserEntry.CREATED_DATE + ", "
                 + UserEntry.FULL_NAME + ", "
+                + UserEntry.IS_ENOUGH + ", "
                 + UserEntry.BIRTHDAY + " ) "
-                + "VALUES ('admin', "
-                + "'admin123456', "
-                + "'admin.traveltrip@gmail.com', "
-                + "1, "
-                + "'https://i.pinimg.com/564x/40/98/2a/40982a8167f0a53dedce3731178f2ef5.jpg', "
-                + "1, "
-                + "1, "
-                + " '" + String.valueOf(dtf.format(now)) + "', "
-                + " '" + String.valueOf(dtf.format(now)) + "', "
-                + "'admin', "
-                + "'" + String.valueOf(dtf.format(now)) + "'"
+                + "VALUES ('admin', " //username
+                + "'admin123456', " //password
+                + "'admin.traveltrip@gmail.com', " //email
+                + "1, " //contacts_id
+                + "'https://i.pinimg.com/564x/40/98/2a/40982a8167f0a53dedce3731178f2ef5.jpg', " //avatar link
+                + "1, " //state_id
+                + "1, " // is super user
+                + " '" + String.valueOf(dtf.format(now)) + "', " //last login
+                + " '" + String.valueOf(dtf.format(now)) + "', " // created date
+                + "'admin', " // full name
+                + "1, " //is_enough
+                + "'" + String.valueOf(dtf.format(now)) + "'" //birthday
                 + ");");
     }
 
@@ -93,51 +95,46 @@ public class UserHelper extends SQLiteOpenHelper {
         }
     }
 
-    public Boolean insertData(String email, String password) {
-        SQLiteDatabase db = this.getWritableDatabase();
-        ContentValues values = new ContentValues();
-        values.put("email", email);
-        values.put("password", password);
-        long result = db.insert(TABLE_NAME, null, values);
 
-        if (result == -1) {
-            return  false;
-        }
-        else {
-            return true;
-        }
-    }
-
-    public Boolean checkUserName(String username) {
+    public Boolean isUsernameExists(String username) {
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE username = ?", new String[]{username});
         if (cursor.getCount() > 0) {
+            cursor.close();
             return true;
         }
         else {
+            cursor.close();
             return false;
         }
     }
 
-    public Boolean checkEmailPassword(String email, String password) {
+    public Boolean isEmailExists(String email) {
         SQLiteDatabase db = this.getWritableDatabase();
-        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE email = ? and password = ?", new String[]{email});
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE email = ?", new String[]{email});
         if (cursor.getCount() > 0) {
+            cursor.close();
             return true;
         }
         else {
+            cursor.close();
             return false;
         }
     }
 
-    public long createAccount(String username, String email, String password){
+    public long createAccount(String full_name, String username, String password){
         SQLiteDatabase db = getWritableDatabase();
         ContentValues values = new ContentValues();
+        values.put(UserEntry.FULL_NAME, full_name);
         values.put(UserEntry.USERNAME, username);
         values.put(UserEntry.PASSWORD, password);
-        values.put(UserEntry.EMAIL, email);
+        values.put(UserEntry.AVATAR, "https://i.pinimg.com/564x/40/98/2a/40982a8167f0a53dedce3731178f2ef5.jpg");
+        values.put(UserEntry.IS_ENOUGH, 0);
+        values.put(UserEntry.STATE, 1);
+        values.put(UserEntry.IS_SUPER_USER, 0);
+        values.put(UserEntry.CREATED_DATE, dtf.format(now));
         long id;
-        if (checkUserName(username)){
+        if (!isUsernameExists(username)){
             id = db.insert(TABLE_NAME, UserEntry._ID, values);
         }
         else {
@@ -149,18 +146,15 @@ public class UserHelper extends SQLiteOpenHelper {
     public int updateUser(UserModel user) {
         SQLiteDatabase db = getWritableDatabase();
         ContentValues values = new ContentValues();
-        values.put(UserEntry.USERNAME, user.getUsername());
-        values.put(UserEntry.PASSWORD, user.getPassword());
         values.put(UserEntry.AVATAR, user.getAvatar());
-        values.put(UserEntry.EMAIL, user.getEmail());
         values.put(UserEntry.FULL_NAME, user.getFull_name());
+        values.put(UserEntry.EMAIL, user.getEmail());
         values.put(UserEntry.CONTACTS, user.getContacts_id());
         values.put(UserEntry.STATE, user.getState());
-        values.put(UserEntry.IS_SUPER_USER, user.getIs_super_user());
         values.put(UserEntry.BIRTHDAY, user.getBirthday());
-        values.put(UserEntry.CREATED_DATE, dtf.format(now));
         values.put(UserEntry.LAST_LOGIN, dtf.format(now));
-        int id = db.update(TABLE_NAME, values, null, null);
+        values.put(UserEntry.IS_ENOUGH, 1);
+        int id = db.update(TABLE_NAME, values, UserEntry._ID + " = ?", new String[]{String.valueOf(user.get_ID())});
         db.close();
         return id;
     }

@@ -2,8 +2,8 @@
     <string name="app_name">Travel Trip Application</string>
     <string name="login">Đăng nhập</string>
     <string name="register">Đăng kí tài khoản</string>
-    <string name="email_or_phone">Nhập email/số điện thoại</string>
-    <string name="hint_enter_email"><i>Nhập email/số điện thoại</i></string>
+    <string name="email_or_phone">Nhập username</string>
+    <string name="hint_enter_email"><i>Nhập email/tài khoảng</i></string>
     <string name="hint_enter_password"><i>Mật khẩu</i></string>
     <string name="password">Mật khẩu</string>
     <string name="others_way_to_login">Hoặc đăng nhập</string>
@@ -15,4 +15,11 @@
     <string name="confirm_password">Nhập lại mật khẩu</string>
     <string name="hint_confirm_password"><i>Nhập lại mật khẩu</i></string>
     <string name="terms">Bằng việc đăng ký, bạn đã đông ý với <b> TRAVEL TRIP</b> về <br>Điều khoản dịch vụ Chính sách bảo mật</br></string>
+    <string name="user_full_name">Tên đầy đủ:</string>
+    <string name="user_birthday">Ngày sinh:</string>
+    <string name="user_contacts">Thông tin liên hệ:</string>
+    <string name="phone_number">Số điện thoại:</string>
+    <string name="email_contact">Email:</string>
+    <string name="address">Đia chỉ:</string>
+    <string name="more_infomation">Thông tin thêm:</string>
 </resources>
