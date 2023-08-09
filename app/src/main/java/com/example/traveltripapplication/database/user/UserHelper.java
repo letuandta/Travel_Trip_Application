@@ -150,7 +150,6 @@ public class UserHelper extends SQLiteOpenHelper {
         values.put(UserEntry.FULL_NAME, user.getFull_name());
         values.put(UserEntry.EMAIL, user.getEmail());
         values.put(UserEntry.CONTACTS, user.getContacts_id());
-        values.put(UserEntry.STATE, user.getState());
         values.put(UserEntry.BIRTHDAY, user.getBirthday());
         values.put(UserEntry.LAST_LOGIN, dtf.format(now));
         values.put(UserEntry.IS_ENOUGH, 1);

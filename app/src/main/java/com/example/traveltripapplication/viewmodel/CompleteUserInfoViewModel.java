@@ -12,6 +12,7 @@ import com.example.traveltripapplication.model.ContactsModel;
 import com.example.traveltripapplication.model.UserModel;
 import com.example.traveltripapplication.presenter.AuthPresenter;
 
+import java.util.Calendar;
 import java.util.concurrent.CompletableFuture;
 
 public class CompleteUserInfoViewModel extends BaseObservable {
@@ -22,6 +23,7 @@ public class CompleteUserInfoViewModel extends BaseObservable {
 
     public CompleteUserInfoViewModel(UserModel user) {
         this.user = user;
+        this.user.setBirthday(getToDaysDate());
     }
 
     @Bindable
@@ -58,5 +60,14 @@ public class CompleteUserInfoViewModel extends BaseObservable {
         completableFuture.thenRun(() -> {
             completeUserInfoInterface.saving();
         });
+    }
+
+    public String getToDaysDate() {
+        Calendar cal = Calendar.getInstance();
+        int year = cal.get(Calendar.YEAR);
+        int month = cal.get(Calendar.MONTH);
+        int day = cal.get(Calendar.DAY_OF_MONTH);
+        month = month + 1;
+        return day + "/" + month + "/" + year;
     }
 }

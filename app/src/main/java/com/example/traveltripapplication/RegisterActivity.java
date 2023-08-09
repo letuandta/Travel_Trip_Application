@@ -3,6 +3,7 @@ package com.example.traveltripapplication;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -15,7 +16,9 @@ import com.example.traveltripapplication.model.ContactsModel;
 import com.example.traveltripapplication.model.UserModel;
 import com.example.traveltripapplication.viewmodel.RegisterViewModel;
 
-public class RegisterActivity extends AppCompatActivity implements RegisterViewModelInterface, CompleteUserInfoInterface {
+import java.util.Objects;
+
+public class RegisterActivity extends AppCompatActivity implements RegisterViewModelInterface, CompleteUserInfoInterface{
 
     private ActivityRegisterBinding mActivityRegisterBinding;
     @Override
@@ -30,14 +33,14 @@ public class RegisterActivity extends AppCompatActivity implements RegisterViewM
 
     @Override
     public void successRegister(UserModel user) {
-        CompleteUserInfoDialogFragment.getInstance(user, this).show(getSupportFragmentManager(), "complete_user_info");
+        CompleteUserInfoDialogFragment completeUserInfoDialogFragment = CompleteUserInfoDialogFragment.newInstance(user, this);
+        completeUserInfoDialogFragment.show(getSupportFragmentManager(), "complete_user_info");
     }
 
     @Override
     public void errorRegister() {
 
     }
-
 
     @Override
     public void saveSuccess() {
