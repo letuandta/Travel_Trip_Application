@@ -46,6 +46,7 @@
                 android:layout_margin="5dp"
                 android:background="@drawable/edit_text_label"
                 android:hint="@string/hint_enter_email"
+                android:inputType="text"
                 android:text="@={LoginViewModel.loginModel.username}"
                 android:padding="15dp" />
         </LinearLayout>

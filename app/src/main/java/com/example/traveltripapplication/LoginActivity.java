@@ -3,6 +3,7 @@ package com.example.traveltripapplication;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
@@ -28,5 +29,7 @@ public class LoginActivity extends AppCompatActivity implements LoginViewModelIn
     public void onClickLogin() {
         Log.d("CALLBACK", "get call back here");
         mActivityLoginBinding.message.setTextColor(Color.parseColor("#54ba81"));
+        Intent intent = new Intent(LoginActivity.this, MainPageActivity.class);
+        startActivity(intent);
     }
 }

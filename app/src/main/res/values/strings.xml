@@ -22,4 +22,8 @@
     <string name="email_contact">Email:</string>
     <string name="address">Đia chỉ:</string>
     <string name="more_infomation">Thông tin thêm:</string>
+    <string name="action_home">Home</string>
+    <string name="action_search_history">Search History</string>
+    <string name="action_favorite">Favorite</string>
+    <string name="action_setting">Setting</string>
 </resources>

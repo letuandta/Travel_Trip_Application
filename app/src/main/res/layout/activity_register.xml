@@ -44,6 +44,7 @@
                 android:background="@drawable/edit_text_label"
                 android:hint="@string/hint_fullname"
                 android:padding="15dp"
+                android:inputType="text"
                 android:text="@={RegisterViewModel.registerModel.fullName}" />
 
         </LinearLayout>
@@ -74,6 +75,7 @@
                 android:layout_margin="5dp"
                 android:background="@drawable/edit_text_label"
                 android:hint="@string/hint_enter_email"
+                android:inputType="text"
                 android:padding="15dp"
                 android:text="@={RegisterViewModel.registerModel.username}"/>
 

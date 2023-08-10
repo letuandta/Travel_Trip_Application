@@ -125,6 +125,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="5dp"
+                        android:inputType="phone"
                         android:background="@drawable/edit_text_label"
                         android:padding="15dp"
                         android:text="@={completeUserInfoViewModel.contactsModel.phone_number}"/>
@@ -142,6 +143,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="5dp"
+                        android:inputType="textEmailAddress"
                         android:background="@drawable/edit_text_label"
                         android:padding="15dp"
                         android:text="@={completeUserInfoViewModel.user.email}"/>
@@ -157,6 +159,7 @@
                     <EditText
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:inputType="text"
                         android:layout_margin="5dp"
                         android:background="@drawable/edit_text_label"
                         android:padding="15dp"
