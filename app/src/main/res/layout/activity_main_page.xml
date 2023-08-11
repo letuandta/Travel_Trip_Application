@@ -9,6 +9,14 @@
         android:background="@color/main_bg_color"
         tools:context=".MainPageActivity">
 
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/view_pager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@id/bottom_nav">
+
+        </androidx.viewpager2.widget.ViewPager2>
+
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/bottom_nav"
             android:layout_width="match_parent"
@@ -17,9 +25,11 @@
             android:background="@drawable/bg_corner_15"
             app:backgroundTint="@color/bottom_nav_color"
             app:elevation="@dimen/cardview_default_elevation"
-            app:itemActiveIndicatorStyle="@android:color/transparent"
+            app:labelVisibilityMode="unlabeled"
+            app:itemActiveIndicatorStyle="@null"
             app:itemIconTint="@color/custom_color_bottom_nav"
             app:itemRippleColor="@null"
+            app:itemIconSize="30dp"
             app:itemTextColor="@color/custom_color_bottom_nav"
             app:menu="@menu/menu_bottom_nav">
 
@@ -32,13 +42,15 @@
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
             android:layout_marginBottom="61dp"
+            android:contentDescription="search"
             android:clickable="true"
             app:backgroundTint="@color/white"
             app:elevation="10dp"
             app:maxImageSize="40dp"
             app:shapeAppearanceOverlay="@style/fab_100_radius"
             app:srcCompat="@android:drawable/ic_menu_search"
-            app:tint="@color/black" />
+            app:tint="@color/black" >
+        </com.google.android.material.floatingactionbutton.FloatingActionButton>
 
 
     </RelativeLayout>
