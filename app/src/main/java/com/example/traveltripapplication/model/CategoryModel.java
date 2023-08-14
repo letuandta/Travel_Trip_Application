@@ -4,12 +4,12 @@ public class CategoryModel {
 
 
     private long cateID;
-    private String imageUrl;
+    private String cateCode;
     private String cateName;
 
-    public CategoryModel(long cateID, String imageUrl, String cateName) {
+    public CategoryModel(long cateID, String cateCode, String cateName) {
         this.cateID = cateID;
-        this.imageUrl = imageUrl;
+        this.cateCode = cateCode;
         this.cateName = cateName;
     }
 
@@ -20,12 +20,12 @@ public class CategoryModel {
     public void setCateID(long cateID) {
         this.cateID = cateID;
     }
-    public String getImageUrl() {
-        return imageUrl;
+    public String getCateCode() {
+        return cateCode;
     }
 
-    public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
+    public void setCateCode(String imageUrl) {
+        this.cateCode = imageUrl;
     }
 
     public String getCateName() {

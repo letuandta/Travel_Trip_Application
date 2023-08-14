@@ -69,7 +69,7 @@ public class PermissionHelper extends SQLiteOpenHelper {
 
     public void delete(long id) {
         SQLiteDatabase db = getWritableDatabase();
-        db.execSQL("DELETE FROM "+ TABLE_NAME +" WHERE id = ?;", new String[]{String.valueOf(id)});
+        db.execSQL("DELETE FROM "+ TABLE_NAME +" WHERE _id = ?;", new String[]{String.valueOf(id)});
         db.close();
     }
 }

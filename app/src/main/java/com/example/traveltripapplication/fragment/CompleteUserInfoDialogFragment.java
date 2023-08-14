@@ -31,9 +31,6 @@ public class CompleteUserInfoDialogFragment extends DialogFragment{
 
     private UserModel user;
     private  FragmentUpdateUserBinding binding;
-
-    private static CompleteUserInfoDialogFragment INSTANCE;
-    
     private DatePickerDialog datePickerDialog;
     private  CompleteUserInfoInterface completeUserInfoInterface;
 

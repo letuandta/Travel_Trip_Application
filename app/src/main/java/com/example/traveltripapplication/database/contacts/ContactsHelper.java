@@ -73,12 +73,12 @@ public class ContactsHelper extends SQLiteOpenHelper {
 
     public Cursor getContactsById(long id) {
         SQLiteDatabase db = getReadableDatabase();
-        return db.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE id = ?;" , new String[]{String.valueOf(id)});
+        return db.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE _id = ?;" , new String[]{String.valueOf(id)});
     }
 
     public void delete(long id) {
         SQLiteDatabase db = getWritableDatabase();
-        db.execSQL("DELETE FROM "+ TABLE_NAME +" WHERE id = ?;", new String[]{String.valueOf(id)});
+        db.execSQL("DELETE FROM "+ TABLE_NAME +" WHERE _id = ?;", new String[]{String.valueOf(id)});
         db.close();
     }
 }
