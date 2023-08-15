@@ -42,8 +42,9 @@ public class CategoryHelper extends SQLiteOpenHelper {
                 );
     }
 
-    public void initDataTemplates(SQLiteDatabase db){
+    public void initDataTemplates(){
         Cursor cursor = getCategoryById(1);
+        SQLiteDatabase db = getWritableDatabase();
         if(cursor.getCount() == 0){
             List<CategoryModel> categoryModels = Arrays.asList(
                     new CategoryModel(1, "C001", "Trong nước"),
@@ -61,6 +62,7 @@ public class CategoryHelper extends SQLiteOpenHelper {
             });
         }
         cursor.close();
+        db.close();
     }
 
     @Override
@@ -74,7 +76,6 @@ public class CategoryHelper extends SQLiteOpenHelper {
     public Cursor getCategoryById(long id) {
         SQLiteDatabase db = getReadableDatabase();
         Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE _id = ?;" , new String[]{String.valueOf(id)});
-        db.close();
         return cursor;
     }
 

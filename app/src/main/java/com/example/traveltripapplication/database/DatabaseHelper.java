@@ -46,23 +46,25 @@ public class DatabaseHelper {
             //Tạp một instance trỏ đến db version của db muốn tạo
             SQLiteDatabase stateDB = new StateHelper(context).getWritableDatabase();
 
-            //Cách triển khai cũ
+            //Khởi tạo table
             mPositionDBHelper().onCreate(stateDB);
             mPermissionHelper().onCreate(stateDB);
             mContactsHelper().onCreate(stateDB);
             mUserHelper().onCreate(stateDB);
+            mCategoryHelper().onCreate(stateDB);
+            mTourHelper().onCreate(stateDB);
+
+            //Tạo dữ liệu mẫu không cần lo lặp dữ liệu
+            mCategoryHelper().initDataTemplates();
+            mTourHelper().initDataTemplates();
+
 
             //Đóng các intance lại
             mPositionDBHelper().close();
             mPermissionHelper().close();
             mContactsHelper().close();
             mUserHelper().close();
-
-            //Cách triển khai mới
-            mCategoryHelper().initDataTemplates(stateDB);
-            mTourHelper().initDataTemplates(stateDB);
-
-            //Đóng các instance
+            //Đóng các instance triển khai templates data
             mCategoryHelper().close();
             mTourHelper().close();
 

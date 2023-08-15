@@ -176,6 +176,7 @@ public class UserHelper extends SQLiteOpenHelper {
         else {
            user.set_ID(-1);
         }
+        result.close();
         return user;
     }
 
