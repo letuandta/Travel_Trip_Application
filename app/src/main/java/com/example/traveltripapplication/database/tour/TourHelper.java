@@ -37,7 +37,7 @@ public class TourHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        Log.d("create category", "onCreate: category");
+        Log.d("create tour", "onCreate: tour");
         db.execSQL("CREATE TABLE IF NOT EXISTS " + TABLE_NAME + " ( "
                         + TourEntry._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
                         + TourEntry.TOUR_CODE + " TEXT, "
@@ -57,8 +57,9 @@ public class TourHelper extends SQLiteOpenHelper {
         }
     }
 
-    public void initDataTemplates(SQLiteDatabase db){
+    public void initDataTemplates(){
         TourModel tour = getTourByTourID(1);
+        SQLiteDatabase db = getWritableDatabase();
         if(tour.getTourID() == -1) {
             ContentValues values = new ContentValues();
             List<TourModel> tourModels = TourDataTemplates.getValues();
@@ -73,6 +74,7 @@ public class TourHelper extends SQLiteOpenHelper {
                 values.clear();
             });
         }
+        db.close();
     }
 
     @SuppressLint("Range")
@@ -80,7 +82,6 @@ public class TourHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = getReadableDatabase();
         TourModel tourModel = new TourModel();
         Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE " + TourEntry._ID + " = ?;" , new String[]{String.valueOf(id)});
-        db.close();
         if(cursor.moveToFirst()) {
             tourModel.setTourID(cursor.getLong(cursor.getColumnIndex(TourEntry._ID)));
             tourModel.setTourTitle(cursor.getString(cursor.getColumnIndex(TourEntry.TITLE)));
