@@ -95,7 +95,13 @@ public class TourHelper extends SQLiteOpenHelper {
     public ArrayList<TourModel> getTourHighRating(){
         ArrayList<TourModel> tourModels = new ArrayList<>();
         SQLiteDatabase db = getReadableDatabase();
-        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME + " LIMIT 5;", null);
+        Cursor cursor = db.rawQuery("SELECT t.* " +
+                        "FROM tour as t " +
+                        "LEFT JOIN rating as r " +
+                        "ON t._id =  r.tour_id " +
+                        "GROUP BY t._id " +
+                        "ORDER BY avg(r.scores) DESC " +
+                        "LIMIT 5", null);
         db.close();
         while (cursor.moveToNext()) {
             TourModel tourModel = new TourModel();

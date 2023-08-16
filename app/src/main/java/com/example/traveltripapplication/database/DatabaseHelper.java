@@ -8,6 +8,7 @@ import com.example.traveltripapplication.database.category.CategoryHelper;
 import com.example.traveltripapplication.database.contacts.ContactsHelper;
 import com.example.traveltripapplication.database.permission.PermissionHelper;
 import com.example.traveltripapplication.database.position.PositionHelper;
+import com.example.traveltripapplication.database.rating.RatingHelper;
 import com.example.traveltripapplication.database.state.StateHelper;
 import com.example.traveltripapplication.database.tour.TourHelper;
 import com.example.traveltripapplication.database.tour_category.TourCategoryHelper;
@@ -47,6 +48,7 @@ public class DatabaseHelper {
     public static TourCategoryHelper mTourCategoryHelper(){return TourCategoryHelper.getInstance(context);}
     public static TourTicketHelper mTourTicketHelper(){return TourTicketHelper.getInstance(context);}
     public static TourItineraryHelper mTourItineraryHelper(){return TourItineraryHelper.getInstance(context);}
+    public static RatingHelper mRatingHelper(){return RatingHelper.getInstance(context);}
 
     public static void initDB(){
         try {
@@ -63,6 +65,7 @@ public class DatabaseHelper {
             mTourCategoryHelper().onCreate(stateDB);
             mTourTicketHelper().onCreate(stateDB);
             mTourItineraryHelper().onCreate(stateDB);
+            mRatingHelper().onCreate(stateDB);
 
             //Tạo dữ liệu mẫu không cần lo lặp dữ liệu
             mCategoryHelper().initDataTemplates();
@@ -70,6 +73,7 @@ public class DatabaseHelper {
             mTourCategoryHelper().InitDataTemplates();
             mTourTicketHelper().InitDataTemplates();
             mTourItineraryHelper().initDataTemplates();
+            mRatingHelper().initDataTemplates();
 
 
             //Đóng các intance lại
@@ -83,6 +87,7 @@ public class DatabaseHelper {
             mTourCategoryHelper().close();
             mTourTicketHelper().close();
             mTourItineraryHelper().close();
+            mRatingHelper().close();
 
             //Đóng StateDB
             stateDB.close();
