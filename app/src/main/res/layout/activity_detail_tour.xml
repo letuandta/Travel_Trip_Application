@@ -281,17 +281,19 @@
                             <TextView
                                 android:text="/ người"
                                 android:padding="3dip" />
-                            <TextView
-                                android:text="Chọn"
-                                android:gravity="center"
-                                android:padding="3dip"
-                                android:layout_marginLeft="130dp"
-                                android:layout_marginRight="10dp"
-                                android:background="@drawable/shape_booking"
-                                android:textStyle="bold"
-                                />
+
                         </TableRow>
+                        <Button
+                            android:text="Chọn"
+                            android:gravity="center"
+                            android:padding="3dip"
+                            android:layout_marginLeft="200dp"
+                            android:layout_marginRight="10dp"
+                            android:background="@drawable/shape_booking"
+                            android:textStyle="bold"
+                            />
                     </TableLayout>
+
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>

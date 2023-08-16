@@ -2,10 +2,7 @@
 <shape
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:shape="rectangle"   >
-
-    <solid
-        android:color="@color/shape_booking" >
-    </solid>
+    <solid android:color="#fcd240"/>
     <padding
         android:left="5dp"
         android:top="5dp"
