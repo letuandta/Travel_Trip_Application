@@ -7,19 +7,24 @@ public class TourModel {
     private int tourDuration;
     private String tourLocation;
     private int tourActive;
-    private String Thumbnail;
+    private String thumbnail;
+    private String experience;
+    private String moreInfo;
 
     public TourModel() {
     }
 
-    public TourModel(long tourID, String tourCode, String tourTitle, int tourDuration, String tourLocation, int tourActive, String thumbnail) {
+
+    public TourModel(long tourID, String tourCode, String tourTitle, int tourDuration, String tourLocation, int tourActive, String thumbnail, String experience, String moreInfo) {
         this.tourID = tourID;
         this.tourCode = tourCode;
         this.tourTitle = tourTitle;
         this.tourDuration = tourDuration;
         this.tourLocation = tourLocation;
         this.tourActive = tourActive;
-        Thumbnail = thumbnail;
+        this.thumbnail = thumbnail;
+        this.experience = experience;
+        this.moreInfo = moreInfo;
     }
 
     public long getTourID() {
@@ -71,10 +76,26 @@ public class TourModel {
     }
 
     public String getThumbnail() {
-        return Thumbnail;
+        return thumbnail;
     }
 
     public void setThumbnail(String thumbnail) {
-        Thumbnail = thumbnail;
+        thumbnail = thumbnail;
+    }
+
+    public String getExperience() {
+        return experience;
+    }
+
+    public void setExperience(String experience) {
+        this.experience = experience;
+    }
+
+    public String getMoreInfo() {
+        return moreInfo;
+    }
+
+    public void setMoreInfo(String moreInfo) {
+        this.moreInfo = moreInfo;
     }
 }

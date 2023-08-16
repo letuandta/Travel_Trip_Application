@@ -45,6 +45,8 @@ public class TourHelper extends SQLiteOpenHelper {
                         + TourEntry.DURATION + " INTEGER, "
                         + TourEntry.LOCATION + " TEXT, "
                         + TourEntry.THUMBNAIL + " TEXT, "
+                        + TourEntry.EXPERIENCE + " TEXT, "
+                        + TourEntry.MORE_INFORMATION + " TEXT, "
                         + TourEntry.ACTIVE + " INTEGER);"
                     );
     }
@@ -59,22 +61,10 @@ public class TourHelper extends SQLiteOpenHelper {
 
     public void initDataTemplates(){
         TourModel tour = getTourByTourID(1);
-        SQLiteDatabase db = getWritableDatabase();
         if(tour.getTourID() == -1) {
-            ContentValues values = new ContentValues();
             List<TourModel> tourModels = TourDataTemplates.getValues();
-            tourModels.forEach(tourModel -> {
-                values.put(TourEntry.TOUR_CODE, tourModel.getTourCode());
-                values.put(TourEntry.TITLE, tourModel.getTourTitle());
-                values.put(TourEntry.DURATION, tourModel.getTourDuration());
-                values.put(TourEntry.LOCATION, tourModel.getTourLocation());
-                values.put(TourEntry.THUMBNAIL, tourModel.getThumbnail());
-                values.put(TourEntry.ACTIVE, tourModel.getTourActive());
-                long id = db.insert(TABLE_NAME, null, values);
-                values.clear();
-            });
+            tourModels.forEach(this::insert);
         }
-        db.close();
     }
 
     @SuppressLint("Range")
@@ -90,6 +80,8 @@ public class TourHelper extends SQLiteOpenHelper {
             tourModel.setTourLocation(cursor.getString(cursor.getColumnIndex(TourEntry.LOCATION)));
             tourModel.setTourActive(cursor.getInt(cursor.getColumnIndex(TourEntry.ACTIVE)));
             tourModel.setThumbnail(cursor.getString(cursor.getColumnIndex(TourEntry.THUMBNAIL)));
+            tourModel.setExperience(cursor.getString(cursor.getColumnIndex(TourEntry.EXPERIENCE)));
+            tourModel.setMoreInfo(cursor.getString(cursor.getColumnIndex(TourEntry.MORE_INFORMATION)));
         }
         else {
             tourModel.setTourID(-1);
@@ -103,8 +95,14 @@ public class TourHelper extends SQLiteOpenHelper {
     public ArrayList<TourModel> getTourHighRating(){
         ArrayList<TourModel> tourModels = new ArrayList<>();
         SQLiteDatabase db = getReadableDatabase();
-        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME + " LIMIT 5;", null);
-        db.close();
+        Cursor cursor = db.rawQuery("SELECT t.* " +
+                        "FROM tour as t " +
+                        "LEFT JOIN rating as r " +
+                        "ON t._id =  r.tour_id " +
+                        "GROUP BY t._id " +
+                        "ORDER BY avg(r.scores) DESC " +
+                        "LIMIT 5", null);
+        Log.d("tour rating", String.valueOf(cursor.getCount()));
         while (cursor.moveToNext()) {
             TourModel tourModel = new TourModel();
             tourModel.setTourID(cursor.getLong(cursor.getColumnIndex(TourEntry._ID)));
@@ -114,6 +112,8 @@ public class TourHelper extends SQLiteOpenHelper {
             tourModel.setTourLocation(cursor.getString(cursor.getColumnIndex(TourEntry.LOCATION)));
             tourModel.setTourActive(cursor.getInt(cursor.getColumnIndex(TourEntry.ACTIVE)));
             tourModel.setThumbnail(cursor.getString(cursor.getColumnIndex(TourEntry.THUMBNAIL)));
+            tourModel.setExperience(cursor.getString(cursor.getColumnIndex(TourEntry.EXPERIENCE)));
+            tourModel.setMoreInfo(cursor.getString(cursor.getColumnIndex(TourEntry.MORE_INFORMATION)));
             tourModels.add(tourModel);
         }
         cursor.close();
@@ -135,6 +135,8 @@ public class TourHelper extends SQLiteOpenHelper {
             tourModel.setTourLocation(cursor.getString(cursor.getColumnIndex(TourEntry.LOCATION)));
             tourModel.setTourActive(cursor.getInt(cursor.getColumnIndex(TourEntry.ACTIVE)));
             tourModel.setThumbnail(cursor.getString(cursor.getColumnIndex(TourEntry.THUMBNAIL)));
+            tourModel.setExperience(cursor.getString(cursor.getColumnIndex(TourEntry.EXPERIENCE)));
+            tourModel.setMoreInfo(cursor.getString(cursor.getColumnIndex(TourEntry.MORE_INFORMATION)));
             tourModels.add(tourModel);
         }
         cursor.close();
@@ -161,6 +163,8 @@ public class TourHelper extends SQLiteOpenHelper {
         values.put(TourEntry.LOCATION, tourModel.getTourLocation());
         values.put(TourEntry.THUMBNAIL, tourModel.getThumbnail());
         values.put(TourEntry.ACTIVE, tourModel.getTourActive());
+        values.put(TourEntry.EXPERIENCE, tourModel.getExperience());
+        values.put(TourEntry.MORE_INFORMATION, tourModel.getMoreInfo());
         long id = db.insert(TABLE_NAME, null, values);
         db.close();
         return id;

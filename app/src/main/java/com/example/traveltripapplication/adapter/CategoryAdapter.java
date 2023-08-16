@@ -39,19 +39,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
         CategoryModel categoryModel = categoryModels.get(position);
         if (categoryModel != null) {
             holder.itemCategoryBinding.tvCate.setText(categoryModel.getCateName());
-//            CompletableFuture<Bitmap> downLoadImageByUrl = CompletableFuture.supplyAsync(() -> {
-//                Bitmap image = null;
-//                try {
-//                    InputStream in = new URL(categoryModel.getImageUrl()).openStream();
-//                    image = BitmapFactory.decodeStream(in);
-//                } catch (IOException e) {
-//                    throw new RuntimeException(e);
-//                }
-//                return image;
-//            });
-//            downLoadImageByUrl.thenAcceptAsync(result -> {
-//                holder.itemCategoryBinding.itemCate.setImageBitmap(result);
-//            });
+            holder.itemCategoryBinding.itemCate.setImageResource(categoryModel.getDrawableImage());
         }
         else return;
     }

@@ -20,7 +20,7 @@
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/bottom_nav"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="60dp"
             android:layout_alignParentBottom="true"
             android:background="@drawable/bg_corner_15"
             app:backgroundTint="@color/bottom_nav_color"
@@ -41,7 +41,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
-            android:layout_marginBottom="61dp"
+            android:layout_marginBottom="35dp"
             android:contentDescription="search"
             android:clickable="true"
             app:backgroundTint="@color/white"
