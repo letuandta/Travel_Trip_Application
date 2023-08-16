@@ -182,23 +182,24 @@ public class UserHelper extends SQLiteOpenHelper {
 
     @SuppressLint("Range")
     public UserModel getUserByEmailAndPassword(String email, String password) {
-        SQLiteDatabase db = getReadableDatabase();
-        UserModel user = new UserModel();
-        Cursor result = db.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE state_id = 1 AND username = ? AND password = ?;" ,
-                new String[]{email, password});
-        if(result.moveToFirst()) {
-            user.set_ID(result.getLong(result.getColumnIndex(UserEntry._ID)));
-            user.setAvatar(result.getString(result.getColumnIndex(UserEntry.AVATAR)));
-            user.setBirthday(result.getString(result.getColumnIndex(UserEntry.BIRTHDAY)));
-            user.setIs_super_user(result.getLong(result.getColumnIndex(UserEntry.IS_SUPER_USER)));
-            user.setContacts_id(result.getLong(result.getColumnIndex(UserEntry.CONTACTS)));
-            user.setCreated_date(result.getString(result.getColumnIndex(UserEntry.CREATED_DATE)));
-            user.setFull_name(result.getString(result.getColumnIndex(UserEntry.FULL_NAME)));
+        try(SQLiteDatabase db = getReadableDatabase()) {
+            UserModel user = new UserModel();
+            Cursor result = db.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE state_id = 1 AND username = ? AND password = ?;",
+                    new String[]{email, password});
+            if (result.moveToFirst()) {
+                user.set_ID(result.getLong(result.getColumnIndex(UserEntry._ID)));
+                user.setAvatar(result.getString(result.getColumnIndex(UserEntry.AVATAR)));
+                user.setBirthday(result.getString(result.getColumnIndex(UserEntry.BIRTHDAY)));
+                user.setIs_super_user(result.getLong(result.getColumnIndex(UserEntry.IS_SUPER_USER)));
+                user.setContacts_id(result.getLong(result.getColumnIndex(UserEntry.CONTACTS)));
+                user.setCreated_date(result.getString(result.getColumnIndex(UserEntry.CREATED_DATE)));
+                user.setFull_name(result.getString(result.getColumnIndex(UserEntry.FULL_NAME)));
+            } else {
+                user.set_ID(-1);
+            }
+            result.close();
+            return user;
         }
-        else {
-            user.set_ID(-1);
-        }
-        return user;
     }
 
     public void delete(long id) {

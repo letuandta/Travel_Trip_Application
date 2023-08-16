@@ -102,7 +102,7 @@ public class TourHelper extends SQLiteOpenHelper {
                         "GROUP BY t._id " +
                         "ORDER BY avg(r.scores) DESC " +
                         "LIMIT 5", null);
-        db.close();
+        Log.d("tour rating", String.valueOf(cursor.getCount()));
         while (cursor.moveToNext()) {
             TourModel tourModel = new TourModel();
             tourModel.setTourID(cursor.getLong(cursor.getColumnIndex(TourEntry._ID)));

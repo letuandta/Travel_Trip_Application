@@ -61,16 +61,17 @@ public class TourCategoryHelper extends SQLiteOpenHelper {
     }
 
     public boolean isExistsTourCategory(long tourID, long cateID){
-        SQLiteDatabase db = getReadableDatabase();
-        String whereClause = TourCategoryEntry.TOUR_ID + " = ? AND " + TourCategoryEntry.CATEGORY_ID + " = ?";
-        String[] whereArgs = new String[]{String.valueOf(tourID), String.valueOf(cateID)};
-        Cursor cursor = db.query(TABLE_NAME, null, whereClause, whereArgs, null, null, null);
-        if(cursor.moveToFirst()){
+        try(SQLiteDatabase db = getReadableDatabase()) {
+            String whereClause = TourCategoryEntry.TOUR_ID + " = ? AND " + TourCategoryEntry.CATEGORY_ID + " = ?";
+            String[] whereArgs = new String[]{String.valueOf(tourID), String.valueOf(cateID)};
+            Cursor cursor = db.query(TABLE_NAME, null, whereClause, whereArgs, null, null, null);
+            if (cursor.moveToFirst()) {
+                cursor.close();
+                return true;
+            }
             cursor.close();
-            return true;
+            return false;
         }
-        cursor.close();
-        return false;
     }
 
     public void insert(long tourID, long cateID){

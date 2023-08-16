@@ -4,24 +4,29 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import com.example.traveltripapplication.R;
 import com.example.traveltripapplication.adapter.CategoryAdapter;
 import com.example.traveltripapplication.adapter.PlaceFamousAdapter;
 import com.example.traveltripapplication.databinding.FragmentHomePageBinding;
 import com.example.traveltripapplication.model.CategoryModel;
 import com.example.traveltripapplication.model.PlaceFamousModel;
-import java.util.ArrayList;
+import com.example.traveltripapplication.model.TourModel;
+import com.example.traveltripapplication.presenter.TourPresenter;
 
-public class HomePageFragment extends Fragment {
+import java.util.ArrayList;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.CopyOnWriteArrayList;
+
+public class HomePageFragment extends Fragment implements PlaceFamousAdapter.PlaceFamounsAdapterListener {
 
     private com.example.traveltripapplication.databinding.FragmentHomePageBinding fragmentHomePageBinding;
-
-    ArrayList<PlaceFamousModel> placeFamousModels;
     ArrayList<CategoryModel> categoryModels;
     @Nullable
     @Override
@@ -34,10 +39,13 @@ public class HomePageFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        dataInit();
         dataInitCate();
 
-        PlaceFamousAdapter placeFamousAdapter = new PlaceFamousAdapter(placeFamousModels);
+        CompletableFuture<ArrayList<TourModel>> future = TourPresenter.getTourHighRating();
+        CopyOnWriteArrayList<TourModel> tours = new CopyOnWriteArrayList<>();
+        future.thenAccept(tours::addAll);
+
+        PlaceFamousAdapter placeFamousAdapter = new PlaceFamousAdapter(tours, this);
         CategoryAdapter categoryAdapter = new CategoryAdapter(categoryModels);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
         LinearLayoutManager linearLayoutManager1 = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
@@ -49,25 +57,21 @@ public class HomePageFragment extends Fragment {
         fragmentHomePageBinding.rcvCategory.setLayoutManager(linearLayoutManager1);
     }
 
-    private void dataInit() {
-        placeFamousModels = new ArrayList<PlaceFamousModel>();
-        placeFamousModels.add(new PlaceFamousModel(1, "Đà Nẵng", "Việt Nam",
-                "https://i.pinimg.com/564x/58/bd/7c/58bd7c653d1fc5d227ca8fad58232b2a.jpg", 0));
-        placeFamousModels.add(new PlaceFamousModel(2, "Đà Nẵng", "Việt Nam",
-                "https://i.pinimg.com/564x/f1/79/13/f17913041c2620f024fdea7406706ac7.jpg", 1));
-        placeFamousModels.add(new PlaceFamousModel(3, "Đà Nẵng", "Việt Nam",
-                "https://i.pinimg.com/564x/a6/0f/0b/a60f0bc22fe23fc9072722398c4a11cc.jpg", 1));
-        placeFamousModels.add(new PlaceFamousModel(4, "Đà Nẵng", "Việt Nam",
-                "https://i.pinimg.com/564x/58/bd/7c/58bd7c653d1fc5d227ca8fad58232b2a.jpg", 0));
-        placeFamousModels.add(new PlaceFamousModel(5, "Đà Nẵng", "Việt Nam",
-                "https://i.pinimg.com/564x/58/bd/7c/58bd7c653d1fc5d227ca8fad58232b2a.jpg", 1));
-    }
+
 
     private void dataInitCate() {
         categoryModels = new ArrayList<CategoryModel>();
-        categoryModels.add(new CategoryModel(1, "https://i.pinimg.com/564x/f1/79/13/f17913041c2620f024fdea7406706ac7.jpg","Quốc Gia" ));
-        categoryModels.add(new CategoryModel(2, "https://i.pinimg.com/564x/f1/79/13/f17913041c2620f024fdea7406706ac7.jpg","Tỉnh" ));
-        categoryModels.add(new CategoryModel(3, "https://i.pinimg.com/564x/f1/79/13/f17913041c2620f024fdea7406706ac7.jpg","Tour" ));
+        categoryModels.add(new CategoryModel(1, "C001", "Trong nước", R.drawable.travel_country));
+        categoryModels.add(new CategoryModel(2, "C002", "Quốc tế", R.drawable.travel_tour));
+        categoryModels.add(new CategoryModel(4, "C004", "Tour nghĩ dưỡng", R.drawable.tour_relax));
+        categoryModels.add(new CategoryModel(3, "C003", "Tour tham quan", R.drawable.travel_city));
+        categoryModels.add(new CategoryModel(3, "C005", "Tour lịch sử", R.drawable.tour_history));
     }
-
+    @Override
+    public void onPlaceClick(TourModel tourModel) {
+        if(tourModel.getTourActive() != 0) {
+            Toast.makeText(getContext(), "click place", Toast.LENGTH_SHORT).show();
+        }
+        else Toast.makeText(getContext(), "Địa điểm hiện đang tạm ngừng hoạt", Toast.LENGTH_SHORT).show();
+    }
 }

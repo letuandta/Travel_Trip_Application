@@ -6,11 +6,27 @@ public class CategoryModel {
     private long cateID;
     private String cateCode;
     private String cateName;
+    private int drawableImage;
 
     public CategoryModel(long cateID, String cateCode, String cateName) {
         this.cateID = cateID;
         this.cateCode = cateCode;
         this.cateName = cateName;
+    }
+
+    public CategoryModel(long cateID, String cateCode, String cateName, int drawableImage) {
+        this.cateID = cateID;
+        this.cateCode = cateCode;
+        this.cateName = cateName;
+        this.drawableImage = drawableImage;
+    }
+
+    public int getDrawableImage() {
+        return drawableImage;
+    }
+
+    public void setDrawableImage(int drawableImage) {
+        this.drawableImage = drawableImage;
     }
 
     public long getCateID() {
