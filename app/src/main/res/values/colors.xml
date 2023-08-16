@@ -9,4 +9,6 @@
     <color name="bottom_nav_color">#4F6A7F</color>
     <color name="main_button_color">#18C0C1</color>
     <color name="btn_search">#18C0C1</color>
+    <color name="shape_color">#c9d4e4</color>
+    <color name="shape_booking">#fcd240</color>
 </resources>
