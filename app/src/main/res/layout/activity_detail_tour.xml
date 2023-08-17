@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".DetailTourActivity"
+
     android:background="@color/main_bg_color">
 
     <ScrollView
@@ -282,18 +282,16 @@
                                 android:text="/ người"
                                 android:padding="3dip" />
 
+                            <Button
+                                android:layout_marginLeft="150dp"
+                                android:layout_marginRight="10dp"
+                                android:background="@drawable/shape_booking"
+                                android:gravity="center"
+                                android:padding="3dip"
+                                android:text="Chọn"
+                                android:textStyle="bold" />
                         </TableRow>
-                        <Button
-                            android:text="Chọn"
-                            android:gravity="center"
-                            android:padding="3dip"
-                            android:layout_marginLeft="200dp"
-                            android:layout_marginRight="10dp"
-                            android:background="@drawable/shape_booking"
-                            android:textStyle="bold"
-                            />
                     </TableLayout>
-
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>

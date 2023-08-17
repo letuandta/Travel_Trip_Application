@@ -11,4 +11,5 @@
     <color name="btn_search">#18C0C1</color>
     <color name="shape_color">#c9d4e4</color>
     <color name="shape_booking">#fcd240</color>
+    <color name="nav_fragment">#35383a</color>
 </resources>
