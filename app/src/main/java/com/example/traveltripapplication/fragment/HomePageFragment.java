@@ -15,23 +15,25 @@ import com.example.traveltripapplication.R;
 import com.example.traveltripapplication.adapter.CategoryAdapter;
 import com.example.traveltripapplication.adapter.PlaceFamousAdapter;
 import com.example.traveltripapplication.databinding.FragmentHomePageBinding;
+import com.example.traveltripapplication.dialog.DatePickerDialog;
 import com.example.traveltripapplication.model.CategoryModel;
-import com.example.traveltripapplication.model.PlaceFamousModel;
 import com.example.traveltripapplication.model.TourModel;
 import com.example.traveltripapplication.presenter.TourPresenter;
+import com.example.traveltripapplication.viewmodel.SearchHomePageViewModel;
 
 import java.util.ArrayList;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CopyOnWriteArrayList;
 
-public class HomePageFragment extends Fragment implements PlaceFamousAdapter.PlaceFamounsAdapterListener {
+public class HomePageFragment extends Fragment implements PlaceFamousAdapter.PlaceFamounsAdapterListener, SearchHomePageViewModel.SearchHomePageListener {
 
-    private com.example.traveltripapplication.databinding.FragmentHomePageBinding fragmentHomePageBinding;
+    FragmentHomePageBinding fragmentHomePageBinding;
     ArrayList<CategoryModel> categoryModels;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         fragmentHomePageBinding = FragmentHomePageBinding.inflate(inflater, container, false);
+        fragmentHomePageBinding.setSearchHomePage(new SearchHomePageViewModel(this));
         return fragmentHomePageBinding.getRoot();
     }
 
@@ -73,5 +75,22 @@ public class HomePageFragment extends Fragment implements PlaceFamousAdapter.Pla
             Toast.makeText(getContext(), "click place", Toast.LENGTH_SHORT).show();
         }
         else Toast.makeText(getContext(), "Địa điểm hiện đang tạm ngừng hoạt", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onClickSearchButton() {
+        Toast.makeText(getContext(), "click search button", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void chooseToDay() {
+        DatePickerDialog datePickerDialog = new DatePickerDialog(fragmentHomePageBinding.textToDay, getContext());
+        fragmentHomePageBinding.textToDay.setOnClickListener(datePickerDialog::openDatePicker);
+    }
+
+    @Override
+    public void choseFromDay() {
+        DatePickerDialog datePickerDialog = new DatePickerDialog(fragmentHomePageBinding.textFromDay, getContext());
+        fragmentHomePageBinding.textFromDay.setOnClickListener(datePickerDialog::openDatePicker);
     }
 }

@@ -30,17 +30,17 @@ public class TourTicketContracts {
                     new TourTicketModel(
                             1, 1, "Tour Đà Nẵng|50 vé – TP. Hồ chí Minh| Vietjet Air",
                             "Một tour du lịch tham quan Thành phố Đà Nẵng 5 ngày 4 đêm",
-                            "22/8/2023", 50, 50, 1, "17000000"
+                            "22/08/2023", 50, 50, 1, "17000000"
                     ),
                     new TourTicketModel(
                             2, 1, "Tour Đà Nẵng|50 vé – Hà Nội| VietNam Airlines",
                             "Một tour du lịch tham quan Thành phố Đà Nẵng 5 ngày 4 đêm",
-                            "25/8/2023", 50, 50, 1, "12000000"
+                            "25/08/2023", 50, 50, 1, "12000000"
                     ),
                     new TourTicketModel(
                             2, 1, "Tour Đà Nẵng|50 vé – Cà Mau| Bamboo Airways",
                             "Một tour du lịch tham quan Thành phố Đà Nẵng 5 ngày 4 đêm",
-                            "29/8/2023", 50, 50, 1, "10000000"
+                            "29/08/2023", 50, 50, 1, "10000000"
                     )
             );
         }

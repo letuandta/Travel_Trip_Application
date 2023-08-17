@@ -2,6 +2,12 @@
 <layout xmlns:tools="http://schemas.android.com/tools"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="searchHomePage"
+            type="com.example.traveltripapplication.viewmodel.SearchHomePageViewModel" />
+    </data>
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -113,6 +119,7 @@
                             android:layout_height="match_parent"
                             android:layout_weight="1"
                             android:background="@null"
+                            android:text="@={searchHomePage.location}"
                             android:ems="10"
                             android:inputType="text"
                             android:paddingLeft="10dp"
@@ -159,15 +166,38 @@
                                 app:srcCompat="@drawable/calendar" />
 
                         </androidx.constraintlayout.widget.ConstraintLayout>
-
                         <TextView
-                            android:id="@+id/textDateRange"
-                            android:layout_width="319dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:gravity="center|start"
+                            android:padding="5dp"
+                            android:text="Từ:"
+                            android:textSize="16sp"/>
+                        <TextView
+                            android:id="@+id/textToDay"
+                            android:layout_width="wrap_content"
                             android:layout_height="match_parent"
                             android:gravity="center|start"
                             android:padding="10dp"
-                            android:text="Từ 10/08/2023 đến 15/08/2023"
-                            android:textSize="16dp"/>
+                            android:text="@={searchHomePage.toDate}"
+                            android:onClick="@{() ->searchHomePage.listener.chooseToDay()}"
+                            android:textSize="16sp"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:gravity="center|start"
+                            android:padding="5dp"
+                            android:text="Đến:"
+                            android:textSize="16sp"/>
+                        <TextView
+                            android:id="@+id/textFromDay"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:gravity="center|start"
+                            android:padding="10dp"
+                            android:text="@={searchHomePage.fromDate}"
+                            android:onClick="@{() ->searchHomePage.listener.choseFromDay()}"
+                            android:textSize="16sp"/>
                     </LinearLayout>
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -195,16 +225,53 @@
 
                         <TextView
                             android:id="@+id/tv_people"
-                            android:layout_width="319dp"
+                            android:layout_width="wrap_content"
                             android:layout_height="match_parent"
                             android:gravity="center|start"
-                            android:padding="10dp"
-                            android:text="1 người"
-                            android:textSize="16dp"/>
+                            android:padding="5dp"
+                            android:text="@={searchHomePage.numberPerson}"
+                            android:textSize="16sp"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:gravity="center|start"
+                            android:text="@{searchHomePage.numberPerson != null ? `Người` : ``}"
+                            android:textSize="16sp"/>
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+                            <ImageView
+                                android:id="@+id/sub_number"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerInParent="true"
+                                android:layout_toStartOf="@id/center_devision"
+                                android:onClick="@{()-> searchHomePage.subNumberPerson()}"
+                                android:src="@drawable/sub_24" />
+                            <View
+                                android:id="@+id/center_devision"
+                                android:layout_width="2dp"
+                                android:layout_toStartOf="@id/add_number"
+                                android:layout_height="match_parent"
+                                android:layout_margin="10dp"
+                                android:background="@color/black"/>
+                            <ImageView
+                                android:id="@+id/add_number"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerInParent="true"
+                                android:layout_alignParentEnd="true"
+                                android:onClick="@{() -> searchHomePage.addNumberPerson()}"
+                                android:layout_marginEnd="10dp"
+                                android:src="@drawable/add_24"/>
+                        </RelativeLayout>
+
                     </LinearLayout>
 
                     <Button
-                        android:id="@+id/button"
+                        android:id="@+id/btn_search"
                         android:layout_width="150dp"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
