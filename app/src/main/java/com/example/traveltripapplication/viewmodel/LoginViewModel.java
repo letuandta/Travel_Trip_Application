@@ -42,7 +42,7 @@ public class LoginViewModel extends BaseObservable {
                     message.set("Login success !!");
                     //Gan gia tri cho user
                     //Dua thong tin user ra cho activity truyen qua activity khac
-                    loginViewModelInterface.onClickLogin();
+                    loginViewModelInterface.onClickLogin(result);
                 }
                 else {
                     message.set("login fail !!");

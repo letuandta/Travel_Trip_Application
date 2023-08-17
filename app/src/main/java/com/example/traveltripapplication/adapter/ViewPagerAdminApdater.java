@@ -10,9 +10,9 @@ import androidx.viewpager2.adapter.FragmentStateAdapter;
 import com.example.traveltripapplication.fragment.HomePageFragment;
 import com.example.traveltripapplication.model.UserModel;
 
-public class ViewPagerAdapter extends FragmentStateAdapter {
+public class ViewPagerAdminApdater extends FragmentStateAdapter {
 
-    public ViewPagerAdapter(@NonNull FragmentManager fragmentManager, @NonNull Lifecycle lifecycle,@NonNull UserModel userModel) {
+    public ViewPagerAdminApdater(@NonNull FragmentManager fragmentManager, @NonNull Lifecycle lifecycle, @NonNull UserModel userModel) {
         super(fragmentManager, lifecycle);
         this.userModel = userModel;
     }
@@ -40,3 +40,4 @@ public class ViewPagerAdapter extends FragmentStateAdapter {
         return 4;
     }
 }
+

@@ -18,6 +18,7 @@ import com.example.traveltripapplication.databinding.FragmentHomePageBinding;
 import com.example.traveltripapplication.dialog.DatePickerDialog;
 import com.example.traveltripapplication.model.CategoryModel;
 import com.example.traveltripapplication.model.TourModel;
+import com.example.traveltripapplication.model.UserModel;
 import com.example.traveltripapplication.presenter.TourPresenter;
 import com.example.traveltripapplication.viewmodel.SearchHomePageViewModel;
 
@@ -29,6 +30,12 @@ public class HomePageFragment extends Fragment implements PlaceFamousAdapter.Pla
 
     FragmentHomePageBinding fragmentHomePageBinding;
     ArrayList<CategoryModel> categoryModels;
+
+    public HomePageFragment(UserModel userModel) {
+        this.userModel = userModel;
+    }
+
+    private UserModel userModel;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -40,7 +47,7 @@ public class HomePageFragment extends Fragment implements PlaceFamousAdapter.Pla
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
+        fragmentHomePageBinding.fullnameuser7.setText(userModel.getFull_name());
         dataInitCate();
 
         CompletableFuture<ArrayList<TourModel>> future = TourPresenter.getTourHighRating();

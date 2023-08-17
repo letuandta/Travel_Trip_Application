@@ -28,4 +28,8 @@
     <string name="action_setting">Setting</string>
     <string name="welcome_user">WELCOME</string>
     <string name="price_tour">Giá tour</string>
+    <string name="manager_user">Quản lý user</string>
+    <string name="manager_cate">Quản lý danh mục</string>
+    <string name="manager_tour">Quản lý tour</string>
+    <string name="manager_order">Quản lý đơn đặt</string>
 </resources>

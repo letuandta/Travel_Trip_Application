@@ -7,6 +7,9 @@
         <variable
             name="searchHomePage"
             type="com.example.traveltripapplication.viewmodel.SearchHomePageViewModel" />
+        <variable
+            name="user"
+            type="com.example.traveltripapplication.viewmodel.CompleteUserInfoViewModel" />
     </data>
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -63,7 +66,6 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="8dp"
-                            android:text="DAT"
                             android:textStyle="bold"
                             app:layout_constraintBottom_toBottomOf="@+id/imageView5"
                             app:layout_constraintStart_toEndOf="@+id/imageView5"

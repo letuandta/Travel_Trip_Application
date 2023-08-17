@@ -1,6 +1,5 @@
 package com.example.traveltripapplication;
 
-import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.MenuItem;
 
@@ -9,33 +8,31 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager2.widget.ViewPager2;
 
-import com.example.traveltripapplication.adapter.ViewPagerAdapter;
-import com.example.traveltripapplication.databinding.ActivityMainPageBinding;
+import com.example.traveltripapplication.adapter.ViewPagerAdminApdater;
+import com.example.traveltripapplication.databinding.ActivityAdminBinding;
 import com.example.traveltripapplication.model.UserModel;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 
-public class MainPageActivity extends AppCompatActivity {
-
-    ActivityMainPageBinding mActivityMainPageBinding;
+public class AdminActivity extends AppCompatActivity {
+    ActivityAdminBinding mActivityAdminBinding;
 
     private UserModel userModel;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mActivityMainPageBinding = ActivityMainPageBinding.inflate(getLayoutInflater());
-        setContentView(mActivityMainPageBinding.getRoot());
+        mActivityAdminBinding = ActivityAdminBinding.inflate(getLayoutInflater());
+        setContentView(mActivityAdminBinding.getRoot());
         UserModel userModel;
         userModel = getIntent().getExtras().getParcelable("user");
         this.userModel = userModel;
         setupViewPager();
 
-        mActivityMainPageBinding.bottomNav.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
+        mActivityAdminBinding.bottomNav.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 if (item.getItemId() == R.id.action_home) {
-                    mActivityMainPageBinding.viewPager.setCurrentItem(0);
+                    mActivityAdminBinding.viewPager.setCurrentItem(0);
                     return true;
                 } else if (item.getItemId() == R.id.action_search_history) {
                     return true;
@@ -49,24 +46,24 @@ public class MainPageActivity extends AppCompatActivity {
     }
 
     private void setupViewPager() {
-        ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager(), getLifecycle(), this.userModel);
-        mActivityMainPageBinding.viewPager.setAdapter(viewPagerAdapter);
+        ViewPagerAdminApdater viewPagerAdminApdater = new ViewPagerAdminApdater(getSupportFragmentManager(), getLifecycle(), this.userModel);
+        mActivityAdminBinding.viewPager.setAdapter(viewPagerAdminApdater);
 
-        mActivityMainPageBinding.viewPager.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
+        mActivityAdminBinding.viewPager.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
             @Override
             public void onPageSelected(int position) {
                 switch (position){
                     case 0:
-                        mActivityMainPageBinding.bottomNav.getMenu().findItem(R.id.action_home).setChecked(true);
+                        mActivityAdminBinding.bottomNav.getMenu().findItem(R.id.manager_user).setChecked(true);
                         break;
                     case 1:
-                        mActivityMainPageBinding.bottomNav.getMenu().findItem(R.id.action_search_history).setChecked(true);
+                        mActivityAdminBinding.bottomNav.getMenu().findItem(R.id.manager_cate).setChecked(true);
                         break;
                     case 2:
-                        mActivityMainPageBinding.bottomNav.getMenu().findItem(R.id.action_favorite).setChecked(true);
+                        mActivityAdminBinding.bottomNav.getMenu().findItem(R.id.manager_order).setChecked(true);
                         break;
                     case 3:
-                        mActivityMainPageBinding.bottomNav.getMenu().findItem(R.id.action_setting).setChecked(true);
+                        mActivityAdminBinding.bottomNav.getMenu().findItem(R.id.manager_tour).setChecked(true);
                         break;
                 }
             }
