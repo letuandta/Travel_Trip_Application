@@ -279,6 +279,7 @@
                         android:layout_gravity="center"
                         android:layout_marginTop="10dp"
                         android:background="@drawable/button_search"
+                        android:onClick="@{() -> searchHomePage.onClickSearchButton()}"
                         android:text="Tìm"
                         app:backgroundTint="@null" />
                 </LinearLayout>

@@ -4,15 +4,16 @@ import androidx.databinding.BaseObservable;
 import androidx.databinding.Bindable;
 
 import com.example.traveltripapplication.BR;
+import com.example.traveltripapplication.model.SearchModel;
 
 import java.util.Calendar;
 
 public class SearchHomePageViewModel extends BaseObservable {
 
-    private String location;
+    private String location = "";
     private String toDate;
     private String fromDate;
-    private String numberPerson;
+    private String numberPerson = "1";
     private SearchHomePageListener listener;
 
     public SearchHomePageViewModel(SearchHomePageListener listener) {
@@ -95,8 +96,12 @@ public class SearchHomePageViewModel extends BaseObservable {
         return dayString + "/" + monthString + "/" + year;
     }
 
+    public void onClickSearchButton(){
+        listener.onClickSearchButton(new SearchModel(getLocation(), getToDate(), getFromDate()));
+    }
+
     public interface SearchHomePageListener{
-        public void onClickSearchButton();
+        public void onClickSearchButton(SearchModel searchModel);
         public void chooseToDay();
         public void choseFromDay();
     }

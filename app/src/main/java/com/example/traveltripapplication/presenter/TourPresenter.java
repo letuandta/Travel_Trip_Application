@@ -14,4 +14,12 @@ public class TourPresenter {
         });
         return future;
     }
+
+    public static CompletableFuture<ArrayList<TourModel>> getToursSearch(String location){
+        CompletableFuture<ArrayList<TourModel>> future = new CompletableFuture<>();
+        future = CompletableFuture.supplyAsync(() -> {
+            return DatabaseHelper.mTourHelper().getTourByLocation(location);
+        });
+        return future;
+    }
 }

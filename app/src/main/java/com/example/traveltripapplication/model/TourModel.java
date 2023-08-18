@@ -10,6 +10,7 @@ public class TourModel {
     private String thumbnail;
     private String experience;
     private String moreInfo;
+    private double ratingTour;
 
     public TourModel() {
     }
@@ -25,6 +26,14 @@ public class TourModel {
         this.thumbnail = thumbnail;
         this.experience = experience;
         this.moreInfo = moreInfo;
+    }
+
+    public double getRatingTour() {
+        return ratingTour;
+    }
+
+    public void setRatingTour(double ratingTour) {
+        this.ratingTour = ratingTour;
     }
 
     public long getTourID() {
@@ -80,7 +89,7 @@ public class TourModel {
     }
 
     public void setThumbnail(String thumbnail) {
-        thumbnail = thumbnail;
+        this.thumbnail = thumbnail;
     }
 
     public String getExperience() {

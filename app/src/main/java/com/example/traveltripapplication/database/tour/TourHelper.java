@@ -95,14 +95,13 @@ public class TourHelper extends SQLiteOpenHelper {
     public ArrayList<TourModel> getTourHighRating(){
         ArrayList<TourModel> tourModels = new ArrayList<>();
         SQLiteDatabase db = getReadableDatabase();
-        Cursor cursor = db.rawQuery("SELECT t.* " +
+        Cursor cursor = db.rawQuery("SELECT t.*, avg(r.scores) as rating_tour " +
                         "FROM tour as t " +
                         "LEFT JOIN rating as r " +
                         "ON t._id =  r.tour_id " +
                         "GROUP BY t._id " +
                         "ORDER BY avg(r.scores) DESC " +
                         "LIMIT 5", null);
-        Log.d("tour rating", String.valueOf(cursor.getCount()));
         while (cursor.moveToNext()) {
             TourModel tourModel = new TourModel();
             tourModel.setTourID(cursor.getLong(cursor.getColumnIndex(TourEntry._ID)));
@@ -114,6 +113,7 @@ public class TourHelper extends SQLiteOpenHelper {
             tourModel.setThumbnail(cursor.getString(cursor.getColumnIndex(TourEntry.THUMBNAIL)));
             tourModel.setExperience(cursor.getString(cursor.getColumnIndex(TourEntry.EXPERIENCE)));
             tourModel.setMoreInfo(cursor.getString(cursor.getColumnIndex(TourEntry.MORE_INFORMATION)));
+            tourModel.setRatingTour(cursor.getDouble(cursor.getColumnIndex("rating_tour")));
             tourModels.add(tourModel);
         }
         cursor.close();
@@ -124,8 +124,14 @@ public class TourHelper extends SQLiteOpenHelper {
     public ArrayList<TourModel> getTourByLocation(String location){
         ArrayList<TourModel> tourModels = new ArrayList<>();
         SQLiteDatabase db = getReadableDatabase();
-        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE " + TourEntry.LOCATION + " LIKE ?;", new String[]{"%"+location+"%"});
-        db.close();
+        Cursor cursor = db.rawQuery("SELECT t.*, avg(r.scores) as rating_tour \n" +
+                "FROM tour as t \n" +
+                "LEFT JOIN rating as r \n" +
+                "ON t._id = r.tour_id \n" +
+                "WHERE t.location LIKE ? \n" +
+                "GROUP BY t._id\n" +
+                "ORDER BY avg(r.scores) DESC \n" +
+                "LIMIT 5", new String[]{"%"+location+"%"});
         while (cursor.moveToNext()) {
             TourModel tourModel = new TourModel();
             tourModel.setTourID(cursor.getLong(cursor.getColumnIndex(TourEntry._ID)));
@@ -137,6 +143,7 @@ public class TourHelper extends SQLiteOpenHelper {
             tourModel.setThumbnail(cursor.getString(cursor.getColumnIndex(TourEntry.THUMBNAIL)));
             tourModel.setExperience(cursor.getString(cursor.getColumnIndex(TourEntry.EXPERIENCE)));
             tourModel.setMoreInfo(cursor.getString(cursor.getColumnIndex(TourEntry.MORE_INFORMATION)));
+            tourModel.setRatingTour(cursor.getDouble(cursor.getColumnIndex("rating_tour")));
             tourModels.add(tourModel);
         }
         cursor.close();

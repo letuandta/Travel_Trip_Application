@@ -17,7 +17,7 @@ public class ViewPagerAdminApdater extends FragmentStateAdapter {
         this.userModel = userModel;
     }
 
-    private UserModel userModel;
+    private final UserModel userModel;
 
     @NonNull
     @Override

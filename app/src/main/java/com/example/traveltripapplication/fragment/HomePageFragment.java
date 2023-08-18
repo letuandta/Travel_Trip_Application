@@ -11,18 +11,22 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import com.example.traveltripapplication.MainPageActivity;
 import com.example.traveltripapplication.R;
 import com.example.traveltripapplication.adapter.CategoryAdapter;
 import com.example.traveltripapplication.adapter.PlaceFamousAdapter;
+import com.example.traveltripapplication.adapter.SearchAdapter;
 import com.example.traveltripapplication.databinding.FragmentHomePageBinding;
 import com.example.traveltripapplication.dialog.DatePickerDialog;
 import com.example.traveltripapplication.model.CategoryModel;
+import com.example.traveltripapplication.model.SearchModel;
 import com.example.traveltripapplication.model.TourModel;
 import com.example.traveltripapplication.model.UserModel;
 import com.example.traveltripapplication.presenter.TourPresenter;
 import com.example.traveltripapplication.viewmodel.SearchHomePageViewModel;
 
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CopyOnWriteArrayList;
 
@@ -35,7 +39,7 @@ public class HomePageFragment extends Fragment implements PlaceFamousAdapter.Pla
         this.userModel = userModel;
     }
 
-    private UserModel userModel;
+    private final UserModel userModel;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -85,8 +89,10 @@ public class HomePageFragment extends Fragment implements PlaceFamousAdapter.Pla
     }
 
     @Override
-    public void onClickSearchButton() {
+    public void onClickSearchButton(SearchModel searchModel) {
         Toast.makeText(getContext(), "click search button", Toast.LENGTH_SHORT).show();
+        ((MainPageActivity) requireActivity()).setSearchModel(searchModel);
+        ((MainPageActivity) requireActivity()).getmActivityMainPageBinding().viewPager.setCurrentItem(1, true);
     }
 
     @Override

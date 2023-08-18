@@ -11,15 +11,42 @@ import androidx.viewpager2.widget.ViewPager2;
 
 import com.example.traveltripapplication.adapter.ViewPagerAdapter;
 import com.example.traveltripapplication.databinding.ActivityMainPageBinding;
+import com.example.traveltripapplication.model.SearchModel;
 import com.example.traveltripapplication.model.UserModel;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 
+import java.util.Objects;
+
 public class MainPageActivity extends AppCompatActivity {
+
+    public ActivityMainPageBinding getmActivityMainPageBinding() {
+        return mActivityMainPageBinding;
+    }
 
     ActivityMainPageBinding mActivityMainPageBinding;
 
     private UserModel userModel;
+
+    public void setSearchModel(SearchModel searchModel) {
+        this.searchModel = searchModel;
+        this.isOtherSearch = true;
+    }
+
+    public SearchModel getSearchModel() {
+        return searchModel;
+    }
+
+    public Boolean getOtherSearch() {
+        return isOtherSearch;
+    }
+
+    public void setOtherSearch(Boolean otherSearch) {
+        this.isOtherSearch = otherSearch;
+    }
+
+    private SearchModel searchModel;
+    private Boolean isOtherSearch = false;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -38,6 +65,7 @@ public class MainPageActivity extends AppCompatActivity {
                     mActivityMainPageBinding.viewPager.setCurrentItem(0);
                     return true;
                 } else if (item.getItemId() == R.id.action_search_history) {
+                    mActivityMainPageBinding.viewPager.setCurrentItem(1);
                     return true;
                 } else if (item.getItemId() == R.id.action_favorite) {
                     return true;

@@ -5,7 +5,7 @@
         android:icon="@drawable/home_24"/>
     <item android:id="@+id/action_search_history"
         android:title="@string/action_search_history"
-        android:icon="@drawable/calendar_24"/>
+        android:icon="@android:drawable/ic_search_category_default"/>
     <item android:id="@+id/action_favorite"
         android:title="@string/action_favorite"
         android:icon="@drawable/favorite_24"/>

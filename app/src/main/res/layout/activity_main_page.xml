@@ -47,8 +47,8 @@
             app:elevation="10dp"
             app:maxImageSize="40dp"
             app:shapeAppearanceOverlay="@style/fab_100_radius"
-            app:srcCompat="@android:drawable/ic_menu_search"
-            app:tint="@color/black" >
+            app:srcCompat="@drawable/cart_24"
+            app:tint="#6D797C" >
         </com.google.android.material.floatingactionbutton.FloatingActionButton>
 
 

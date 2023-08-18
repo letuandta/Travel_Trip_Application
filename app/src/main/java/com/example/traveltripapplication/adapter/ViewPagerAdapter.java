@@ -8,16 +8,20 @@ import androidx.lifecycle.Lifecycle;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 
 import com.example.traveltripapplication.fragment.HomePageFragment;
+import com.example.traveltripapplication.fragment.SearchFragment;
+import com.example.traveltripapplication.model.SearchModel;
 import com.example.traveltripapplication.model.UserModel;
 
 public class ViewPagerAdapter extends FragmentStateAdapter {
 
-    public ViewPagerAdapter(@NonNull FragmentManager fragmentManager, @NonNull Lifecycle lifecycle,@NonNull UserModel userModel) {
+    public ViewPagerAdapter(@NonNull FragmentManager fragmentManager, @NonNull Lifecycle lifecycle,
+                            @NonNull UserModel userModel) {
         super(fragmentManager, lifecycle);
         this.userModel = userModel;
     }
 
-    private UserModel userModel;
+    private final UserModel userModel;
+
 
     @NonNull
     @Override
@@ -26,7 +30,7 @@ public class ViewPagerAdapter extends FragmentStateAdapter {
             case 0:
                 return new HomePageFragment(userModel);
             case 1:
-                return new HomePageFragment(userModel);
+                return new SearchFragment();
             case 2:
                 return new HomePageFragment(userModel);
             case 3:
