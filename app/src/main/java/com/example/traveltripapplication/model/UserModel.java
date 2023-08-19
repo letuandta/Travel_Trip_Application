@@ -20,6 +20,19 @@ public class UserModel implements Parcelable {
 
     public UserModel() {}
 
+    public UserModel(long _ID, String username, String password, String email, String avatar, long state, String full_name, long contacts_id, long is_super_user, String created_date, String birthday) {
+        this._ID = _ID;
+        this.username = username;
+        this.password = password;
+        this.email = email;
+        this.avatar = avatar;
+        this.state = state;
+        this.full_name = full_name;
+        this.contacts_id = contacts_id;
+        this.is_super_user = is_super_user;
+        this.created_date = created_date;
+        this.birthday = birthday;
+    }
 
     public long get_ID() {
         return _ID;

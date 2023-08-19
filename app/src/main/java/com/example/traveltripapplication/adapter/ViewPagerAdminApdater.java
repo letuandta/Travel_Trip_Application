@@ -8,6 +8,7 @@ import androidx.lifecycle.Lifecycle;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 
 import com.example.traveltripapplication.fragment.HomePageFragment;
+import com.example.traveltripapplication.fragment.UserFragment;
 import com.example.traveltripapplication.model.UserModel;
 
 public class ViewPagerAdminApdater extends FragmentStateAdapter {
@@ -24,7 +25,7 @@ public class ViewPagerAdminApdater extends FragmentStateAdapter {
     public Fragment createFragment(int position) {
         switch (position) {
             case 0:
-                return new HomePageFragment(userModel);
+                return new UserFragment();
             case 1:
                 return new HomePageFragment(userModel);
             case 2:

@@ -17,6 +17,7 @@ import com.example.traveltripapplication.model.UserModel;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 
 public class UserHelper extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = DatabaseInformation.DATABASE_NAME;
@@ -122,6 +123,31 @@ public class UserHelper extends SQLiteOpenHelper {
         }
     }
 
+    @SuppressLint("Range")
+    public ArrayList<UserModel> getListUser() {
+        SQLiteDatabase db = getReadableDatabase();
+        ArrayList<UserModel> userModels = new ArrayList<>();
+        Cursor cursor = db.query(TABLE_NAME, null, null, null, null, null, null);
+        while (cursor.moveToNext() ) {
+           userModels.add(new UserModel(
+                   cursor.getLong(cursor.getColumnIndex(UserEntry._ID)),
+                   cursor.getString(cursor.getColumnIndex(UserEntry.USERNAME)),
+                   cursor.getString(cursor.getColumnIndex(UserEntry.PASSWORD)),
+                   cursor.getString(cursor.getColumnIndex(UserEntry.EMAIL)),
+                   cursor.getString(cursor.getColumnIndex(UserEntry.AVATAR)),
+                   cursor.getLong(cursor.getColumnIndex(UserEntry.STATE)),
+                   cursor.getString(cursor.getColumnIndex(UserEntry.FULL_NAME)),
+                   cursor.getLong(cursor.getColumnIndex(UserEntry.CONTACTS)),
+                   cursor.getLong(cursor.getColumnIndex(UserEntry.IS_SUPER_USER)),
+                   cursor.getString(cursor.getColumnIndex(UserEntry.CREATED_DATE)),
+                   cursor.getString(cursor.getColumnIndex(UserEntry.BIRTHDAY))
+           ));
+        }
+        cursor.getCount();
+        Log.d("ts", "getListUser: " + cursor.getCount());
+        cursor.close();
+        return userModels;
+    }
     public long createAccount(String full_name, String username, String password){
         SQLiteDatabase db = getWritableDatabase();
         ContentValues values = new ContentValues();

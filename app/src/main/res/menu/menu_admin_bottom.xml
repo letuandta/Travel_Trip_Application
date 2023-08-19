@@ -2,14 +2,14 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:id="@+id/manager_user"
         android:title="@string/manager_user"
-        android:icon="@drawable/fb_icon"/>
+        android:icon="@drawable/user_admin"/>
     <item android:id="@+id/manager_cate"
         android:title="@string/manager_cate"
-        android:icon="@drawable/calendar_24"/>
+        android:icon="@drawable/category"/>
     <item android:id="@+id/manager_order"
         android:title="@string/manager_order"
-        android:icon="@drawable/favorite_24"/>
+        android:icon="@drawable/order"/>
     <item android:id="@+id/manager_tour"
         android:title="@string/manager_tour"
-        android:icon="@drawable/settings_24"/>
+        android:icon="@drawable/tour"/>
 </menu>

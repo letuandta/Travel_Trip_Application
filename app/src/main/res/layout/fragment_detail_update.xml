@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="10dp">
+
+    <LinearLayout
+        android:id="@+id/linear_fullname"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.2">
+
+        <TextView
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="12dp"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:text="Họ tên:"
+            android:padding="15dp" />
+
+        <EditText
+            android:id="@+id/tv_fullname"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/edit_text_label"
+            android:inputType="text"
+            android:padding="15dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linear_email"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linear_fullname"
+        app:layout_constraintVertical_bias="0.0"
+        android:layout_marginTop="10dp">
+
+        <TextView
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="12dp"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:padding="15dp"
+            android:text="Email:" />
+
+        <EditText
+            android:id="@+id/tv_email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/edit_text_label"
+            android:inputType="text"
+            android:padding="15dp"/>
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/linear_birthday"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linear_email"
+        app:layout_constraintVertical_bias="0.0"
+        android:layout_marginTop="10dp">
+
+        <TextView
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="12dp"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:padding="15dp"
+            android:text="Ngày sinh:" />
+
+        <EditText
+            android:id="@+id/tv_birthday"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/edit_text_label"
+            android:inputType="text"
+            android:padding="15dp"/>
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/linear_contacts"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linear_birthday"
+        app:layout_constraintVertical_bias="0.0"
+        android:layout_marginTop="10dp">
+
+        <TextView
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="12dp"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:padding="15dp"
+            android:text="Địa chỉ:" />
+
+        <EditText
+            android:id="@+id/tv_contact"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/edit_text_label"
+            android:inputType="text"
+            android:padding="15dp"/>
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/linear_role"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linear_contacts"
+        app:layout_constraintVertical_bias="0.0"
+        android:layout_marginTop="10dp">
+
+        <TextView
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="12dp"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:padding="15dp"
+            android:text="Vai trò:" />
+
+        <EditText
+            android:id="@+id/tv_role"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/edit_text_label"
+            android:inputType="text"
+            android:padding="15dp"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linear_save"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linear_role"
+        app:layout_constraintVertical_bias="0.0"
+        android:layout_marginTop="10dp"
+        android:gravity="center">
+        <Button
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:text="Lưu"
+            android:background="@drawable/login_button_bg"
+            app:backgroundTint="@null"
+            android:layout_margin="10dp"
+            android:textSize="16sp"
+            android:layout_gravity="center"
+            android:onClick="@{() -> completeUserInfoViewModel.onClickSaveButton(activity)}">
+        </Button>
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

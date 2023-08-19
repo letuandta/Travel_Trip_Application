@@ -23,13 +23,13 @@ public class AdminActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         mActivityAdminBinding = ActivityAdminBinding.inflate(getLayoutInflater());
         setContentView(mActivityAdminBinding.getRoot());
-        UserModel userModel;
-        userModel = getIntent().getExtras().getParcelable("user");
+            UserModel userModel;
+            userModel = getIntent().getExtras().getParcelable("user");
         this.userModel = userModel;
-        setupViewPager();
+            setupViewPager();
 
         mActivityAdminBinding.bottomNav.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
-            @Override
+                @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 if (item.getItemId() == R.id.action_home) {
                     mActivityAdminBinding.viewPager.setCurrentItem(0);
