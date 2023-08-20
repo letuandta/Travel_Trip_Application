@@ -30,7 +30,8 @@ import java.util.Objects;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CopyOnWriteArrayList;
 
-public class HomePageFragment extends Fragment implements PlaceFamousAdapter.PlaceFamounsAdapterListener, SearchHomePageViewModel.SearchHomePageListener {
+public class HomePageFragment extends Fragment implements PlaceFamousAdapter.PlaceFamounsAdapterListener, SearchHomePageViewModel.SearchHomePageListener
+, CategoryAdapter.CategoryAdapterListener {
 
     FragmentHomePageBinding fragmentHomePageBinding;
     ArrayList<CategoryModel> categoryModels;
@@ -59,7 +60,7 @@ public class HomePageFragment extends Fragment implements PlaceFamousAdapter.Pla
         future.thenAccept(tours::addAll);
 
         PlaceFamousAdapter placeFamousAdapter = new PlaceFamousAdapter(tours, this);
-        CategoryAdapter categoryAdapter = new CategoryAdapter(categoryModels);
+        CategoryAdapter categoryAdapter = new CategoryAdapter(categoryModels, this);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
         LinearLayoutManager linearLayoutManager1 = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
 
@@ -78,7 +79,7 @@ public class HomePageFragment extends Fragment implements PlaceFamousAdapter.Pla
         categoryModels.add(new CategoryModel(2, "C002", "Quốc tế", R.drawable.travel_tour));
         categoryModels.add(new CategoryModel(4, "C004", "Tour nghĩ dưỡng", R.drawable.tour_relax));
         categoryModels.add(new CategoryModel(3, "C003", "Tour tham quan", R.drawable.travel_city));
-        categoryModels.add(new CategoryModel(3, "C005", "Tour lịch sử", R.drawable.tour_history));
+        categoryModels.add(new CategoryModel(5, "C005", "Tour lịch sử", R.drawable.tour_history));
     }
     @Override
     public void onPlaceClick(TourModel tourModel) {
@@ -105,5 +106,11 @@ public class HomePageFragment extends Fragment implements PlaceFamousAdapter.Pla
     public void choseFromDay() {
         DatePickerDialog datePickerDialog = new DatePickerDialog(fragmentHomePageBinding.textFromDay, getContext());
         fragmentHomePageBinding.textFromDay.setOnClickListener(datePickerDialog::openDatePicker);
+    }
+
+    @Override
+    public void onClickCategoryItem(long cateId) {
+        ((MainPageActivity) requireActivity()).setCategoryId(cateId);
+        ((MainPageActivity) requireActivity()).getmActivityMainPageBinding().viewPager.setCurrentItem(1, true);
     }
 }

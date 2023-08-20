@@ -40,7 +40,7 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder
             TourModel tourModel = tourModels.get(position);
             if(tourModel != null) {
                 Log.d("thumnail", "onBindViewHolder: " + tourModel.getThumbnail());
-
+                Log.d("rating scrores", "onBindViewHolder: " + tourModel.getRatingTour());
                 holder.mItemResultSearchBinding.tvResultTour.setText(tourModel.getTourTitle());
                 String date = String.valueOf(tourModel.getTourDuration() + " Ngày");
                 holder.mItemResultSearchBinding.tvDuration.setText(date);

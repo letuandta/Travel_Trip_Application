@@ -22,9 +22,11 @@ import java.util.concurrent.CompletableFuture;
 public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHolder> {
 
     private final ArrayList<CategoryModel> categoryModels;
+    private final CategoryAdapterListener listener;
 
-    public CategoryAdapter(ArrayList<CategoryModel> categoryModels) {
+    public CategoryAdapter(ArrayList<CategoryModel> categoryModels, CategoryAdapterListener listener) {
         this.categoryModels = categoryModels;
+        this.listener = listener;
     }
 
     @NonNull
@@ -40,6 +42,10 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
         if (categoryModel != null) {
             holder.itemCategoryBinding.tvCate.setText(categoryModel.getCateName());
             holder.itemCategoryBinding.itemCate.setImageResource(categoryModel.getDrawableImage());
+
+            holder.itemCategoryBinding.cvPlace.setOnClickListener(view -> {
+                listener.onClickCategoryItem(categoryModel.getCateID());
+            });
         }
         else return;
     }
@@ -52,11 +58,15 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
 
     public static class ViewHolder extends RecyclerView.ViewHolder{
 
-        private ItemCategoryBinding itemCategoryBinding;
+        private final ItemCategoryBinding itemCategoryBinding;
 
         public ViewHolder(@NonNull ItemCategoryBinding itemCategoryBinding) {
             super(itemCategoryBinding.getRoot());
             this.itemCategoryBinding = itemCategoryBinding;
         }
+    }
+
+    public  interface CategoryAdapterListener{
+        public void onClickCategoryItem(long cateId);
     }
 }

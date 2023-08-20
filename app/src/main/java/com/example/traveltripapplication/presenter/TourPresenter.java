@@ -22,4 +22,12 @@ public class TourPresenter {
         });
         return future;
     }
+
+    public static CompletableFuture<ArrayList<TourModel>> getToursByCategoryId(Long cateId){
+        CompletableFuture<ArrayList<TourModel>> future = new CompletableFuture<>();
+        future = CompletableFuture.supplyAsync(() -> {
+            return DatabaseHelper.mTourHelper().getTourByCategoryId(cateId);
+        });
+        return future;
+    }
 }

@@ -121,6 +121,41 @@ public class TourHelper extends SQLiteOpenHelper {
     }
 
     @SuppressLint("Range")
+    public ArrayList<TourModel> getTourByCategoryId(long categoryId){
+        ArrayList<TourModel> tourModels = new ArrayList<>();
+        Log.d("CATGORY ID", "getTourByCategoryId: " + categoryId);
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT t.*, avg(r.scores) as rating_tour " +
+                        "FROM tour as t " +
+                        "LEFT JOIN rating as r " +
+                        "ON t._id = r.tour_id " +
+                        "INNER JOIN tour_category as c " +
+                        "ON t._id = c.tour_id " +
+                        "WHERE c.category_id = ? " +
+                        "GROUP BY t._id " +
+                        "ORDER BY avg(r.scores) DESC"
+                , new String[]{String.valueOf(categoryId)});
+        Log.d("CURSOR SIZE", "getTourByCategoryId: " + cursor.getCount());
+        while (cursor.moveToNext()) {
+            TourModel tourModel = new TourModel();
+            tourModel.setTourID(cursor.getLong(cursor.getColumnIndex(TourEntry._ID)));
+            tourModel.setTourTitle(cursor.getString(cursor.getColumnIndex(TourEntry.TITLE)));
+            tourModel.setTourCode(cursor.getString(cursor.getColumnIndex(TourEntry.TOUR_CODE)));
+            tourModel.setTourDuration(cursor.getInt(cursor.getColumnIndex(TourEntry.DURATION)));
+            tourModel.setTourLocation(cursor.getString(cursor.getColumnIndex(TourEntry.LOCATION)));
+            tourModel.setTourActive(cursor.getInt(cursor.getColumnIndex(TourEntry.ACTIVE)));
+            tourModel.setThumbnail(cursor.getString(cursor.getColumnIndex(TourEntry.THUMBNAIL)));
+            tourModel.setExperience(cursor.getString(cursor.getColumnIndex(TourEntry.EXPERIENCE)));
+            tourModel.setMoreInfo(cursor.getString(cursor.getColumnIndex(TourEntry.MORE_INFORMATION)));
+            tourModel.setRatingTour(cursor.getDouble(cursor.getColumnIndex("rating_tour")));
+            tourModels.add(tourModel);
+        }
+        cursor.close();
+        return tourModels;
+    }
+
+
+    @SuppressLint("Range")
     public ArrayList<TourModel> getTourByLocation(String location){
         ArrayList<TourModel> tourModels = new ArrayList<>();
         SQLiteDatabase db = getReadableDatabase();

@@ -1,6 +1,5 @@
 package com.example.traveltripapplication;
 
-import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.MenuItem;
 
@@ -13,10 +12,7 @@ import com.example.traveltripapplication.adapter.ViewPagerAdapter;
 import com.example.traveltripapplication.databinding.ActivityMainPageBinding;
 import com.example.traveltripapplication.model.SearchModel;
 import com.example.traveltripapplication.model.UserModel;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
-
-import java.util.Objects;
 
 public class MainPageActivity extends AppCompatActivity {
 
@@ -31,6 +27,7 @@ public class MainPageActivity extends AppCompatActivity {
     public void setSearchModel(SearchModel searchModel) {
         this.searchModel = searchModel;
         this.isOtherSearch = true;
+        this.isCateSearch = false;
     }
 
     public SearchModel getSearchModel() {
@@ -45,9 +42,29 @@ public class MainPageActivity extends AppCompatActivity {
         this.isOtherSearch = otherSearch;
     }
 
+    public Boolean getCateSearch() {
+        return isCateSearch;
+    }
+
+    public void setCateSearch(Boolean cateSearch) {
+        this.isCateSearch = cateSearch;
+    }
+
+    public long getCategoryId() {
+        return categoryId;
+    }
+
+    public void setCategoryId(long categoryId) {
+        this.categoryId = categoryId;
+        this.isCateSearch = true;
+        this.isOtherSearch = false;
+    }
+
     private SearchModel searchModel;
+    private long categoryId;
     private Boolean isOtherSearch = false;
 
+    private Boolean isCateSearch = true;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

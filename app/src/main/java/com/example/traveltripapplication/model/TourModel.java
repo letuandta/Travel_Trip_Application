@@ -13,6 +13,7 @@ public class TourModel {
     private double ratingTour;
 
     public TourModel() {
+        this.ratingTour = 0;
     }
 
 
@@ -33,7 +34,7 @@ public class TourModel {
     }
 
     public void setRatingTour(double ratingTour) {
-        this.ratingTour = ratingTour;
+            this.ratingTour = ratingTour;
     }
 
     public long getTourID() {

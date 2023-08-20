@@ -40,6 +40,8 @@ public class SearchFragment extends Fragment implements SearchAdapter.SearchAdap
         searchModel = new SearchModel();
         searchModel = ((MainPageActivity) requireActivity()).getSearchModel();
         boolean isOtherSearch = ((MainPageActivity) requireActivity()).getOtherSearch();
+        boolean isCateSearch = ((MainPageActivity) requireActivity()).getCateSearch();
+        Log.d("IS CATEGORY SEARCH", "" + isCateSearch);
         if (searchModel != null && isOtherSearch) {
             ((MainPageActivity) requireActivity()).setOtherSearch(false);
             mFragmentSearchBinding.textLocation.setText(searchModel.getLocation());
@@ -48,13 +50,32 @@ public class SearchFragment extends Fragment implements SearchAdapter.SearchAdap
 
             CompletableFuture<ArrayList<TourModel>> future = TourPresenter.getToursSearch(searchModel.getLocation());
             CopyOnWriteArrayList<TourModel> tours = new CopyOnWriteArrayList<>();
-            future.thenAccept(tours::addAll);
+            future.thenAccept(result -> {
+                tours.addAll(result);
+                Log.d("Tour size", " " + tours.size());
 
-            SearchAdapter searchAdapter = new SearchAdapter(tours, this);
-            LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
-            mFragmentSearchBinding.rcvResultSearch.setLayoutManager(linearLayoutManager);
-            mFragmentSearchBinding.rcvResultSearch.setAdapter(null);
-            mFragmentSearchBinding.rcvResultSearch.setAdapter(searchAdapter);
+                SearchAdapter searchAdapter = new SearchAdapter(tours, this);
+                LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
+                mFragmentSearchBinding.rcvResultSearch.setLayoutManager(linearLayoutManager);
+                mFragmentSearchBinding.rcvResultSearch.setAdapter(searchAdapter);
+            });
+        }
+        else if (isCateSearch){
+            ((MainPageActivity) requireActivity()).setCateSearch(false);
+            long cateId = ((MainPageActivity) requireActivity()).getCategoryId();
+            mFragmentSearchBinding.textLocation.setText("Danh mục");
+
+            CompletableFuture<ArrayList<TourModel>> future = TourPresenter.getToursByCategoryId(cateId);
+            CopyOnWriteArrayList<TourModel> tours = new CopyOnWriteArrayList<>();
+            future.thenAccept(result -> {
+                tours.addAll(result);
+                Log.d("Tour size", " " + tours.size());
+
+                SearchAdapter searchAdapter = new SearchAdapter(tours, this);
+                LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
+                mFragmentSearchBinding.rcvResultSearch.setLayoutManager(linearLayoutManager);
+                mFragmentSearchBinding.rcvResultSearch.setAdapter(searchAdapter);
+            });
         }
     }
 
