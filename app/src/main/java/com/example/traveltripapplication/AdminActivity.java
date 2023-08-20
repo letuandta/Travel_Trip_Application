@@ -18,6 +18,16 @@ public class AdminActivity extends AppCompatActivity {
 
     private UserModel userModel;
 
+    public boolean isFlag() {
+        return flag;
+    }
+
+    public void setFlag(boolean flag) {
+        this.flag = flag;
+    }
+
+    boolean flag = false;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

@@ -1,5 +1,6 @@
 package com.example.traveltripapplication.adapter;
 
+import android.annotation.SuppressLint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -50,5 +51,11 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
             super(itemListUserBinding.getRoot());
             this.itemListUserBinding = itemListUserBinding;
         }
+    }
+
+    public void onLoadData(CopyOnWriteArrayList<UserModel> userModels) {
+        this.userModels.clear();
+        this.userModels.addAll(userModels);
+        this.notifyDataSetChanged();
     }
 }

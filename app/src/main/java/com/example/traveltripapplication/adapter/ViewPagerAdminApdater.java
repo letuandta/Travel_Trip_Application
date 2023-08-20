@@ -27,11 +27,11 @@ public class ViewPagerAdminApdater extends FragmentStateAdapter {
             case 0:
                 return new UserFragment();
             case 1:
-                return new HomePageFragment(userModel);
+                return new UserFragment();
             case 2:
-                return new HomePageFragment(userModel);
+                return new UserFragment();
             case 3:
-                return new HomePageFragment(userModel);
+                return new UserFragment();
         }
         return null;
     }
