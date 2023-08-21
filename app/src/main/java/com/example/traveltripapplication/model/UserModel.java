@@ -5,20 +5,23 @@ import android.os.Parcelable;
 
 import androidx.annotation.NonNull;
 
-public class UserModel implements Parcelable {
+import java.io.Serializable;
+
+public class UserModel implements Serializable {
     private long _ID;
     private String username;
     private String password;
     private String email;
     private String avatar;
     private long state;
-    private  String full_name;
+    private String full_name;
     private long contacts_id;
     private long is_super_user;
     private String created_date;
     private String birthday;
 
-    public UserModel() {}
+    public UserModel() {
+    }
 
     public UserModel(long _ID, String username, String password, String email, String avatar, long state, String full_name, long contacts_id, long is_super_user, String created_date, String birthday) {
         this._ID = _ID;
@@ -122,33 +125,4 @@ public class UserModel implements Parcelable {
         this.birthday = birthday;
     }
 
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(@NonNull Parcel parcel, int flags) {
-        parcel.writeString(avatar);
-        parcel.writeString(full_name);
-        parcel.writeLong(_ID);
-    }
-
-    public UserModel(Parcel parcel){
-        avatar = parcel.readString();
-        full_name = parcel.readString();
-        _ID = parcel.readLong();
-    }
-
-    public static final Creator<UserModel> CREATOR = new Creator<UserModel>() {
-        @Override
-        public UserModel createFromParcel(Parcel parcel) {
-            return new UserModel(parcel);
-        }
-
-        @Override
-        public UserModel[] newArray(int size) {
-            return new UserModel[size];
-        }
-    };
 }

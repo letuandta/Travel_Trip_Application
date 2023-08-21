@@ -70,7 +70,6 @@ public class AddUserFragment extends DialogFragment implements AddUserViewModel.
     public void successAddUser() {
         this.dismissAllowingStateLoss();
         ((AdminActivity) requireActivity()).setFlag(true);
-
         addUserViewModelListener.successAddUser();
     }
 }

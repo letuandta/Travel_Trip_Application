@@ -1,5 +1,6 @@
 package com.example.traveltripapplication.fragment;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -33,32 +34,49 @@ public class UserFragment extends Fragment implements AddUserFragment.addUserVie
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         fragmentUserBinding = FragmentUserBinding.inflate(inflater, container, false);
-        CopyOnWriteArrayList<UserModel> listUser = new CopyOnWriteArrayList<>();
-        CompletableFuture<ArrayList<UserModel>> completableFuture = UserPresenter.getListUser();
-        completableFuture.thenAccept(listUser::addAll);
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
 
-        userAdapter = new UserAdapter(listUser);
-        fragmentUserBinding.rcListUser.setLayoutManager(null);
-        fragmentUserBinding.rcListUser.setAdapter(null);
-        fragmentUserBinding.rcListUser.setLayoutManager(layoutManager);
-        fragmentUserBinding.rcListUser.setAdapter(userAdapter);
 //        Log.d("ts", String.valueOf(listUser.size()));
-
-        fragmentUserBinding.btnAdd.setOnClickListener(view -> {
-            AddUserFragment addUserFragment = AddUserFragment.newInstanse(this);
-            addUserFragment.show(requireActivity().getSupportFragmentManager(), "addUser");
-        });
         return fragmentUserBinding.getRoot();
     }
 
     public void successAddUser() {
         if (((AdminActivity) requireActivity()).isFlag()){
             ((AdminActivity) requireActivity()).setFlag(false);
-            CopyOnWriteArrayList<UserModel> listUser = new CopyOnWriteArrayList<>();
+            ArrayList<UserModel> listUser = new ArrayList<>();
             CompletableFuture<ArrayList<UserModel>> completableFuture = UserPresenter.getListUser();
             completableFuture.thenAccept(listUser::addAll);
             userAdapter.onLoadData(listUser);
         }
     }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        ArrayList<UserModel> listUser = new ArrayList<>();
+        CompletableFuture<ArrayList<UserModel>> completableFuture = UserPresenter.getListUser();
+        completableFuture.thenAccept(listUser::addAll);
+        LinearLayoutManager linearLayoutManager= new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
+
+        userAdapter = new UserAdapter(listUser);
+        fragmentUserBinding.rcListUser.setAdapter(userAdapter);
+        fragmentUserBinding.rcListUser.setLayoutManager(linearLayoutManager);
+        fragmentUserBinding.btnAdd.setOnClickListener(view1 -> {
+            AddUserFragment addUserFragment = AddUserFragment.newInstanse(this);
+            addUserFragment.show(requireActivity().getSupportFragmentManager(), "addUser");
+        });
+    }
+
+    //    @Override
+//    public void onAttach(@NonNull Context context) {
+//        super.onAttach(context);
+//        if (((AdminActivity) requireActivity()).isFlag()){
+//            ((AdminActivity) requireActivity()).setFlag(false);
+//            ArrayList<UserModel> listUser = new ArrayList<>();
+//            CompletableFuture<ArrayList<UserModel>> completableFuture = UserPresenter.getListUser();
+//            completableFuture.thenAccept(listUser::addAll);
+//            userAdapter.onLoadData(listUser);
+//            fragmentUserBinding.rcListUser.smoothScrollToPosition(0);
+//        }
+//
+//    }
 }

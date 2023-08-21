@@ -1,24 +1,25 @@
 package com.example.traveltripapplication.adapter;
 
-import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.traveltripapplication.databinding.ItemCategoryBinding;
+import com.example.traveltripapplication.admin.UpdateUserAdminActivity;
 import com.example.traveltripapplication.databinding.ItemListUserBinding;
-import com.example.traveltripapplication.model.CategoryModel;
 import com.example.traveltripapplication.model.UserModel;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
-    private  final CopyOnWriteArrayList<UserModel> userModels;
+    private  final ArrayList<UserModel> userModels;
 
-    public UserAdapter(CopyOnWriteArrayList<UserModel> userModels) {
+    public UserAdapter(ArrayList<UserModel> userModels) {
         this.userModels = userModels;
     }
 
@@ -35,6 +36,17 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
         if (userModel != null) {
             holder.itemListUserBinding.tvFullname.setText(userModel.getFull_name());
             holder.itemListUserBinding.tvRole.setText((userModel.getIs_super_user()==1 ? "admin" : "customer"));
+            holder.itemListUserBinding.tvEmail.setText((userModel.getEmail()));
+            holder.itemListUserBinding.btnUpdate.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    // Get the user id from the button
+                    // Start the UpdateActivity with the user id
+                    Intent intent = new Intent(view.getContext(), UpdateUserAdminActivity.class);
+                    intent.putExtra("user", userModel);
+                    view.getContext().startActivity(intent);
+                }
+            });
         }
         else return;
     }
@@ -53,7 +65,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
         }
     }
 
-    public void onLoadData(CopyOnWriteArrayList<UserModel> userModels) {
+    public void onLoadData(ArrayList<UserModel> userModels) {
         this.userModels.clear();
         this.userModels.addAll(userModels);
         this.notifyDataSetChanged();

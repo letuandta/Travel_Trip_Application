@@ -6,12 +6,15 @@ import androidx.databinding.DataBindingUtil;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.util.Log;
 
 import com.example.traveltripapplication.databinding.ActivityLoginBinding;
 import com.example.traveltripapplication.interfaceviewmodel.LoginViewModelInterface;
 import com.example.traveltripapplication.model.UserModel;
 import com.example.traveltripapplication.viewmodel.LoginViewModel;
+
+import java.io.Serializable;
 
 public class LoginActivity extends AppCompatActivity implements LoginViewModelInterface {
 

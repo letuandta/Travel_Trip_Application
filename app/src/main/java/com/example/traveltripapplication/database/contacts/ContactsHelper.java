@@ -2,6 +2,7 @@ package com.example.traveltripapplication.database.contacts;
 
 import static com.example.traveltripapplication.database.contacts.ContactsContract.ContactsEntry;
 
+import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -71,14 +72,34 @@ public class ContactsHelper extends SQLiteOpenHelper {
         return id;
     }
 
-    public Cursor getContactsById(long id) {
+    @SuppressLint("Range")
+    public ContactsModel getContactsById(long id) {
         SQLiteDatabase db = getReadableDatabase();
-        return db.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE _id = ?;" , new String[]{String.valueOf(id)});
+        ContactsModel contactsModel = new ContactsModel();
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE _id = ?;" , new String[]{String.valueOf(id)});
+        if (cursor.moveToFirst()) {
+            contactsModel.setAddress(cursor.getString(cursor.getColumnIndex(ContactsEntry.CURRENT_ADDRESS)));
+            contactsModel.setMore(cursor.getString(cursor.getColumnIndex(ContactsEntry.MORE_INFORMATION)));
+            contactsModel.setPhone_number(cursor.getString(cursor.getColumnIndex(ContactsEntry.PHONE_NUMBER)));
+        }
+        cursor.close();
+        return contactsModel;
     }
 
     public void delete(long id) {
         SQLiteDatabase db = getWritableDatabase();
         db.execSQL("DELETE FROM "+ TABLE_NAME +" WHERE _id = ?;", new String[]{String.valueOf(id)});
         db.close();
+    }
+
+    public int update(ContactsModel contactsModel, long contactId) {
+        SQLiteDatabase db = getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(ContactsEntry.PHONE_NUMBER, contactsModel.getPhone_number());
+        values.put(ContactsEntry.CURRENT_ADDRESS, contactsModel.getAddress());
+        values.put(ContactsEntry.MORE_INFORMATION, contactsModel.getMore());
+        int id = db.update(TABLE_NAME, values,ContactsEntry._ID + " = ? ", new String[]{String.valueOf(contactId)}  );
+        db.close();
+        return id;
     }
 }
