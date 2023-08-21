@@ -9,6 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.traveltripapplication.admin.UpdateUserAdminActivity;
+import com.example.traveltripapplication.database.DatabaseHelper;
 import com.example.traveltripapplication.databinding.ItemListUserBinding;
 import com.example.traveltripapplication.model.UserModel;
 
@@ -40,12 +41,16 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
             holder.itemListUserBinding.btnUpdate.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    // Get the user id from the button
-                    // Start the UpdateActivity with the user id
                     Intent intent = new Intent(view.getContext(), UpdateUserAdminActivity.class);
                     intent.putExtra("user", userModel);
                     view.getContext().startActivity(intent);
                 }
+            });
+            holder.itemListUserBinding.btnRemove.setOnClickListener(view -> {
+                DatabaseHelper.mContactsHelper().delete(userModel.getContacts_id());
+                DatabaseHelper.mUserHelper().delete(userModel.get_ID());
+                if (userModels.remove(userModel))
+                    this.notifyItemRemoved(position);
             });
         }
         else return;
@@ -70,4 +75,5 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
         this.userModels.addAll(userModels);
         this.notifyDataSetChanged();
     }
+
 }

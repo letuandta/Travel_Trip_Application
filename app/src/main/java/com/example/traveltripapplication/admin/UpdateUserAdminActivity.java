@@ -107,7 +107,7 @@ public class UpdateUserAdminActivity extends AppCompatActivity {
         contactsModel.setAddress(String.valueOf(editAddress.getText()));
         contactsModel.setMore(String.valueOf(editMore.getText()));
         contactsModel.setPhone_number(String.valueOf(editContact.getText()));
-        if (btnRole.getText() == "Admin") {
+        if (String.valueOf(btnRole.getText()) == "Admin") {
             userModel.setIs_super_user(1);
         }
         else  userModel.setIs_super_user(0);

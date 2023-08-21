@@ -53,8 +53,12 @@ public class UserFragment extends Fragment implements AddUserFragment.addUserVie
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         ArrayList<UserModel> listUser = new ArrayList<>();
+        listUser.add(new UserModel());
         CompletableFuture<ArrayList<UserModel>> completableFuture = UserPresenter.getListUser();
-        completableFuture.thenAccept(listUser::addAll);
+        completableFuture.thenAccept(result -> {
+            listUser.clear();
+            listUser.addAll(result);
+        });
         LinearLayoutManager linearLayoutManager= new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
 
         userAdapter = new UserAdapter(listUser);
