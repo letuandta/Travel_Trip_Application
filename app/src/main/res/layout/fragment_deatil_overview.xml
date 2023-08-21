@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_marginTop="20dp"
+            android:padding="10dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="Bạn sẽ nhận được gì?"
+                android:textStyle="bold"
+                android:textAllCaps="true"
+                android:layout_marginBottom="10dp"/>
+            <TextView
+                android:id="@+id/tv_experience"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="Surrounded by rice fields, Villa Kayu Lama offers a peaceful retreat in Ubud. Guests can take a leisurely swim in the private pools or "                        />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="Thông tin thêm"
+                android:textStyle="bold"
+                android:layout_marginTop="10dp"
+                android:textAllCaps="true"
+                android:layout_marginBottom="10dp"/>
+            <TextView
+                android:id="@+id/tv_more_info"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="Surrounded by rice fields, Villa Kayu Lama offers a peaceful retreat in Ubud. Guests can take a leisurely swim in the private pools or "                        />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center">
+            <TableLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:stretchColumns="1">
+                <TableRow>
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="Thời gian chuyến đi"
+                        android:textStyle="bold"
+                        android:textAllCaps="true"
+                        android:padding="5dp" />
+                    <TextView
+                        android:id="@+id/tv_duration"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="5 Ngày"
+                        android:padding="5dp" />
+                </TableRow>
+            </TableLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+</layout>
