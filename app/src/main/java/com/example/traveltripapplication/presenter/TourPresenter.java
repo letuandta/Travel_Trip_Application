@@ -30,4 +30,12 @@ public class TourPresenter {
         });
         return future;
     }
+
+    public static CompletableFuture<TourModel> getTourById(long id){
+        CompletableFuture<TourModel> future = new CompletableFuture<>();
+        future = CompletableFuture.supplyAsync(() -> {
+            return DatabaseHelper.mTourHelper().getTourByTourID(id);
+        });
+        return future;
+    }
 }

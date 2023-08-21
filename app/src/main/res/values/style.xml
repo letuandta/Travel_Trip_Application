@@ -4,4 +4,8 @@
         <item name="cornerFamily">rounded</item>
         <item name="cornerSize">100%</item>
     </style>
+    <style name="RatingBar" parent="Theme.AppCompat">
+        <item name="colorControlNormal">#B1AFAF</item>
+        <item name="colorControlActivated">#FFEB3B</item>
+    </style>
 </resources>

@@ -1,7 +1,6 @@
 package com.example.traveltripapplication.adapter;
 
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
+
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
@@ -11,21 +10,23 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.traveltripapplication.databinding.ItemResultSearchBinding;
 import com.example.traveltripapplication.model.TourModel;
+import com.squareup.picasso.Picasso;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.URL;
-import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.CopyOnWriteArrayList;
+import java.util.ArrayList;
 
 public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder> {
 
-    private final CopyOnWriteArrayList<TourModel> tourModels;
+    private final ArrayList<TourModel> tourModels = new ArrayList<>();
     private final SearchAdapterListener searchAdapterListener;
 
-    public SearchAdapter(CopyOnWriteArrayList<TourModel> tourModels, SearchAdapterListener searchAdapterListener) {
-        this.tourModels = tourModels;
+    public SearchAdapter( SearchAdapterListener searchAdapterListener) {
         this.searchAdapterListener = searchAdapterListener;
+    }
+
+    public void updateData(ArrayList<TourModel> tourModels) {
+        this.tourModels.clear();
+        this.tourModels.addAll(tourModels);
+        notifyDataSetChanged();
     }
 
     @NonNull
@@ -36,7 +37,7 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder
     }
 
     @Override
-    public void onBindViewHolder(@NonNull SearchAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
             TourModel tourModel = tourModels.get(position);
             if(tourModel != null) {
                 Log.d("thumnail", "onBindViewHolder: " + tourModel.getThumbnail());
@@ -45,20 +46,7 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder
                 String date = String.valueOf(tourModel.getTourDuration() + " Ngày");
                 holder.mItemResultSearchBinding.tvDuration.setText(date);
                 holder.mItemResultSearchBinding.ratingBar2.setRating((float) tourModel.getRatingTour());
-                CompletableFuture<Bitmap> downLoadImageByUrl = CompletableFuture.supplyAsync(() -> {
-
-                    Bitmap image = null;
-                    try {
-                        InputStream in = new URL(tourModel.getThumbnail()).openStream();
-                        image = BitmapFactory.decodeStream(in);
-                    } catch (IOException e) {
-                        throw new RuntimeException(e);
-                    }
-                    return image;
-                });
-                downLoadImageByUrl.thenAcceptAsync(image -> {
-                    holder.mItemResultSearchBinding.imgResult.setImageBitmap(image);
-                });
+                Picasso.get().load(tourModel.getThumbnail()).into(holder.mItemResultSearchBinding.imgResult);
                 holder.mItemResultSearchBinding.cvResultSearch.setOnClickListener(view -> {
                     searchAdapterListener.onClickItem(tourModel);
                 });

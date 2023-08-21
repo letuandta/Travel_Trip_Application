@@ -1,6 +1,8 @@
 package com.example.traveltripapplication.model;
 
-public class TourModel {
+import java.io.Serializable;
+
+public class TourModel implements Serializable {
     private long tourID;
     private String tourCode;
     private String tourTitle;

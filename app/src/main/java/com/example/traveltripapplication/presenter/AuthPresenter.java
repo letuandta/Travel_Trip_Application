@@ -9,8 +9,7 @@ import java.util.concurrent.CompletableFuture;
 
 public class AuthPresenter {
 
-    //region for repository
-    //****
+
 
 
     //region for method

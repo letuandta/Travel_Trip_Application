@@ -1,5 +1,6 @@
 package com.example.traveltripapplication.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,11 +12,13 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import com.example.traveltripapplication.DetailTourActivity;
 import com.example.traveltripapplication.MainPageActivity;
 import com.example.traveltripapplication.R;
 import com.example.traveltripapplication.adapter.CategoryAdapter;
 import com.example.traveltripapplication.adapter.PlaceFamousAdapter;
 import com.example.traveltripapplication.adapter.SearchAdapter;
+import com.example.traveltripapplication.adapter.ViewPagerAdapter;
 import com.example.traveltripapplication.databinding.FragmentHomePageBinding;
 import com.example.traveltripapplication.dialog.DatePickerDialog;
 import com.example.traveltripapplication.model.CategoryModel;
@@ -85,6 +88,9 @@ public class HomePageFragment extends Fragment implements PlaceFamousAdapter.Pla
     public void onPlaceClick(TourModel tourModel) {
         if(tourModel.getTourActive() != 0) {
             Toast.makeText(getContext(), "click place", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(getContext(), DetailTourActivity.class);
+            intent.putExtra("tour", tourModel);
+            startActivity(intent);
         }
         else Toast.makeText(getContext(), "Địa điểm hiện đang tạm ngừng hoạt", Toast.LENGTH_SHORT).show();
     }
@@ -93,7 +99,8 @@ public class HomePageFragment extends Fragment implements PlaceFamousAdapter.Pla
     public void onClickSearchButton(SearchModel searchModel) {
         Toast.makeText(getContext(), "click search button", Toast.LENGTH_SHORT).show();
         ((MainPageActivity) requireActivity()).setSearchModel(searchModel);
-        ((MainPageActivity) requireActivity()).getmActivityMainPageBinding().viewPager.setCurrentItem(1, true);
+        ((MainPageActivity) requireActivity()).getmActivityMainPageBinding().viewPager.setCurrentItem(1,true);
+
     }
 
     @Override

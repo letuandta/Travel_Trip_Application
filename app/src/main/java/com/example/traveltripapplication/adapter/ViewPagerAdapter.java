@@ -12,35 +12,41 @@ import com.example.traveltripapplication.fragment.SearchFragment;
 import com.example.traveltripapplication.model.SearchModel;
 import com.example.traveltripapplication.model.UserModel;
 
+import java.util.Arrays;
+import java.util.List;
+
 public class ViewPagerAdapter extends FragmentStateAdapter {
 
     public ViewPagerAdapter(@NonNull FragmentManager fragmentManager, @NonNull Lifecycle lifecycle,
                             @NonNull UserModel userModel) {
         super(fragmentManager, lifecycle);
         this.userModel = userModel;
+
+        this.fragments = Arrays.asList(
+                new HomePageFragment(userModel),
+                new SearchFragment(),
+                new HomePageFragment(userModel),
+                new HomePageFragment(userModel)
+        );
     }
 
     private final UserModel userModel;
+
+    private final List<Fragment> fragments;
 
 
     @NonNull
     @Override
     public Fragment createFragment(int position) {
-        switch (position) {
-            case 0:
-                return new HomePageFragment(userModel);
-            case 1:
-                return new SearchFragment();
-            case 2:
-                return new HomePageFragment(userModel);
-            case 3:
-                return new HomePageFragment(userModel);
-        }
-        return null;
+        return fragments.get(position);
     }
 
     @Override
     public int getItemCount() {
         return 4;
+    }
+
+    public Fragment getFragment(int position) {
+        return fragments.get(position);
     }
 }

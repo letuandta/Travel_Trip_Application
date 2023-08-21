@@ -31,7 +31,7 @@ public class TourContracts {
                     new TourModel(1, "DN001", "Tour tham quan Thành phố Đà Nẵng",
                             5, "Đà Nẵng", 1,
                             "https://i.pinimg.com/564x/ef/69/c5/ef69c56e319d6db337527303f3501ee1.jpg",
-                            "Tận hưởng khung cảnh tuyệt vời của đỉnh Bà Nà khi đứng trên cầu Vàng| Ngắm nhìn những  cảnh đẹp ở núi Chúa từ buồn cáp treo|Ghé thăm làng Pháp với những kiến trúc Pháp tinh tế| vui chơi ở công viên Fantasy Park",
+                            "Tận hưởng khung cảnh tuyệt vời của đỉnh Bà Nà khi đứng trên cầu Vàng\n Ngắm nhìn những  cảnh đẹp ở núi Chúa từ buồn cáp treo\nGhé thăm làng Pháp với những kiến trúc Pháp tinh tế\n vui chơi ở công viên Fantasy Park",
                             "Liên hệ hotline: 0364971541 để biết thêm chi tiết."),
                     new TourModel(2, "NT001", "Tour nghĩ dưỡng Nha Trang",
                             3,"Nha Trang, Khánh Hòa", 0,

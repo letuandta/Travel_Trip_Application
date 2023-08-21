@@ -7,25 +7,32 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
+import com.example.traveltripapplication.databinding.ActivityDetailTourBinding;
+import com.example.traveltripapplication.model.TourModel;
+import com.example.traveltripapplication.viewmodel.DetailTourViewModel;
+import com.squareup.picasso.Picasso;
+
 import org.w3c.dom.Text;
 
 public class DetailTourActivity extends AppCompatActivity {
-    TextView value;
-    int count = 0;
+
+    ActivityDetailTourBinding binding;
+    TourModel mTourModel;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_detail_tour);
-//        value = (TextView) findViewById(R.id.value);
+        binding = ActivityDetailTourBinding.inflate(getLayoutInflater());
+
+        if (getIntent().getExtras().getSerializable("tour") instanceof TourModel) {
+            mTourModel = (TourModel) getIntent().getExtras().getSerializable("tour");
+        }
+        DetailTourViewModel detailTourViewModel = new DetailTourViewModel(mTourModel);
+        binding.setDetailTour(detailTourViewModel);
+        setContentView(binding.getRoot());
+
+        binding.imgArrowBack.setOnClickListener(view -> this.onBackPressed());
+        Picasso.get().load(mTourModel.getThumbnail()).into(binding.imgPlace);
     }
 
-    public void increment(View v ) {
-        count++;
-        value.setText("" + count);
-    }
-    public void decrement(View v) {
-        if (count <= 0) count = 0;
-        else count--;
-        value.setText(""+count);
-    }
 }

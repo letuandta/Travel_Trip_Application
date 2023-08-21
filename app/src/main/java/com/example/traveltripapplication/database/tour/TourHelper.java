@@ -71,7 +71,15 @@ public class TourHelper extends SQLiteOpenHelper {
     public TourModel getTourByTourID(long id){
         SQLiteDatabase db = getReadableDatabase();
         TourModel tourModel = new TourModel();
-        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE " + TourEntry._ID + " = ?;" , new String[]{String.valueOf(id)});
+        Cursor cursor = db.rawQuery(
+                "SELECT t.*, avg(r.scores) as rating_tour \n" +
+                        "FROM tour as t \n" +
+                        "LEFT JOIN rating as r \n" +
+                        "ON t._id =  r.tour_id \n" +
+                        "WHERE t._id = ?\n" +
+                        "GROUP BY t._id \n" +
+                        "ORDER BY avg(r.scores) DESC "
+                , new String[]{String.valueOf(id)});
         if(cursor.moveToFirst()) {
             tourModel.setTourID(cursor.getLong(cursor.getColumnIndex(TourEntry._ID)));
             tourModel.setTourTitle(cursor.getString(cursor.getColumnIndex(TourEntry.TITLE)));
@@ -82,6 +90,7 @@ public class TourHelper extends SQLiteOpenHelper {
             tourModel.setThumbnail(cursor.getString(cursor.getColumnIndex(TourEntry.THUMBNAIL)));
             tourModel.setExperience(cursor.getString(cursor.getColumnIndex(TourEntry.EXPERIENCE)));
             tourModel.setMoreInfo(cursor.getString(cursor.getColumnIndex(TourEntry.MORE_INFORMATION)));
+            tourModel.setRatingTour(cursor.getDouble(cursor.getColumnIndex("rating_tour")));
         }
         else {
             tourModel.setTourID(-1);

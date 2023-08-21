@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.traveltripapplication.R;
 import com.example.traveltripapplication.databinding.ItemPlaceBinding;
 import com.example.traveltripapplication.model.TourModel;
+import com.squareup.picasso.Picasso;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -51,21 +52,7 @@ public class PlaceFamousAdapter extends RecyclerView.Adapter<PlaceFamousAdapter.
             else{
                 holder.itemPlaceBinding.imageView.setImageResource(R.drawable.baseline_favorite_border_24);
             }
-            CompletableFuture<Bitmap> downLoadImageByUrl = CompletableFuture.supplyAsync(() -> {
-
-                Bitmap image = null;
-                try {
-                    InputStream in = new URL(tourModel.getThumbnail()).openStream();
-                    image = BitmapFactory.decodeStream(in);
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
-                return image;
-            });
-
-            downLoadImageByUrl.thenAcceptAsync(result -> {
-                holder.itemPlaceBinding.imgPlace.setImageBitmap(result);
-            });
+            Picasso.get().load(tourModel.getThumbnail()).into(holder.itemPlaceBinding.imgPlace);
 
             holder.itemPlaceBinding.cvPlace.setOnClickListener(view -> {
                 listener.onPlaceClick(tourModel);

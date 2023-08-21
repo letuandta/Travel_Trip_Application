@@ -24,11 +24,11 @@ public class TourItineraryContracts {
         public static  List<TourItineraryModel> getValues(){
             return Arrays.asList(
                     new TourItineraryModel(1, 1, 1,
-                            "7:30 Đón khách ra sân bay|9:00 Lên máy bay| 10:20 Đến Đà Nẵng| 12:00 lên xe đi tham quan"),
-                    new TourItineraryModel(2, 1, 2, "7:30 Đón khách lên xe|9:00 Đến nơi tham quan"),
-                    new TourItineraryModel(3, 1, 3, "7:30 Đón khách lên xe|9:00 Đến nơi tham quan"),
-                    new TourItineraryModel(4, 1, 4, "7:30 Đón khách lên xe|9:00 Đến nơi tham quan"),
-                    new TourItineraryModel(5, 1, 5, "7:30 Đón khách lên xe|9:00 Đến nơi tham quan")
+                            "7:30 Đón khách ra sân bay\n9:00 Lên máy bay\n10:20 Đến Đà Nẵng\n12:00 lên xe đi tham quan"),
+                    new TourItineraryModel(2, 1, 2, "7:30 Đón khách lên xe\n9:00 Đến nơi tham quan"),
+                    new TourItineraryModel(3, 1, 3, "7:30 Đón khách lên xe\n9:00 Đến nơi tham quan"),
+                    new TourItineraryModel(4, 1, 4, "7:30 Đón khách lên xe\n9:00 Đến nơi tham quan"),
+                    new TourItineraryModel(5, 1, 5, "7:30 Đón khách lên xe\n9:00 Đến nơi tham quan")
             );
         }
     }
