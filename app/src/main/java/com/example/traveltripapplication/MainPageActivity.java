@@ -64,7 +64,7 @@ public class MainPageActivity extends AppCompatActivity {
     private long categoryId;
     private Boolean isOtherSearch = false;
 
-    private Boolean isCateSearch = true;
+    private Boolean isCateSearch = false;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

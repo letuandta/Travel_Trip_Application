@@ -29,7 +29,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
     }
 
     @Override
-    public void onBindViewHolder(@NonNull UserAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         UserModel userModel = userModels.get(position);
         if (userModel != null) {
             holder.itemListUserBinding.tvFullname.setText(userModel.getFull_name());
