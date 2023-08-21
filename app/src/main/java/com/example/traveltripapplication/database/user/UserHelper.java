@@ -172,13 +172,13 @@ public class UserHelper extends SQLiteOpenHelper {
     public int updateUser(UserModel user) {
         SQLiteDatabase db = getWritableDatabase();
         ContentValues values = new ContentValues();
-        values.put(UserEntry.AVATAR, user.getAvatar());
         values.put(UserEntry.FULL_NAME, user.getFull_name());
         values.put(UserEntry.EMAIL, user.getEmail());
         values.put(UserEntry.CONTACTS, user.getContacts_id());
         values.put(UserEntry.BIRTHDAY, user.getBirthday());
         values.put(UserEntry.LAST_LOGIN, dtf.format(now));
         values.put(UserEntry.IS_ENOUGH, 1);
+        values.put(UserEntry.IS_SUPER_USER, user.getIs_super_user());
         int id = db.update(TABLE_NAME, values, UserEntry._ID + " = ?", new String[]{String.valueOf(user.get_ID())});
         db.close();
         return id;

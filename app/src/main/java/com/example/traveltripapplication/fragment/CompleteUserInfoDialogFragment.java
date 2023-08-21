@@ -40,7 +40,7 @@ public class CompleteUserInfoDialogFragment extends DialogFragment{
     public static CompleteUserInfoDialogFragment newInstance(UserModel user, CompleteUserInfoInterface completeUserInfoInterface){
             final CompleteUserInfoDialogFragment dialog = new CompleteUserInfoDialogFragment();
             Bundle bundle = new Bundle();
-            bundle.putParcelable("USER", user);
+            bundle.putSerializable("user", user);
             dialog.setArguments(bundle);
             dialog.setCompleteUserInfoInterface(completeUserInfoInterface);
             return dialog;
@@ -50,7 +50,7 @@ public class CompleteUserInfoDialogFragment extends DialogFragment{
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         assert getArguments() != null;
-        user = (UserModel) getArguments().getParcelable("USER");
+        user = (UserModel) getArguments().getSerializable("user");
         binding = DataBindingUtil.inflate(LayoutInflater.from(getContext()),
                 R.layout.fragment_update_user, null, false);
         binding.setCompleteUserInfoViewModel(new CompleteUserInfoViewModel(user));

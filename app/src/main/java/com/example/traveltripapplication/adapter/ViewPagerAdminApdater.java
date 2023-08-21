@@ -26,19 +26,15 @@ public class ViewPagerAdminApdater extends FragmentStateAdapter {
         switch (position) {
             case 0:
                 return new UserFragment();
-            case 1:
-                return new HomePageFragment(userModel);
-            case 2:
-                return new HomePageFragment(userModel);
-            case 3:
-                return new HomePageFragment(userModel);
+//            case 1:
+//                return new UserFragment();
         }
         return null;
     }
 
     @Override
     public int getItemCount() {
-        return 4;
+        return 1;
     }
 }
 

@@ -5,6 +5,6 @@
         android:title="Admin" />
 
     <item
-        android:id="@+id/kotlin"
+        android:id="@+id/customer"
         android:title="Khách hàng" />
 </menu>

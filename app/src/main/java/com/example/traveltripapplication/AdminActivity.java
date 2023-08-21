@@ -16,7 +16,21 @@ import com.google.android.material.navigation.NavigationBarView;
 public class AdminActivity extends AppCompatActivity {
     ActivityAdminBinding mActivityAdminBinding;
 
+
     private UserModel userModel;
+
+    public boolean isFlag() {
+        return flag;
+    }
+
+    public void setFlag(boolean flag) {
+        this.flag = flag;
+    }
+
+    boolean flag = false;
+    public UserModel getUserModel() {
+        return userModel;
+    }
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -24,7 +38,7 @@ public class AdminActivity extends AppCompatActivity {
         mActivityAdminBinding = ActivityAdminBinding.inflate(getLayoutInflater());
         setContentView(mActivityAdminBinding.getRoot());
             UserModel userModel;
-            userModel = getIntent().getExtras().getParcelable("user");
+            userModel = (UserModel) getIntent().getExtras().getSerializable("user");
         this.userModel = userModel;
             setupViewPager();
 
@@ -56,17 +70,23 @@ public class AdminActivity extends AppCompatActivity {
                     case 0:
                         mActivityAdminBinding.bottomNav.getMenu().findItem(R.id.manager_user).setChecked(true);
                         break;
-                    case 1:
-                        mActivityAdminBinding.bottomNav.getMenu().findItem(R.id.manager_cate).setChecked(true);
-                        break;
-                    case 2:
-                        mActivityAdminBinding.bottomNav.getMenu().findItem(R.id.manager_order).setChecked(true);
-                        break;
-                    case 3:
-                        mActivityAdminBinding.bottomNav.getMenu().findItem(R.id.manager_tour).setChecked(true);
-                        break;
+//                    case 1:
+//                        mActivityAdminBinding.bottomNav.getMenu().findItem(R.id.manager_cate).setChecked(true);
+//                        break;
+//                    case 2:
+//                        mActivityAdminBinding.bottomNav.getMenu().findItem(R.id.manager_order).setChecked(true);
+//                        break;
+//                    case 3:
+//                        mActivityAdminBinding.bottomNav.getMenu().findItem(R.id.manager_tour).setChecked(true);
+//                        break;
                 }
             }
         });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        this.flag = true;
     }
 }

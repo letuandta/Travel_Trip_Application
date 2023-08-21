@@ -14,6 +14,8 @@ import com.example.traveltripapplication.model.SearchModel;
 import com.example.traveltripapplication.model.UserModel;
 import com.google.android.material.navigation.NavigationBarView;
 
+import java.io.Serializable;
+
 public class MainPageActivity extends AppCompatActivity {
 
     public ActivityMainPageBinding getmActivityMainPageBinding() {
@@ -71,7 +73,7 @@ public class MainPageActivity extends AppCompatActivity {
         mActivityMainPageBinding = ActivityMainPageBinding.inflate(getLayoutInflater());
         setContentView(mActivityMainPageBinding.getRoot());
         UserModel userModel;
-        userModel = getIntent().getExtras().getParcelable("user");
+        userModel = (UserModel) getIntent().getExtras().getSerializable("user");
         this.userModel = userModel;
         setupViewPager();
 
