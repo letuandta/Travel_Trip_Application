@@ -1,7 +1,5 @@
-package com.example.traveltripapplication.adapter;
+package com.example.traveltripapplication.customer.adapter;
 
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
@@ -14,11 +12,6 @@ import com.example.traveltripapplication.databinding.ItemPlaceBinding;
 import com.example.traveltripapplication.model.TourModel;
 import com.squareup.picasso.Picasso;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 public class PlaceFamousAdapter extends RecyclerView.Adapter<PlaceFamousAdapter.ViewHolder> {

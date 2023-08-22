@@ -10,7 +10,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
-import com.example.traveltripapplication.adapter.TourItineraryAdapter;
+import com.example.traveltripapplication.customer.adapter.TourItineraryAdapter;
 import com.example.traveltripapplication.databinding.FragmentDetailItineraryBinding;
 import com.example.traveltripapplication.model.TourItineraryModel;
 import com.example.traveltripapplication.data.repository.TourRepository;

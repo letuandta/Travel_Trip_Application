@@ -9,13 +9,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.example.traveltripapplication.R;
-import com.example.traveltripapplication.adapter.ViewPagerAdapter;
+import com.example.traveltripapplication.customer.adapter.ViewPagerAdapter;
 import com.example.traveltripapplication.databinding.ActivityMainPageBinding;
 import com.example.traveltripapplication.model.SearchModel;
 import com.example.traveltripapplication.model.UserModel;
 import com.google.android.material.navigation.NavigationBarView;
-
-import java.io.Serializable;
 
 public class MainPageActivity extends AppCompatActivity {
 

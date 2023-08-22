@@ -15,7 +15,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.example.traveltripapplication.customer.DetailTourActivity;
 import com.example.traveltripapplication.customer.MainPageActivity;
-import com.example.traveltripapplication.adapter.SearchAdapter;
+import com.example.traveltripapplication.customer.adapter.SearchAdapter;
 import com.example.traveltripapplication.databinding.FragmentSearchBinding;
 import com.example.traveltripapplication.model.SearchModel;
 import com.example.traveltripapplication.model.TourModel;

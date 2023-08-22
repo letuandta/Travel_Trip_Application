@@ -1,15 +1,19 @@
 package com.example.traveltripapplication.admin;
 
+import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.example.traveltripapplication.R;
-import com.example.traveltripapplication.adapter.ViewPagerAdminApdater;
+import com.example.traveltripapplication.admin.adapter.ViewPagerAdminApdater;
 import com.example.traveltripapplication.databinding.ActivityAdminBinding;
 import com.example.traveltripapplication.model.UserModel;
 import com.google.android.material.navigation.NavigationBarView;
@@ -20,6 +24,8 @@ public class AdminActivity extends AppCompatActivity {
 
     private UserModel userModel;
     private UserModel userAdded;
+    private UserModel userUpdate;
+    int position;
 
     public boolean isFlag() {
         return flag;
@@ -36,6 +42,14 @@ public class AdminActivity extends AppCompatActivity {
 
     public UserModel getUserAdded() {
         return userAdded;
+    }
+
+    public UserModel getUserUpdate() {
+        return userUpdate;
+    }
+
+    public int getPosition() {
+        return position;
     }
 
     public void setUserAdded(UserModel userAdded) {
@@ -99,4 +113,5 @@ public class AdminActivity extends AppCompatActivity {
         super.onResume();
         this.flag = true;
     }
+
 }

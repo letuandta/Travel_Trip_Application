@@ -1,5 +1,6 @@
-package com.example.traveltripapplication.adapter;
+package com.example.traveltripapplication.admin.adapter;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,6 +9,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.traveltripapplication.admin.AdminActivity;
 import com.example.traveltripapplication.admin.UpdateUserAdminActivity;
 import com.example.traveltripapplication.data.database.DatabaseHelper;
 import com.example.traveltripapplication.databinding.ItemListUserBinding;
@@ -77,6 +79,13 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
     public void loadDataLastPosition(UserModel userModel){
         this.userModels.add(userModel);
         this.notifyItemInserted(userModels.size() - 1);
+    }
+
+    public void updateData(UserModel userModel, int position){
+        if(position != -1){
+        this.userModels.set(position, userModel);
+        this.notifyItemChanged(position);
+        }
     }
 
 }

@@ -1,4 +1,4 @@
-package com.example.traveltripapplication.adapter;
+package com.example.traveltripapplication.customer.adapter;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;

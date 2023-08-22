@@ -1,4 +1,4 @@
-package com.example.traveltripapplication.adapter;
+package com.example.traveltripapplication.customer.adapter;
 
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
@@ -9,8 +9,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.traveltripapplication.databinding.ItemDetailItineraryBinding;
 import com.example.traveltripapplication.model.TourItineraryModel;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class TourItineraryAdapter extends RecyclerView.Adapter<TourItineraryAdapter.ViewHolder> {

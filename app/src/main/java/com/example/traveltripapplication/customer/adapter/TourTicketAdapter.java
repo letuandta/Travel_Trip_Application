@@ -1,4 +1,4 @@
-package com.example.traveltripapplication.adapter;
+package com.example.traveltripapplication.customer.adapter;
 
 import android.util.Log;
 import android.view.LayoutInflater;

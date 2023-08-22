@@ -12,7 +12,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
-import com.example.traveltripapplication.adapter.TourTicketAdapter;
+import com.example.traveltripapplication.customer.adapter.TourTicketAdapter;
 import com.example.traveltripapplication.databinding.FragmentDetailTicketBinding;
 import com.example.traveltripapplication.model.TourTicketModel;
 import com.example.traveltripapplication.data.repository.TourRepository;
