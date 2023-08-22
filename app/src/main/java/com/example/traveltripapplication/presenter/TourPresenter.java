@@ -1,6 +1,7 @@
 package com.example.traveltripapplication.presenter;
 
 import com.example.traveltripapplication.database.DatabaseHelper;
+import com.example.traveltripapplication.model.TourItineraryModel;
 import com.example.traveltripapplication.model.TourModel;
 
 import java.util.ArrayList;
@@ -36,6 +37,14 @@ public class TourPresenter {
         future = CompletableFuture.supplyAsync(() -> {
             return DatabaseHelper.mTourHelper().getTourByTourID(id);
         });
+        return future;
+    }
+
+    public static CompletableFuture<ArrayList<TourItineraryModel>> getItineraryByTourId(long id){
+        CompletableFuture<ArrayList<TourItineraryModel>> future = CompletableFuture.supplyAsync(() -> {
+            return DatabaseHelper.mTourItineraryHelper().getItineraryByTourId(id);
+        });
+
         return future;
     }
 }

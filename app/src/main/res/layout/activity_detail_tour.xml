@@ -11,224 +11,232 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/main_bg_color">
+        android:background="@color/white">
 
-        <ScrollView
+        <LinearLayout
+            android:id="@+id/linearLayout9"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-            <LinearLayout
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/constraint_layout"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical" >
+                android:layout_height="match_parent">
 
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/constraint_layout"
+                <ImageView
+                    android:id="@+id/img_place"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_height="match_parent"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/dalat"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.0" />
 
-                    <ImageView
-                        android:id="@+id/img_place"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:scaleType="fitXY"
-                        android:src="@drawable/dalat"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.0"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintVertical_bias="0.0" />
+                <LinearLayout
+                    android:id="@+id/linearLayout8"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
 
-                    <LinearLayout
-                        android:id="@+id/linearLayout8"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:orientation="vertical">
+                </LinearLayout>
 
-                    </LinearLayout>
-                    <ImageView
-                        android:id="@+id/img_arrow_back"
-                        android:layout_width="16dp"
-                        android:layout_height="26dp"
-                        android:layout_marginStart="24dp"
-                        android:layout_marginTop="28dp"
-                        android:src="@drawable/iconarrow"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                <ImageView
+                    android:id="@+id/img_arrow_back"
+                    android:layout_width="16dp"
+                    android:layout_height="26dp"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginTop="28dp"
+                    android:src="@drawable/iconarrow"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-                    <ImageView
-                        android:id="@+id/img_share"
-                        android:layout_width="35dp"
-                        android:layout_height="25dp"
-                        android:layout_marginEnd="20dp"
-                        android:src="@drawable/share"
-                        app:layout_constraintBottom_toBottomOf="@+id/img_arrow_back"
-                        app:layout_constraintEnd_toStartOf="@+id/img_star"
-                        app:layout_constraintTop_toTopOf="@+id/img_arrow_back"
-                        app:layout_constraintVertical_bias="1.0" />
+                <ImageView
+                    android:id="@+id/img_share"
+                    android:layout_width="35dp"
+                    android:layout_height="25dp"
+                    android:layout_marginEnd="20dp"
+                    android:src="@drawable/share"
+                    app:layout_constraintBottom_toBottomOf="@+id/img_arrow_back"
+                    app:layout_constraintEnd_toStartOf="@+id/img_star"
+                    app:layout_constraintTop_toTopOf="@+id/img_arrow_back"
+                    app:layout_constraintVertical_bias="1.0" />
 
-                    <ImageView
-                        android:id="@+id/img_star"
-                        android:layout_width="35dp"
-                        android:layout_height="25dp"
-                        android:layout_marginEnd="24dp"
-                        android:src="@drawable/starwhite"
-                        app:layout_constraintBottom_toBottomOf="@+id/img_share"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="@+id/img_share"
-                        app:layout_constraintVertical_bias="1.0" />
+                <ImageView
+                    android:id="@+id/img_star"
+                    android:layout_width="35dp"
+                    android:layout_height="25dp"
+                    android:layout_marginEnd="24dp"
+                    android:src="@drawable/starwhite"
+                    app:layout_constraintBottom_toBottomOf="@+id/img_share"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/img_share"
+                    app:layout_constraintVertical_bias="1.0" />
+
+                <TextView
+                    android:id="@+id/tv_name_tour"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="100dp"
+                    android:layout_marginBottom="180dp"
+                    android:text="@={detailTour.tour.tourTitle}"
+                    android:textAlignment="center"
+                    android:textAllCaps="true"
+                    android:textColor="@color/white"
+                    android:textSize="30dp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="@+id/img_place"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/img_arrow_back" />
+
+                <TextView
+                    android:id="@+id/tv_tour_location"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@={detailTour.tour.tourLocation}"
+                    android:textColor="@color/white"
+                    app:layout_constraintBottom_toBottomOf="@+id/img_place"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.497"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_name_tour"
+                    app:layout_constraintVertical_bias="0.124" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginBottom="32dp"
+                    android:background="@drawable/shape"
+                    android:orientation="horizontal"
+                    android:padding="5dp"
+                    app:cardCornerRadius="15dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/img_place"
+                    app:layout_constraintCircleRadius="50dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_tour_location"
+                    app:layout_constraintVertical_bias="0.387">
 
                     <TextView
-                        android:id="@+id/tv_name_tour"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_marginBottom="180dp"
-                        android:layout_marginTop="100dp"
-                        android:text="@={detailTour.tour.tourTitle}"
-                        android:textAlignment="center"
-                        android:textAllCaps="true"
-                        android:textColor="@color/white"
-                        android:textSize="30dp"
-                        android:textStyle="bold"
-                        app:layout_constraintBottom_toBottomOf="@+id/img_place"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/img_arrow_back" />
-
-                    <TextView
-                        android:id="@+id/tv_tour_location"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@={detailTour.tour.tourLocation}"
-                        android:textColor="@color/white"
-                        app:layout_constraintBottom_toBottomOf="@+id/img_place"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.497"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/tv_name_tour"
-                        app:layout_constraintVertical_bias="0.124" />
+                        android:paddingLeft="10dp"
+                        android:text="@={detailTour.rating}"
+                        android:textColor="@color/black"
+                        android:textStyle="bold" />
+
+                    <ImageView
+                        android:id="@+id/imageView11"
+                        android:layout_width="20dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_weight="1"
+                        android:src="@drawable/star" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="-20dp"
+                    android:background="@drawable/shape"
+                    android:orientation="vertical"
+                    android:padding="10dp"
+                    app:layout_constraintTop_toBottomOf="@+id/img_place"
+                    tools:layout_editor_absoluteX="0dp">
 
                     <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_marginBottom="32dp"
-                        android:background="@drawable/shape"
-                        android:orientation="horizontal"
-                        android:padding="5dp"
-                        app:cardCornerRadius="15dp"
-                        app:layout_constraintBottom_toBottomOf="@+id/img_place"
-                        app:layout_constraintCircleRadius="50dp"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/tv_tour_location"
-                        app:layout_constraintVertical_bias="0.387">
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="20dp"
+                        android:gravity="center">
 
                         <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:paddingLeft="10dp"
-                            android:text="@={detailTour.rating}"
+                            android:id="@+id/tag_overview"
+                            android:layout_width="100dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginRight="5dp"
+                            android:background="@drawable/shape_button"
+                            android:gravity="center"
+                            android:padding="5dp"
+                            android:text="Tổng quan"
+                            android:textAllCaps="true"
                             android:textColor="@color/black"
+                            android:textSize="14dp"
                             android:textStyle="bold" />
 
-                        <ImageView
-                            android:id="@+id/imageView11"
-                            android:layout_width="20dp"
+                        <TextView
+                            android:id="@+id/tag_itinerary"
+                            android:layout_width="100dp"
                             android:layout_height="match_parent"
-                            android:layout_marginLeft="5dp"
-                            android:layout_marginRight="10dp"
-                            android:layout_weight="1"
-                            android:src="@drawable/star" />
-                    </LinearLayout>
+                            android:layout_marginRight="5dp"
+                            android:background="@drawable/shape_button"
+                            android:gravity="center"
+                            android:padding="5dp"
+                            android:text="Lịch trình"
+                            android:textAllCaps="true"
+                            android:textColor="@color/black"
+                            android:textSize="14dp"
+                            android:textStyle="bold" />
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="-20dp"
-                        android:background="@drawable/shape"
-                        android:orientation="vertical"
-                        android:padding="10dp"
-                        app:layout_constraintTop_toBottomOf="@+id/img_place"
-                        tools:layout_editor_absoluteX="0dp">
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
+                        <TextView
+                            android:id="@+id/tag_ticket"
+                            android:layout_width="50dp"
                             android:layout_height="match_parent"
-                            android:layout_marginTop="20dp"
-                            android:gravity="center">
+                            android:layout_marginRight="5dp"
+                            android:background="@drawable/shape_button"
+                            android:gravity="center"
+                            android:padding="5dp"
+                            android:text="vé"
+                            android:textAllCaps="true"
+                            android:textColor="@color/black"
+                            android:textSize="14dp"
+                            android:textStyle="bold" />
 
-                            <TextView
-                                android:layout_width="100dp"
-                                android:layout_height="match_parent"
-                                android:layout_marginRight="5dp"
-                                android:background="@drawable/shape_button"
-                                android:gravity="center"
-                                android:paddingLeft="5dp"
-                                android:paddingRight="5dp"
-                                android:text="Tổng quan"
-                                android:textAllCaps="true"
-                                android:textColor="@color/black"
-                                android:textSize="14dp"
-                                android:textStyle="bold" />
-
-                            <TextView
-                                android:layout_width="100dp"
-                                android:layout_height="match_parent"
-                                android:layout_marginRight="5dp"
-                                android:background="@drawable/shape_button"
-                                android:gravity="center"
-                                android:paddingLeft="5dp"
-                                android:paddingRight="5dp"
-                                android:text="Lịch trình"
-                                android:textAllCaps="true"
-                                android:textColor="@color/black"
-                                android:textSize="14dp"
-                                android:textStyle="bold" />
-
-                            <TextView
-                                android:layout_width="50dp"
-                                android:layout_height="match_parent"
-                                android:layout_marginRight="5dp"
-                                android:background="@drawable/shape_button"
-                                android:gravity="center"
-                                android:paddingLeft="5dp"
-                                android:paddingRight="5dp"
-                                android:text="vé"
-                                android:textAllCaps="true"
-                                android:textColor="@color/black"
-                                android:textSize="14dp"
-                                android:textStyle="bold" />
-
-                            <TextView
-                                android:layout_width="100dp"
-                                android:layout_height="match_parent"
-                                android:layout_marginRight="5dp"
-                                android:background="@drawable/shape_button"
-                                android:gravity="center"
-                                android:paddingLeft="5dp"
-                                android:paddingRight="5dp"
-                                android:text="đánh giá"
-                                android:textAllCaps="true"
-                                android:textColor="@color/black"
-                                android:textSize="14dp"
-                                android:textStyle="bold" />
-                        </LinearLayout>
+                        <TextView
+                            android:id="@+id/tag_rating"
+                            android:layout_width="100dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginRight="5dp"
+                            android:background="@drawable/shape_button"
+                            android:gravity="center"
+                            android:padding="5dp"
+                            android:text="đánh giá"
+                            android:textAllCaps="true"
+                            android:textColor="@color/black"
+                            android:textSize="14dp"
+                            android:textStyle="bold" />
                     </LinearLayout>
+                </LinearLayout>
 
-                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </LinearLayout>
 
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-                    <androidx.viewpager2.widget.ViewPager2
-                        android:id="@+id/view_pager"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent">
-                    </androidx.viewpager2.widget.ViewPager2>
-                </RelativeLayout>
-            </LinearLayout>
-        </ScrollView>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="542dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout9">
+
+            <androidx.viewpager2.widget.ViewPager2
+                android:id="@+id/view_pager"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentStart="true"
+                android:layout_marginTop="20dp">
+
+            </androidx.viewpager2.widget.ViewPager2>
+        </RelativeLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
