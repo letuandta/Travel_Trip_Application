@@ -7,7 +7,7 @@ public class OrderTicketContracts {
     }
 
     public final static class OrderTicketEntry{
-        public static final String TABLE_NAME = "order_detail";
+        public static final String TABLE_NAME = "order_ticket";
         public static final String _ID = BaseColumns._ID;
         public static final String ORDER_ID = "order_id";
         public static final String TOUR_TICKET_ID = "tour_ticket_id";
