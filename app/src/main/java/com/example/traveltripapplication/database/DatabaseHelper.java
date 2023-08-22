@@ -4,17 +4,20 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 
-import com.example.traveltripapplication.database.category.CategoryHelper;
-import com.example.traveltripapplication.database.contacts.ContactsHelper;
-import com.example.traveltripapplication.database.permission.PermissionHelper;
-import com.example.traveltripapplication.database.position.PositionHelper;
-import com.example.traveltripapplication.database.rating.RatingHelper;
-import com.example.traveltripapplication.database.state.StateHelper;
-import com.example.traveltripapplication.database.tour.TourHelper;
-import com.example.traveltripapplication.database.tour_category.TourCategoryHelper;
-import com.example.traveltripapplication.database.tour_itinerary.TourItineraryHelper;
-import com.example.traveltripapplication.database.tour_ticket.TourTicketHelper;
-import com.example.traveltripapplication.database.user.UserHelper;
+import com.example.traveltripapplication.database.order.order_state.OrderStateHelper;
+import com.example.traveltripapplication.database.order.order_ticket.OrderTicketHelper;
+import com.example.traveltripapplication.database.order.order_tour.OrderTourHelper;
+import com.example.traveltripapplication.database.tour.category.CategoryHelper;
+import com.example.traveltripapplication.database.user.contacts.ContactsHelper;
+import com.example.traveltripapplication.database.user.permission.PermissionHelper;
+import com.example.traveltripapplication.database.user.position.PositionHelper;
+import com.example.traveltripapplication.database.tour.rating.RatingHelper;
+import com.example.traveltripapplication.database.user.state.StateHelper;
+import com.example.traveltripapplication.database.tour.tour.TourHelper;
+import com.example.traveltripapplication.database.tour.tour_category.TourCategoryHelper;
+import com.example.traveltripapplication.database.tour.tour_itinerary.TourItineraryHelper;
+import com.example.traveltripapplication.database.tour.tour_ticket.TourTicketHelper;
+import com.example.traveltripapplication.database.user.user.UserHelper;
 
 public class DatabaseHelper {
 
@@ -49,6 +52,9 @@ public class DatabaseHelper {
     public static TourTicketHelper mTourTicketHelper(){return TourTicketHelper.getInstance(context);}
     public static TourItineraryHelper mTourItineraryHelper(){return TourItineraryHelper.getInstance(context);}
     public static RatingHelper mRatingHelper(){return RatingHelper.getInstance(context);}
+    public static OrderTourHelper mOrderTourHelper(){return OrderTourHelper.getInstance(context);}
+    public static OrderTicketHelper mOrderTicketHelper(){return OrderTicketHelper.getInstance(context);}
+    public static OrderStateHelper mOrderStateHelper(){return OrderStateHelper.getInstance(context);}
 
     public static void initDB(){
         try {
@@ -66,6 +72,9 @@ public class DatabaseHelper {
             mTourTicketHelper().onCreate(stateDB);
             mTourItineraryHelper().onCreate(stateDB);
             mRatingHelper().onCreate(stateDB);
+            mOrderTourHelper().onCreate(stateDB);
+            mOrderTicketHelper().onCreate(stateDB);
+            mOrderStateHelper().onCreate(stateDB);
 
             //Tạo dữ liệu mẫu không cần lo lặp dữ liệu
             mCategoryHelper().initDataTemplates();
@@ -74,20 +83,7 @@ public class DatabaseHelper {
             mTourTicketHelper().InitDataTemplates();
             mTourItineraryHelper().initDataTemplates();
             mRatingHelper().initDataTemplates();
-
-
-            //Đóng các intance lại
-            mPositionDBHelper().close();
-            mPermissionHelper().close();
-            mContactsHelper().close();
-            mUserHelper().close();
-            //Đóng các instance triển khai templates data
-            mCategoryHelper().close();
-            mTourHelper().close();
-            mTourCategoryHelper().close();
-            mTourTicketHelper().close();
-            mTourItineraryHelper().close();
-            mRatingHelper().close();
+            mOrderStateHelper().initDataTemplates();
 
             //Đóng StateDB
             stateDB.close();
