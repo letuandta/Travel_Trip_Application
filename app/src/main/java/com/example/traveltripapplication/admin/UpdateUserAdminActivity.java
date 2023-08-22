@@ -3,21 +3,17 @@ package com.example.traveltripapplication.admin;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
-import android.provider.SyncStateContract;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.PopupMenu;
 import android.widget.Toast;
 
 import com.example.traveltripapplication.R;
-import com.example.traveltripapplication.database.DatabaseHelper;
+import com.example.traveltripapplication.data.database.DatabaseHelper;
 import com.example.traveltripapplication.databinding.FragmentUserBinding;
 import com.example.traveltripapplication.model.ContactsModel;
 import com.example.traveltripapplication.model.UserModel;
@@ -43,8 +39,8 @@ public class UpdateUserAdminActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         btnDatePickerBirthday = findViewById(R.id.datePickerBirthday);
-        com.example.traveltripapplication.dialog.DatePickerDialog datePickerDialog1
-                = new com.example.traveltripapplication.dialog.DatePickerDialog(btnDatePickerBirthday, this);
+        com.example.traveltripapplication.util.dialog.DatePickerDialog datePickerDialog1
+                = new com.example.traveltripapplication.util.dialog.DatePickerDialog(btnDatePickerBirthday, this);
         btnDatePickerBirthday.setOnClickListener(datePickerDialog1::openDatePicker);
         btnRole = findViewById(R.id.clickBtn);
         btnRole.setOnClickListener(view -> {

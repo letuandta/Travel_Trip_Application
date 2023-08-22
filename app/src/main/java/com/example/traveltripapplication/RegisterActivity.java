@@ -3,20 +3,16 @@ package com.example.traveltripapplication;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 
-import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 
+import com.example.traveltripapplication.customer.fragment.CompleteUserInfoDialogFragment;
 import com.example.traveltripapplication.databinding.ActivityRegisterBinding;
-import com.example.traveltripapplication.fragment.CompleteUserInfoDialogFragment;
-import com.example.traveltripapplication.interfaceviewmodel.CompleteUserInfoInterface;
-import com.example.traveltripapplication.interfaceviewmodel.RegisterViewModelInterface;
-import com.example.traveltripapplication.model.ContactsModel;
+import com.example.traveltripapplication.viewmodel.interfaceListener.CompleteUserInfoInterface;
+import com.example.traveltripapplication.viewmodel.interfaceListener.RegisterViewModelInterface;
 import com.example.traveltripapplication.model.UserModel;
 import com.example.traveltripapplication.viewmodel.RegisterViewModel;
-
-import java.util.Objects;
 
 public class RegisterActivity extends AppCompatActivity implements RegisterViewModelInterface, CompleteUserInfoInterface{
 

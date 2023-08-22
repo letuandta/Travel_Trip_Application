@@ -10,16 +10,18 @@ import com.example.traveltripapplication.databinding.ItemDetailItineraryBinding;
 import com.example.traveltripapplication.model.TourItineraryModel;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class TourItineraryAdapter extends RecyclerView.Adapter<TourItineraryAdapter.ViewHolder> {
 
-    final ArrayList<TourItineraryModel> tourItineraryModels;
+    final List<TourItineraryModel> tourItineraryModels;;
 
-    public TourItineraryAdapter(ArrayList<TourItineraryModel> tourItineraryModels) {
+    public TourItineraryAdapter(List<TourItineraryModel> tourItineraryModels) {
         this.tourItineraryModels = tourItineraryModels;
     }
 
-    public void updateData(ArrayList<TourItineraryModel> tourItineraryModels){
+    public void updateData(List<TourItineraryModel> tourItineraryModels){
         this.tourItineraryModels.clear();
         this.tourItineraryModels.addAll(tourItineraryModels);
         this.notifyDataSetChanged();

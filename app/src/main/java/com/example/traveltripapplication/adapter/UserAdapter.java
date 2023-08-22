@@ -9,13 +9,11 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.traveltripapplication.admin.UpdateUserAdminActivity;
-import com.example.traveltripapplication.database.DatabaseHelper;
+import com.example.traveltripapplication.data.database.DatabaseHelper;
 import com.example.traveltripapplication.databinding.ItemListUserBinding;
 import com.example.traveltripapplication.model.UserModel;
 
-import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.concurrent.CopyOnWriteArrayList;
 
 public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
     private  final ArrayList<UserModel> userModels;
@@ -74,6 +72,11 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
         this.userModels.clear();
         this.userModels.addAll(userModels);
         this.notifyDataSetChanged();
+    }
+
+    public void loadDataLastPosition(UserModel userModel){
+        this.userModels.add(userModel);
+        this.notifyItemInserted(userModels.size() - 1);
     }
 
 }

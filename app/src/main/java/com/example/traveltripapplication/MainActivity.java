@@ -5,7 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 
-import com.example.traveltripapplication.database.DatabaseHelper;
+import com.example.traveltripapplication.data.database.DatabaseHelper;
 import com.example.traveltripapplication.databinding.ActivityMainBinding;
 
 public class MainActivity extends AppCompatActivity {

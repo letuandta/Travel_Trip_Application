@@ -8,8 +8,10 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 
+import com.example.traveltripapplication.admin.AdminActivity;
+import com.example.traveltripapplication.customer.MainPageActivity;
 import com.example.traveltripapplication.databinding.ActivityLoginBinding;
-import com.example.traveltripapplication.interfaceviewmodel.LoginViewModelInterface;
+import com.example.traveltripapplication.viewmodel.interfaceListener.LoginViewModelInterface;
 import com.example.traveltripapplication.model.UserModel;
 import com.example.traveltripapplication.viewmodel.LoginViewModel;
 

@@ -6,12 +6,10 @@ import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.Lifecycle;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 
-import com.example.traveltripapplication.fragment.HomePageFragment;
-import com.example.traveltripapplication.fragment.SearchFragment;
-import com.example.traveltripapplication.fragment.TourItineraryFragment;
-import com.example.traveltripapplication.fragment.TourOverViewFragment;
+import com.example.traveltripapplication.customer.fragment.TourItineraryFragment;
+import com.example.traveltripapplication.customer.fragment.TourOverViewFragment;
+import com.example.traveltripapplication.customer.fragment.TourTicketFragment;
 import com.example.traveltripapplication.model.TourModel;
-import com.example.traveltripapplication.model.UserModel;
 
 import java.util.Arrays;
 import java.util.List;
@@ -24,7 +22,8 @@ public class ViewPagerDetailTourAdapter extends FragmentStateAdapter {
         super(fragmentManager, lifecycle);
         this.fragments = Arrays.asList(
                 new TourOverViewFragment(tourModel.getExperience(), tourModel.getMoreInfo(), String.valueOf(tourModel.getTourDuration())),
-                new TourItineraryFragment(tourModel.getTourID())
+                new TourItineraryFragment(tourModel.getTourID()),
+                new TourTicketFragment(tourModel.getTourID())
         );
     }
     private final List<Fragment> fragments;
@@ -36,6 +35,6 @@ public class ViewPagerDetailTourAdapter extends FragmentStateAdapter {
 
     @Override
     public int getItemCount() {
-        return 2;
+        return 3;
     }
 }

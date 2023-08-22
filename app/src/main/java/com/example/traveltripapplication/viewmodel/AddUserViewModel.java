@@ -1,6 +1,5 @@
 package com.example.traveltripapplication.viewmodel;
 
-import android.app.Notification;
 import android.util.Log;
 
 import androidx.databinding.BaseObservable;
@@ -8,10 +7,9 @@ import androidx.databinding.Bindable;
 import androidx.databinding.ObservableField;
 
 import com.example.traveltripapplication.BR;
-import com.example.traveltripapplication.database.DatabaseHelper;
 import com.example.traveltripapplication.model.ContactsModel;
 import com.example.traveltripapplication.model.UserModel;
-import com.example.traveltripapplication.presenter.AuthPresenter;
+import com.example.traveltripapplication.data.repository.AuthRepository;
 
 import java.util.Calendar;
 import java.util.concurrent.CompletableFuture;
@@ -56,11 +54,11 @@ public class AddUserViewModel extends BaseObservable {
         }
         else
             userModel.setIs_super_user(0);
-        CompletableFuture<Long> addUserFuture = AuthPresenter.Register(userModel.getFull_name(), userModel.getUsername(), userModel.getPassword());
+        CompletableFuture<Long> addUserFuture = AuthRepository.Register(userModel.getFull_name(), userModel.getUsername(), userModel.getPassword());
         addUserFuture.thenAcceptAsync(result -> {
             userModel.set_ID(result);
             if (result >= 0) {
-                CompletableFuture<Integer> completableFuture = AuthPresenter.CompleteUserInfo(userModel, contactsModel);
+                CompletableFuture<Integer> completableFuture = AuthRepository.CompleteUserInfo(userModel, contactsModel);
                 completableFuture.thenAccept(re -> {
                     Log.d("id dd", String.valueOf(re));
                     if(re > 0) {

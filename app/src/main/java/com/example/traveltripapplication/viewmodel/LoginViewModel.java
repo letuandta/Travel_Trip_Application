@@ -8,9 +8,9 @@ import androidx.databinding.ObservableField;
 
 import com.example.traveltripapplication.BR;
 import com.example.traveltripapplication.model.UserModel;
-import com.example.traveltripapplication.presenter.AuthPresenter;
-import com.example.traveltripapplication.enumapp.LoginEnum;
-import com.example.traveltripapplication.interfaceviewmodel.LoginViewModelInterface;
+import com.example.traveltripapplication.data.repository.AuthRepository;
+import com.example.traveltripapplication.util.enumapp.LoginEnum;
+import com.example.traveltripapplication.viewmodel.interfaceListener.LoginViewModelInterface;
 import com.example.traveltripapplication.model.LoginModel;
 
 import java.util.concurrent.CompletableFuture;
@@ -35,7 +35,7 @@ public class LoginViewModel extends BaseObservable {
     public void onClickLoginButton(LoginViewModelInterface loginViewModelInterface)  {
         if((getLoginModel().isEmailValid() || getLoginModel().isUserNameValid()) && getLoginModel().isPasswordValid()) {
             Log.d("LOGIN", getLoginModel().getUsername() + getLoginModel().getPassword());
-            CompletableFuture<UserModel> loginFuture = AuthPresenter.Login(getLoginModel().getUsername(), getLoginModel().getPassword(),
+            CompletableFuture<UserModel> loginFuture = AuthRepository.Login(getLoginModel().getUsername(), getLoginModel().getPassword(),
                     getLoginModel().isEmailValid() ? LoginEnum.EMAIL : LoginEnum.USERNAME);
             loginFuture.thenAcceptAsync(result -> {
                 if(result.get_ID() != -1){

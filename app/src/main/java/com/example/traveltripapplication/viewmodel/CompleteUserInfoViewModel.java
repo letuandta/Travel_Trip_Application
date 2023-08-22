@@ -7,10 +7,10 @@ import androidx.databinding.Bindable;
 import androidx.databinding.ObservableField;
 
 import com.example.traveltripapplication.BR;
-import com.example.traveltripapplication.interfaceviewmodel.CompleteUserInfoInterface;
+import com.example.traveltripapplication.viewmodel.interfaceListener.CompleteUserInfoInterface;
 import com.example.traveltripapplication.model.ContactsModel;
 import com.example.traveltripapplication.model.UserModel;
-import com.example.traveltripapplication.presenter.AuthPresenter;
+import com.example.traveltripapplication.data.repository.AuthRepository;
 
 import java.util.Calendar;
 import java.util.concurrent.CompletableFuture;
@@ -47,7 +47,7 @@ public class CompleteUserInfoViewModel extends BaseObservable {
     }
 
     public void onClickSaveButton(CompleteUserInfoInterface completeUserInfoInterface){
-        CompletableFuture<Integer> completableFuture = AuthPresenter.CompleteUserInfo(user, contactsModel);
+        CompletableFuture<Integer> completableFuture = AuthRepository.CompleteUserInfo(user, contactsModel);
         completableFuture.thenAcceptAsync(result -> {
             Log.d("id dd", String.valueOf(result));
             if(result > 0) {

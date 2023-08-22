@@ -10,6 +10,7 @@ public class TourTicketModel {
     private int amount;
     private int active;
     private String price;
+    private int quantity;
 
     public TourTicketModel() {
     }
@@ -96,5 +97,13 @@ public class TourTicketModel {
 
     public void setPrice(String price) {
         this.price = price;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
     }
 }

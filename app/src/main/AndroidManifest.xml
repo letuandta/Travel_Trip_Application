@@ -21,10 +21,10 @@
             android:name=".admin.UpdateUserAdminActivity"
             android:exported="false" />
         <activity
-            android:name=".AdminActivity"
+            android:name=".admin.AdminActivity"
             android:exported="false" />
         <activity
-            android:name=".DetailTourActivity"
+            android:name=".customer.DetailTourActivity"
             android:exported="false" />
         <activity
             android:name=".RegisterActivity"
@@ -33,7 +33,7 @@
             android:name=".LoginActivity"
             android:exported="false" />
         <activity
-            android:name=".MainPageActivity"
+            android:name=".customer.MainPageActivity"
             android:exported="false" />
         <activity
             android:name=".MainActivity"

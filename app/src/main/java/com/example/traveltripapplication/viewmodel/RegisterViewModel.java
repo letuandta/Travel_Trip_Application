@@ -7,10 +7,10 @@ import androidx.databinding.Bindable;
 import androidx.databinding.ObservableField;
 
 import com.example.traveltripapplication.BR;
-import com.example.traveltripapplication.interfaceviewmodel.RegisterViewModelInterface;
+import com.example.traveltripapplication.viewmodel.interfaceListener.RegisterViewModelInterface;
 import com.example.traveltripapplication.model.RegisterModel;
 import com.example.traveltripapplication.model.UserModel;
-import com.example.traveltripapplication.presenter.AuthPresenter;
+import com.example.traveltripapplication.data.repository.AuthRepository;
 
 import java.util.concurrent.CompletableFuture;
 
@@ -31,7 +31,7 @@ public class RegisterViewModel extends BaseObservable {
     public void onClickButtonRegister(RegisterViewModelInterface registerViewModelInterface) {
         if ((getRegisterModel().checkPassword()) && getRegisterModel().isUserNameValid() && getRegisterModel().isPasswordValid() && getRegisterModel().isConfirmPasswordValid()) {
             Log.d("Account", getRegisterModel().getFullName() + getRegisterModel().getPassword() + getRegisterModel().getUsername() + getRegisterModel().getConfirmPassword());
-            CompletableFuture<Long> registerFuture = AuthPresenter.Register(getRegisterModel().getFullName(), getRegisterModel().getUsername(), getRegisterModel().getPassword());
+            CompletableFuture<Long> registerFuture = AuthRepository.Register(getRegisterModel().getFullName(), getRegisterModel().getUsername(), getRegisterModel().getPassword());
 
             registerFuture.thenAcceptAsync(result -> {
                 if (result >= 0) {

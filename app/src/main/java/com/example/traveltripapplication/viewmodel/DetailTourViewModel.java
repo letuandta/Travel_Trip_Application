@@ -6,9 +6,6 @@ import androidx.databinding.ObservableField;
 
 import com.example.traveltripapplication.BR;
 import com.example.traveltripapplication.model.TourModel;
-import com.example.traveltripapplication.presenter.TourPresenter;
-
-import java.util.concurrent.CompletableFuture;
 
 public class DetailTourViewModel extends BaseObservable {
 
