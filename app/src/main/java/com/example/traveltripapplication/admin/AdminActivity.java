@@ -55,14 +55,17 @@ public class AdminActivity extends AppCompatActivity {
         mActivityAdminBinding.bottomNav.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
                 @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                if (item.getItemId() == R.id.action_home) {
+                if (item.getItemId() == R.id.manager_user) {
                     mActivityAdminBinding.viewPager.setCurrentItem(0);
                     return true;
-                } else if (item.getItemId() == R.id.action_search_history) {
+                } else if (item.getItemId() == R.id.manager_cate) {
+                    mActivityAdminBinding.viewPager.setCurrentItem(1);
                     return true;
-                } else if (item.getItemId() == R.id.action_favorite) {
+                } else if (item.getItemId() == R.id.manager_order) {
+                    mActivityAdminBinding.viewPager.setCurrentItem(2);
                     return true;
                 } else {
+                    mActivityAdminBinding.viewPager.setCurrentItem(3);
                     return true;
                 }
             }
@@ -80,15 +83,15 @@ public class AdminActivity extends AppCompatActivity {
                     case 0:
                         mActivityAdminBinding.bottomNav.getMenu().findItem(R.id.manager_user).setChecked(true);
                         break;
-//                    case 1:
-//                        mActivityAdminBinding.bottomNav.getMenu().findItem(R.id.manager_cate).setChecked(true);
-//                        break;
-//                    case 2:
-//                        mActivityAdminBinding.bottomNav.getMenu().findItem(R.id.manager_order).setChecked(true);
-//                        break;
-//                    case 3:
-//                        mActivityAdminBinding.bottomNav.getMenu().findItem(R.id.manager_tour).setChecked(true);
-//                        break;
+                    case 1:
+                        mActivityAdminBinding.bottomNav.getMenu().findItem(R.id.manager_cate).setChecked(true);
+                        break;
+                    case 2:
+                        mActivityAdminBinding.bottomNav.getMenu().findItem(R.id.manager_order).setChecked(true);
+                        break;
+                    case 3:
+                        mActivityAdminBinding.bottomNav.getMenu().findItem(R.id.manager_tour).setChecked(true);
+                        break;
                 }
             }
         });

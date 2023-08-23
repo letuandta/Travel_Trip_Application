@@ -1,23 +1,16 @@
 package com.example.traveltripapplication.adapter;
 
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.traveltripapplication.R;
 import com.example.traveltripapplication.databinding.ItemCategoryBinding;
-import com.example.traveltripapplication.databinding.ItemPlaceBinding;
+import com.example.traveltripapplication.databinding.ItemListCateBinding;
 import com.example.traveltripapplication.model.CategoryModel;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.URL;
 import java.util.ArrayList;
-import java.util.concurrent.CompletableFuture;
 
 public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHolder> {
 
@@ -33,7 +26,8 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         ItemCategoryBinding itemCategoryBinding = ItemCategoryBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false);
-        return new ViewHolder(itemCategoryBinding);
+        ItemListCateBinding itemListCateBinding = ItemListCateBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false);
+        return new ViewHolder(itemCategoryBinding, itemListCateBinding);
     }
 
     @Override
@@ -46,6 +40,9 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
             holder.itemCategoryBinding.cvPlace.setOnClickListener(view -> {
                 listener.onClickCategoryItem(categoryModel.getCateID());
             });
+
+            holder.itemListCateBinding.tvCateCode.setText(categoryModel.getCateCode());
+            holder.itemListCateBinding.tvCateName.setText(categoryModel.getCateName());
         }
         else return;
     }
@@ -59,11 +56,15 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
     public static class ViewHolder extends RecyclerView.ViewHolder{
 
         private final ItemCategoryBinding itemCategoryBinding;
+        private  final ItemListCateBinding itemListCateBinding;
 
-        public ViewHolder(@NonNull ItemCategoryBinding itemCategoryBinding) {
+        public ViewHolder(@NonNull ItemCategoryBinding itemCategoryBinding, ItemListCateBinding itemListCateBinding) {
             super(itemCategoryBinding.getRoot());
             this.itemCategoryBinding = itemCategoryBinding;
+            this.itemListCateBinding = itemListCateBinding;
         }
+
+
     }
 
     public  interface CategoryAdapterListener{
