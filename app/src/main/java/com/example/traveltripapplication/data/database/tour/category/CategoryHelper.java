@@ -1,5 +1,6 @@
 package com.example.traveltripapplication.data.database.tour.category;
 
+import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -10,6 +11,7 @@ import android.util.Log;
 import com.example.traveltripapplication.data.database.DatabaseInformation;
 import com.example.traveltripapplication.model.CategoryModel;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -85,5 +87,23 @@ public class CategoryHelper extends SQLiteOpenHelper {
         long id = db.insert(TABLE_NAME, categoryContract.CategoryEntry._ID, values);
         db.close();
         return id;
+    }
+    @SuppressLint("Range")
+    public ArrayList<CategoryModel> getListCate() {
+        SQLiteDatabase db = getReadableDatabase();
+
+        ArrayList<CategoryModel> categoryModels = new ArrayList<>();
+        Cursor cursor = db.query(TABLE_NAME, null, null, null, null, null, null, null);
+        while (cursor.moveToNext()) {
+            categoryModels.add(new CategoryModel(
+                    cursor.getLong(cursor.getColumnIndex(categoryContract.CategoryEntry._ID)),
+                    cursor.getString(cursor.getColumnIndex(categoryContract.CategoryEntry.CATEGORY_CODE)),
+                    cursor.getString(cursor.getColumnIndex(categoryContract.CategoryEntry.CATEGORY_NAME))
+            ));
+        }
+        cursor.getCount();
+        Log.d("listCate", "getListCate: "+ cursor.getCount());
+        cursor.close();
+        return categoryModels;
     }
 }

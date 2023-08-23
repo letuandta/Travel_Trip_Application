@@ -32,9 +32,9 @@
                         android:id="@+id/btn_add"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:background="@drawable/login_button_bg"
                         android:text="THÊM USER"
-                        android:textSize="14sp" />
+                        android:textSize="14sp"
+                        android:textStyle="bold"/>
                 </LinearLayout>
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rc_listUser"

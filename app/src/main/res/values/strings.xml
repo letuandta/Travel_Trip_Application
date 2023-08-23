@@ -32,4 +32,6 @@
     <string name="manager_cate">Quản lý danh mục</string>
     <string name="manager_tour">Quản lý tour</string>
     <string name="manager_order">Quản lý đơn đặt</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

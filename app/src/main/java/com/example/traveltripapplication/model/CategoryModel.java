@@ -7,6 +7,8 @@ public class CategoryModel {
     private String cateCode;
     private String cateName;
     private int drawableImage;
+    public CategoryModel() {
+    }
 
     public CategoryModel(long cateID, String cateCode, String cateName) {
         this.cateID = cateID;
