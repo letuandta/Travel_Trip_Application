@@ -7,7 +7,6 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.traveltripapplication.databinding.ItemCategoryBinding;
-import com.example.traveltripapplication.databinding.ItemListCateBinding;
 import com.example.traveltripapplication.model.CategoryModel;
 
 import java.util.ArrayList;
@@ -39,6 +38,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
             holder.itemCategoryBinding.cvPlace.setOnClickListener(view -> {
                 listener.onClickCategoryItem(categoryModel.getCateID());
             });
+
         }
         else return;
     }

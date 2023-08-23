@@ -6,7 +6,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.Lifecycle;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 
-import com.example.traveltripapplication.admin.fragment.CategoryFragment;
+import com.example.traveltripapplication.admin.fragment.CateFragment;
 import com.example.traveltripapplication.admin.fragment.UserFragment;
 import com.example.traveltripapplication.model.UserModel;
 
@@ -26,7 +26,7 @@ public class ViewPagerAdminApdater extends FragmentStateAdapter {
             case 0:
                 return new UserFragment();
             case 1:
-                return new CategoryFragment();
+                return new CateFragment();
 
         }
         return null;
