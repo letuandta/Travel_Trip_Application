@@ -1,4 +1,4 @@
-package com.example.traveltripapplication.adapter;
+package com.example.traveltripapplication.customer.adapter;
 
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
@@ -7,7 +7,10 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.traveltripapplication.databinding.ItemCategoryBinding;
+<<<<<<< HEAD:app/src/main/java/com/example/traveltripapplication/adapter/CategoryAdapter.java
 import com.example.traveltripapplication.databinding.ItemListCateBinding;
+=======
+>>>>>>> 4c5b788a880e0664f1dcc4edfb849e6e44acdf31:app/src/main/java/com/example/traveltripapplication/customer/adapter/CategoryAdapter.java
 import com.example.traveltripapplication.model.CategoryModel;
 
 import java.util.ArrayList;

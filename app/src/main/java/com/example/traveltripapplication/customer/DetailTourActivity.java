@@ -11,19 +11,14 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.traveltripapplication.R;
-import com.example.traveltripapplication.adapter.ViewPagerDetailTourAdapter;
+import com.example.traveltripapplication.customer.adapter.ViewPagerDetailTourAdapter;
 import com.example.traveltripapplication.databinding.ActivityDetailTourBinding;
 import com.example.traveltripapplication.model.TourModel;
 import com.example.traveltripapplication.viewmodel.DetailTourViewModel;
 import com.squareup.picasso.Picasso;
 
-import org.w3c.dom.Text;
-
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Objects;
 
-import eightbitlab.com.blurview.RenderEffectBlur;
 import eightbitlab.com.blurview.RenderScriptBlur;
 
 public class DetailTourActivity extends AppCompatActivity {
