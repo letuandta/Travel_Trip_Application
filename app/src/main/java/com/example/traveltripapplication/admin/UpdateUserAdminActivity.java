@@ -14,6 +14,8 @@ import android.widget.PopupMenu;
 import android.widget.Toast;
 
 import com.example.traveltripapplication.R;
+import com.example.traveltripapplication.admin.fragment.CateFragment;
+import com.example.traveltripapplication.admin.fragment.UserFragment;
 import com.example.traveltripapplication.data.database.DatabaseHelper;
 import com.example.traveltripapplication.databinding.FragmentUserBinding;
 import com.example.traveltripapplication.model.ContactsModel;
@@ -28,7 +30,7 @@ public class UpdateUserAdminActivity extends AppCompatActivity {
     editMore;
 
     public ContactsModel contactsModel;
-
+    int position;
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,6 +69,8 @@ public class UpdateUserAdminActivity extends AppCompatActivity {
         if (getIntent().getExtras().getSerializable("user") instanceof UserModel) {
             userModel = (UserModel) getIntent().getExtras().getSerializable("user");
         }
+        position = getIntent().getIntExtra("position", -1);
+
         contactsModel = DatabaseHelper.mContactsHelper().getContactsById(userModel.getContacts_id());
         editFullName.setText(userModel.getFull_name());
         editEmail.setText(userModel.getEmail());
@@ -83,20 +87,7 @@ public class UpdateUserAdminActivity extends AppCompatActivity {
             btnRole.setText("Admin");
         }
         else   btnRole.setText("Customer");
-//        backButton = findViewById(R.id.btn_back);
-//
-//        backButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                onBackPressed();
-//            }
-//        });
     }
-//    @Override
-//    public void onBackPressed() {
-//        super.onBackPressed();
-//    }
-
     public void updateUser() {
         userModel.setFull_name(String.valueOf(editFullName.getText()));
         userModel.setBirthday(String.valueOf(btnDatePickerBirthday.getText()));
@@ -112,7 +103,7 @@ public class UpdateUserAdminActivity extends AppCompatActivity {
         int data2 = DatabaseHelper.mContactsHelper().update(contactsModel, userModel.getContacts_id());
 
         if (data > 0 && data2 >0) {
-            Toast.makeText(this, "Thanhf cong", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Thành công", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -125,6 +116,9 @@ public class UpdateUserAdminActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if (item.getItemId()== android.R.id.home) {
+            UserFragment.userModelUpdate = userModel;
+            UserFragment.checkUpdateUser = true;
+            UserFragment.position = position;
             finish();
         }
         return super.onOptionsItemSelected(item);

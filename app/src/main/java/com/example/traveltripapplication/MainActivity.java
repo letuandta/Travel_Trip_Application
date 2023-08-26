@@ -20,7 +20,7 @@ public class MainActivity extends AppCompatActivity {
 
         //region: create database
         DatabaseHelper.setContext(MainActivity.this);
-        DatabaseHelper.initDB(); //mở comment lúc tạo database với các table và dữ liệu mẫu rồi nhớ đóng không thì bị lặp dữ liệu
+//        DatabaseHelper.initDB(); //mở comment lúc tạo database với các table và dữ liệu mẫu rồi nhớ đóng không thì bị lặp dữ liệu
         //Lở bị lỗi do quên đóng thì uninstall app trên máy ảo rồi build lại là được
         //end region
 

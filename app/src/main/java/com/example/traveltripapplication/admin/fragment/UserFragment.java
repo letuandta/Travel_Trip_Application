@@ -1,6 +1,7 @@
 package com.example.traveltripapplication.admin.fragment;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +15,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import com.example.traveltripapplication.admin.AdminActivity;
 import com.example.traveltripapplication.admin.adapter.UserAdapter;
 import com.example.traveltripapplication.databinding.FragmentUserBinding;
+import com.example.traveltripapplication.model.CategoryModel;
 import com.example.traveltripapplication.model.UserModel;
 import com.example.traveltripapplication.data.repository.UserRepository;
 
@@ -27,6 +29,10 @@ public class UserFragment extends Fragment implements AddUserFragment.addUserVie
 
     UserAdapter userAdapter;
 
+    public static UserModel userModelUpdate = new UserModel();
+    public static boolean checkUpdateUser =false;
+
+    public static int position;
 
     @Nullable
     @Override
@@ -67,7 +73,14 @@ public class UserFragment extends Fragment implements AddUserFragment.addUserVie
         });
     }
 
-
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (UserFragment.checkUpdateUser) {
+            userAdapter.updateData(UserFragment.userModelUpdate, position);
+            UserFragment.checkUpdateUser = false;
+        }
+    }
     //    @Override
 //    public void onAttach(@NonNull Context context) {
 //        super.onAttach(context);

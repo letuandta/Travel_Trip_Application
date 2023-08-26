@@ -220,4 +220,22 @@ public class TourHelper extends SQLiteOpenHelper {
         db.close();
         return id;
     }
+
+    @SuppressLint("Range")
+    public ArrayList<TourModel> getListTour() {
+        SQLiteDatabase db = getReadableDatabase();
+        ArrayList<TourModel> tourModels = new ArrayList<>();
+        Cursor cursor = db.query(TABLE_NAME, null, null, null, null, null, null);
+        while(cursor.moveToNext()) {
+            tourModels.add(new TourModel(
+                    cursor.getLong(cursor.getColumnIndex(TourEntry._ID)),
+                    cursor.getString(cursor.getColumnIndex(TourEntry.TOUR_CODE)),
+                    cursor.getString(cursor.getColumnIndex(TourEntry.TITLE))
+            ));
+        }
+        cursor.getCount();
+        Log.d("listTour", "getListTour: "+ cursor.getCount());
+        cursor.close();
+        return  tourModels;
+    }
 }

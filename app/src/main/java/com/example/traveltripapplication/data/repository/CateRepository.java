@@ -13,4 +13,13 @@ public class CateRepository {
         });
         return future;
     }
+
+    public static CompletableFuture<Long> createCate(CategoryModel categoryModel) {
+        CompletableFuture<Long> registerFuture = new CompletableFuture<>();
+        registerFuture = CompletableFuture.supplyAsync(() -> {
+            return DatabaseHelper.mCategoryHelper().insert(categoryModel);
+        });
+
+        return registerFuture;
+    }
 }

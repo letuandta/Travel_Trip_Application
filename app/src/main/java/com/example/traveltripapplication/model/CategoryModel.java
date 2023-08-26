@@ -1,6 +1,8 @@
 package com.example.traveltripapplication.model;
 
-public class CategoryModel {
+import java.io.Serializable;
+
+public class CategoryModel implements Serializable {
 
 
     private long cateID;
@@ -21,6 +23,9 @@ public class CategoryModel {
         this.cateCode = cateCode;
         this.cateName = cateName;
         this.drawableImage = drawableImage;
+    }
+
+    public CategoryModel(String categoryCode, String categoryName) {
     }
 
     public int getDrawableImage() {

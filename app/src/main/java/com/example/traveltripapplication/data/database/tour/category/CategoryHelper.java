@@ -1,5 +1,7 @@
 package com.example.traveltripapplication.data.database.tour.category;
 
+import static com.example.traveltripapplication.data.database.tour.category.categoryContract.*;
+
 import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.content.Context;
@@ -9,6 +11,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
 import com.example.traveltripapplication.data.database.DatabaseInformation;
+import com.example.traveltripapplication.data.database.user.user.UserContract;
 import com.example.traveltripapplication.model.CategoryModel;
 
 import java.util.ArrayList;
@@ -17,7 +20,7 @@ import java.util.List;
 
 public class CategoryHelper extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = DatabaseInformation.DATABASE_NAME;
-    private static final String TABLE_NAME = categoryContract.CategoryEntry.TABLE_NAME;
+    private static final String TABLE_NAME = CategoryEntry.TABLE_NAME;
     private static final int DATABASE_VERSION = DatabaseInformation.VERSION;
 
     private static CategoryHelper INSTANCE;
@@ -36,9 +39,9 @@ public class CategoryHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         Log.d("create category", "onCreate: category");
         db.execSQL("CREATE TABLE IF NOT EXISTS " + TABLE_NAME + " ("
-                                + categoryContract.CategoryEntry._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
-                                + categoryContract.CategoryEntry.CATEGORY_CODE + " TEXT, "
-                                + categoryContract.CategoryEntry.CATEGORY_NAME + " TEXT);"
+                                + CategoryEntry._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+                                + CategoryEntry.CATEGORY_CODE + " TEXT, "
+                                + CategoryEntry.CATEGORY_NAME + " TEXT);"
                 );
     }
 
@@ -55,8 +58,8 @@ public class CategoryHelper extends SQLiteOpenHelper {
             );
             ContentValues values = new ContentValues();
             categoryModels.forEach(categoryModel -> {
-                values.put(categoryContract.CategoryEntry.CATEGORY_CODE, categoryModel.getCateCode());
-                values.put(categoryContract.CategoryEntry.CATEGORY_NAME, categoryModel.getCateName());
+                values.put(CategoryEntry.CATEGORY_CODE, categoryModel.getCateCode());
+                values.put(CategoryEntry.CATEGORY_NAME, categoryModel.getCateName());
                 long id = db.insert(TABLE_NAME, null, values);
                 values.clear();
             });
@@ -82,9 +85,9 @@ public class CategoryHelper extends SQLiteOpenHelper {
     public long insert(CategoryModel categoryModel){
         SQLiteDatabase db = getWritableDatabase();
         ContentValues values = new ContentValues();
-        values.put(categoryContract.CategoryEntry.CATEGORY_CODE, categoryModel.getCateCode());
-        values.put(categoryContract.CategoryEntry.CATEGORY_NAME, categoryModel.getCateName());
-        long id = db.insert(TABLE_NAME, categoryContract.CategoryEntry._ID, values);
+        values.put(CategoryEntry.CATEGORY_CODE, categoryModel.getCateCode());
+        values.put(CategoryEntry.CATEGORY_NAME, categoryModel.getCateName());
+        long id = db.insert(TABLE_NAME, CategoryEntry._ID, values);
         db.close();
         return id;
     }
@@ -96,9 +99,9 @@ public class CategoryHelper extends SQLiteOpenHelper {
         Cursor cursor = db.query(TABLE_NAME, null, null, null, null, null, null, null);
         while (cursor.moveToNext()) {
             categoryModels.add(new CategoryModel(
-                    cursor.getLong(cursor.getColumnIndex(categoryContract.CategoryEntry._ID)),
-                    cursor.getString(cursor.getColumnIndex(categoryContract.CategoryEntry.CATEGORY_CODE)),
-                    cursor.getString(cursor.getColumnIndex(categoryContract.CategoryEntry.CATEGORY_NAME))
+                    cursor.getLong(cursor.getColumnIndex(CategoryEntry._ID)),
+                    cursor.getString(cursor.getColumnIndex(CategoryEntry.CATEGORY_CODE)),
+                    cursor.getString(cursor.getColumnIndex(CategoryEntry.CATEGORY_NAME))
             ));
         }
         cursor.getCount();
@@ -106,4 +109,22 @@ public class CategoryHelper extends SQLiteOpenHelper {
         cursor.close();
         return categoryModels;
     }
+
+    public void delete(long id) {
+        SQLiteDatabase db = getWritableDatabase();
+        db.execSQL("DELETE FROM "+ TABLE_NAME +" WHERE _id = ?;", new String[]{String.valueOf(id)});
+        db.close();
+    }
+
+    public int update(CategoryModel categoryModel) {
+        SQLiteDatabase db = getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(CategoryEntry.CATEGORY_CODE, categoryModel.getCateCode());
+        values.put(CategoryEntry.CATEGORY_NAME, categoryModel.getCateName());
+        int id = db.update(TABLE_NAME, values, CategoryEntry._ID + " = ?", new String[]{String.valueOf(categoryModel.getCateID())});
+        db.close();
+        return id;
+    }
+
+
 }

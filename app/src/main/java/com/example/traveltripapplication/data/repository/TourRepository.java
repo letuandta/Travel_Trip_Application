@@ -53,7 +53,13 @@ public class TourRepository {
         CompletableFuture<ArrayList<TourTicketModel>> future = CompletableFuture.supplyAsync(() -> {
             return DatabaseHelper.mTourTicketHelper().getTicketByTourID(id);
         });
+        return future;
+    }
 
+    public static CompletableFuture<ArrayList<TourModel>> getListCate() {
+        CompletableFuture<ArrayList<TourModel>> future = CompletableFuture.supplyAsync(() -> {
+            return DatabaseHelper.mTourHelper().getListTour();
+        });
         return future;
     }
 }

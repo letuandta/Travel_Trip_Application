@@ -43,6 +43,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
                 public void onClick(View view) {
                     Intent intent = new Intent(view.getContext(), UpdateUserAdminActivity.class);
                     intent.putExtra("user", userModel);
+                    intent.putExtra("position", holder.getLayoutPosition());
                     view.getContext().startActivity(intent);
                 }
             });

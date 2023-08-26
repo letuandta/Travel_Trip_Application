@@ -75,7 +75,7 @@ public class AdminActivity extends AppCompatActivity {
                 } else if (item.getItemId() == R.id.manager_cate) {
                     mActivityAdminBinding.viewPager.setCurrentItem(1);
                     return true;
-                } else if (item.getItemId() == R.id.manager_order) {
+                } else if (item.getItemId() == R.id.manager_tour) {
                     mActivityAdminBinding.viewPager.setCurrentItem(2);
                     return true;
                 } else {
@@ -101,10 +101,10 @@ public class AdminActivity extends AppCompatActivity {
                         mActivityAdminBinding.bottomNav.getMenu().findItem(R.id.manager_cate).setChecked(true);
                         break;
                     case 2:
-                        mActivityAdminBinding.bottomNav.getMenu().findItem(R.id.manager_order).setChecked(true);
+                        mActivityAdminBinding.bottomNav.getMenu().findItem(R.id.manager_tour).setChecked(true);
                         break;
                     case 3:
-                        mActivityAdminBinding.bottomNav.getMenu().findItem(R.id.manager_tour).setChecked(true);
+                        mActivityAdminBinding.bottomNav.getMenu().findItem(R.id.manager_order).setChecked(true);
                         break;
                 }
             }

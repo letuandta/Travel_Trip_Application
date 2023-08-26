@@ -3,11 +3,11 @@
     <string name="login">Đăng nhập</string>
     <string name="register">Đăng kí tài khoản</string>
     <string name="email_or_phone">Nhập Tài khoảng</string>
-    <string name="hint_enter_email"><i>Nhập email/tài khoảng</i></string>
+    <string name="hint_enter_email"><i>Nhập email/tài khoản</i></string>
     <string name="hint_enter_password"><i>Mật khẩu</i></string>
     <string name="password">Mật khẩu</string>
     <string name="others_way_to_login">Hoặc đăng nhập</string>
-    <string name="you_have_not_account"><i><b>Bạn chưa có tài khoảng?</b></i></string>
+    <string name="you_have_not_account"><i><b>Bạn chưa có tài khoản?</b></i></string>
     <string name="register_2"><b>Đăng ký</b></string>
     <string name="skip"><b>Bỏ qua</b></string>
     <string name="fullname">Họ và tên</string>

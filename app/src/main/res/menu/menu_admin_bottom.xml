@@ -6,10 +6,10 @@
     <item android:id="@+id/manager_cate"
         android:title="@string/manager_cate"
         android:icon="@drawable/category"/>
-    <item android:id="@+id/manager_order"
-        android:title="@string/manager_order"
-        android:icon="@drawable/order"/>
     <item android:id="@+id/manager_tour"
         android:title="@string/manager_tour"
         android:icon="@drawable/tour"/>
+    <item android:id="@+id/manager_order"
+        android:title="@string/manager_order"
+        android:icon="@drawable/order"/>
 </menu>

@@ -7,6 +7,7 @@ import androidx.lifecycle.Lifecycle;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 
 import com.example.traveltripapplication.admin.fragment.CateFragment;
+import com.example.traveltripapplication.admin.fragment.TourFragment;
 import com.example.traveltripapplication.admin.fragment.UserFragment;
 import com.example.traveltripapplication.model.UserModel;
 
@@ -27,6 +28,8 @@ public class ViewPagerAdminApdater extends FragmentStateAdapter {
                 return new UserFragment();
             case 1:
                 return new CateFragment();
+            case 2:
+                return new TourFragment();
 
         }
         return null;
@@ -34,7 +37,7 @@ public class ViewPagerAdminApdater extends FragmentStateAdapter {
 
     @Override
     public int getItemCount() {
-        return 2;
+        return 3;
     }
 }
 
