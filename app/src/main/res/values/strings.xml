@@ -2,7 +2,7 @@
     <string name="app_name">Travel Trip Application</string>
     <string name="login">Đăng nhập</string>
     <string name="register">Đăng kí tài khoản</string>
-    <string name="email_or_phone">Nhập Tài khoảng</string>
+    <string name="email_or_phone">Nhập Tài khoản</string>
     <string name="hint_enter_email"><i>Nhập email/tài khoản</i></string>
     <string name="hint_enter_password"><i>Mật khẩu</i></string>
     <string name="password">Mật khẩu</string>

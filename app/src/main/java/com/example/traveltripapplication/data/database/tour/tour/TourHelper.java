@@ -11,6 +11,8 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
 import com.example.traveltripapplication.data.database.DatabaseInformation;
+import com.example.traveltripapplication.data.database.tour.category.categoryContract;
+import com.example.traveltripapplication.model.CategoryModel;
 import com.example.traveltripapplication.model.TourModel;
 
 import java.util.ArrayList;
@@ -230,12 +232,35 @@ public class TourHelper extends SQLiteOpenHelper {
             tourModels.add(new TourModel(
                     cursor.getLong(cursor.getColumnIndex(TourEntry._ID)),
                     cursor.getString(cursor.getColumnIndex(TourEntry.TOUR_CODE)),
-                    cursor.getString(cursor.getColumnIndex(TourEntry.TITLE))
+                    cursor.getString(cursor.getColumnIndex(TourEntry.TITLE)),
+                    cursor.getInt(cursor.getColumnIndex(TourEntry.DURATION)),
+                    cursor.getString(cursor.getColumnIndex(TourEntry.LOCATION)),
+                    cursor.getString(cursor.getColumnIndex(TourEntry.THUMBNAIL)),
+                    cursor.getString(cursor.getColumnIndex(TourEntry.MORE_INFORMATION))
             ));
         }
         cursor.getCount();
         Log.d("listTour", "getListTour: "+ cursor.getCount());
         cursor.close();
         return  tourModels;
+    }
+    public int update(TourModel tourModel) {
+        SQLiteDatabase db = getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(TourEntry.TOUR_CODE, tourModel.getTourCode());
+        values.put(TourEntry.TITLE, tourModel.getTourTitle());
+        values.put(TourEntry.DURATION, tourModel.getTourDuration());
+        values.put(TourEntry.LOCATION, tourModel.getTourLocation());
+        values.put(TourEntry.EXPERIENCE, tourModel.getExperience());
+        values.put(TourEntry.MORE_INFORMATION, tourModel.getMoreInfo());
+        int id = db.update(TABLE_NAME, values, TourContracts.TourEntry._ID + " = ?", new String[]{String.valueOf(tourModel.getTourID())});
+        db.close();
+        return id;
+    }
+
+    public void delete(long id) {
+        SQLiteDatabase db = getWritableDatabase();
+        db.execSQL("DELETE FROM "+ TABLE_NAME +" WHERE _id = ?;", new String[]{String.valueOf(id)});
+        db.close();
     }
 }

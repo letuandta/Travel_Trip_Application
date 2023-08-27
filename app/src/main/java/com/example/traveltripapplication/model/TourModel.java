@@ -18,10 +18,15 @@ public class TourModel implements Serializable {
         this.ratingTour = 0;
     }
 
-    public TourModel(long tourID, String tourCode, String tourTitle) {
+    public TourModel(long tourID, String tourCode, String tourTitle,int tourDuration, String tourLocation, String thumbnail,
+                     String moreInfo)  {
         this.tourID = tourID;
         this.tourCode = tourCode;
         this.tourTitle = tourTitle;
+        this.tourDuration = tourDuration;
+        this.tourLocation = tourLocation;
+        this.thumbnail = thumbnail;
+        this.moreInfo = moreInfo;
     }
 
     public TourModel(long tourID, String tourCode, String tourTitle, int tourDuration, String tourLocation, int tourActive, String thumbnail, String experience, String moreInfo) {

@@ -20,6 +20,7 @@ import com.example.traveltripapplication.viewmodel.AddUserViewModel;
 public class AddUserFragment extends DialogFragment implements AddUserViewModel.addUserViewModelListener {
 
     private FragmentUserAddBinding binding;
+    AddUserViewModel addUserViewModel = new AddUserViewModel(this);
 
     public AddUserFragment(AddUserFragment.addUserViewModelListener addUserViewModelListener) {
         this.addUserViewModelListener = addUserViewModelListener;
@@ -31,11 +32,8 @@ public class AddUserFragment extends DialogFragment implements AddUserViewModel.
         final AddUserFragment dialog = new AddUserFragment(addUserViewModelListener);
         return dialog;
     }
-    public interface addUserViewModelListener {
-        public void successAddUser(UserModel userModel);
-    }
 
-    AddUserViewModel addUserViewModel = new AddUserViewModel(this);
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -78,4 +76,8 @@ public class AddUserFragment extends DialogFragment implements AddUserViewModel.
     public void successAddUser() {
         this.dismiss();
     }
+    public interface addUserViewModelListener {
+        public void successAddUser(UserModel userModel);
+    }
+
 }

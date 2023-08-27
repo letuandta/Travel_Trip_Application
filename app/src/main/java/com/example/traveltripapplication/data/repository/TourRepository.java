@@ -62,4 +62,12 @@ public class TourRepository {
         });
         return future;
     }
+
+    public static CompletableFuture<Long> createTour(TourModel tourModel) {
+        CompletableFuture<Long> registerFuture = new CompletableFuture<>();
+        registerFuture = CompletableFuture.supplyAsync(() -> {
+            return DatabaseHelper.mTourHelper().insert(tourModel);
+        });
+        return registerFuture;
+    }
 }
