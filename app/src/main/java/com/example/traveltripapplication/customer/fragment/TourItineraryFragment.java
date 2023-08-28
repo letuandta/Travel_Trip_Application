@@ -46,10 +46,13 @@ public class TourItineraryFragment extends Fragment {
             tourItineraryModels.addAll(result);
         });
         future.join();
-        TourItineraryAdapter adapter = new TourItineraryAdapter(tourItineraryModels);
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
-        binding.rcvItinerary.setAdapter(adapter);
-        binding.rcvItinerary.setLayoutManager(linearLayoutManager);
+        if(tourItineraryModels.size() > 0) {
+            binding.tvEmpty.setVisibility(View.GONE);
+            TourItineraryAdapter adapter = new TourItineraryAdapter(tourItineraryModels);
+            LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
+            binding.rcvItinerary.setAdapter(adapter);
+            binding.rcvItinerary.setLayoutManager(linearLayoutManager);
+        }
 
     }
 }

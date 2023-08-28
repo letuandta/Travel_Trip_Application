@@ -7,6 +7,7 @@ public class RatingModel {
     private double scores;
     private String message;
     private String createdDate;
+    private UserModel userModel;
 
     public RatingModel() {
     }
@@ -67,4 +68,13 @@ public class RatingModel {
     public void setCreatedDate(String createdDate) {
         this.createdDate = createdDate;
     }
+
+    public UserModel getUserModel() {
+        return userModel;
+    }
+
+    public void setUserModel(UserModel userModel) {
+        this.userModel = userModel;
+    }
+
 }

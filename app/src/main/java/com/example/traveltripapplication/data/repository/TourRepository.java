@@ -1,6 +1,7 @@
 package com.example.traveltripapplication.data.repository;
 
 import com.example.traveltripapplication.data.database.DatabaseHelper;
+import com.example.traveltripapplication.model.RatingModel;
 import com.example.traveltripapplication.model.TourItineraryModel;
 import com.example.traveltripapplication.model.TourModel;
 import com.example.traveltripapplication.model.TourTicketModel;
@@ -69,5 +70,25 @@ public class TourRepository {
             return DatabaseHelper.mTourHelper().insert(tourModel);
         });
         return registerFuture;
+    }
+
+    public static CompletableFuture<ArrayList<RatingModel>> getRatingByTourId(long tourId, int currentPage){
+        CompletableFuture<ArrayList<RatingModel>> future = CompletableFuture.supplyAsync(() -> {
+            return DatabaseHelper.mRatingHelper().getRatingByTourId(tourId, currentPage);
+        });
+
+        return future;
+    }
+
+    public static CompletableFuture<Integer> getCommentCountByTourId(long tourId){
+        CompletableFuture<Integer> future = CompletableFuture.supplyAsync(() -> {
+            return DatabaseHelper.mRatingHelper().getCommentCountByTourId(tourId);
+        });
+
+        return future;
+    }
+
+    public static CompletableFuture<Long> createRating(RatingModel ratingModel){
+        return CompletableFuture.supplyAsync(() -> DatabaseHelper.mRatingHelper().insert(ratingModel));
     }
 }

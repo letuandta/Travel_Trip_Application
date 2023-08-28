@@ -7,6 +7,7 @@ import androidx.lifecycle.Lifecycle;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 
 import com.example.traveltripapplication.customer.fragment.HomePageFragment;
+import com.example.traveltripapplication.customer.fragment.OrderListFragment;
 import com.example.traveltripapplication.customer.fragment.SearchFragment;
 import com.example.traveltripapplication.model.UserModel;
 
@@ -21,10 +22,10 @@ public class ViewPagerAdapter extends FragmentStateAdapter {
         this.userModel = userModel;
 
         this.fragments = Arrays.asList(
-                new HomePageFragment(userModel),
+                HomePageFragment.newInstance(userModel),
                 new SearchFragment(),
-                new HomePageFragment(userModel),
-                new HomePageFragment(userModel)
+                new OrderListFragment(),
+                HomePageFragment.newInstance(userModel)
         );
     }
 

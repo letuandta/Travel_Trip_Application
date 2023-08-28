@@ -32,6 +32,7 @@ public class AddTourViewModel extends BaseObservable {
     public void onClickButtonAdd() {
         tourModel.setThumbnail("https://i.pinimg.com/564x/ef/69/c5/ef69c56e319d6db337527303f3501ee1.jpg");
         tourModel.setTourDuration(Integer.parseInt(String.valueOf(duration.get())));
+        tourModel.setTourActive(1);
         CompletableFuture<Long> addTourFuture = TourRepository.createTour(tourModel);
         addTourFuture.thenAcceptAsync(result -> {
            tourModel.setTourID(result);

@@ -1,5 +1,8 @@
 package com.example.traveltripapplication.data.database.order.order_ticket;
 
+import static com.example.traveltripapplication.data.database.order.order_ticket.OrderTicketContracts.*;
+
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -9,11 +12,15 @@ import com.example.traveltripapplication.data.database.tour.tour_ticket.TourTick
 import com.example.traveltripapplication.data.database.DatabaseInformation;
 import com.example.traveltripapplication.data.database.order.order_tour.OrderTourContracts;
 
+import java.util.List;
+import java.util.Map;
+import java.util.function.BiConsumer;
+
 public class OrderTicketHelper extends SQLiteOpenHelper {
 
 
     private static final String DATABASE_NAME = DatabaseInformation.DATABASE_NAME;
-    private static final String TABLE_NAME = OrderTicketContracts.OrderTicketEntry.TABLE_NAME;
+    private static final String TABLE_NAME = OrderTicketEntry.TABLE_NAME;
     private static final int DATABASE_VERSION = DatabaseInformation.VERSION;
 
     private static OrderTicketHelper INSTANCE;
@@ -34,11 +41,12 @@ public class OrderTicketHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         Log.d("create order ticket", "onCreate: order_ticket");
         db.execSQL("CREATE TABLE IF NOT EXISTS " + TABLE_NAME + " ( "
-                + OrderTicketContracts.OrderTicketEntry._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
-                + OrderTicketContracts.OrderTicketEntry.ORDER_ID + " INTEGER, "
-                + OrderTicketContracts.OrderTicketEntry.TOUR_TICKET_ID + " INTEGER, "
-                + "FOREIGN KEY ("+ OrderTicketContracts.OrderTicketEntry.ORDER_ID+") REFERENCES " + OrderTourContracts.OrderEntry.TABLE_NAME + "("+ OrderTourContracts.OrderEntry._ID +"), "
-                + "FOREIGN KEY ("+ OrderTicketContracts.OrderTicketEntry.TOUR_TICKET_ID+") REFERENCES " + TourTicketContracts.TourTicketEntry.TABLE_NAME + "("+ TourTicketContracts.TourTicketEntry._ID +"));"
+                + OrderTicketEntry._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+                + OrderTicketEntry.ORDER_ID + " INTEGER, "
+                + OrderTicketEntry.TOUR_TICKET_ID + " INTEGER, "
+                + OrderTicketEntry.QUANTITY + " INTEGER, "
+                + "FOREIGN KEY ("+ OrderTicketEntry.ORDER_ID+") REFERENCES " + OrderTourContracts.OrderEntry.TABLE_NAME + "("+ OrderTourContracts.OrderEntry._ID +"), "
+                + "FOREIGN KEY ("+ OrderTicketEntry.TOUR_TICKET_ID+") REFERENCES " + TourTicketContracts.TourTicketEntry.TABLE_NAME + "("+ TourTicketContracts.TourTicketEntry._ID +"));"
         );
     }
 
@@ -48,5 +56,19 @@ public class OrderTicketHelper extends SQLiteOpenHelper {
             db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
             onCreate(db);
         }
+    }
+
+    public long insert(long orderId, Map<Long, Integer> tickets){
+        SQLiteDatabase db = getWritableDatabase();
+        final long[] id = {-1};
+        tickets.forEach((ticketID, quantity) -> {
+            ContentValues values = new ContentValues();
+            values.put(OrderTicketEntry.ORDER_ID, orderId);
+            values.put(OrderTicketEntry.TOUR_TICKET_ID, ticketID);
+            values.put(OrderTicketEntry.QUANTITY, quantity);
+            id[0] = db.insert(TABLE_NAME, OrderTicketEntry._ID, values);
+        });
+        db.close();
+        return id[0];
     }
 }

@@ -54,7 +54,6 @@ public class TourFragment extends Fragment implements AddTourFragment.addTourVie
         });
         completableFuture.join();
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
-
         tourAdapter = new TourAdapter(listTour);
         fragmentTourBinding.rcListTour.setAdapter(tourAdapter);
         fragmentTourBinding.rcListTour.setLayoutManager(linearLayoutManager);

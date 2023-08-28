@@ -18,8 +18,9 @@ public class OrderStateContracts {
     public static class OrderStateDataTemplates{
         public static List<OrderStateModel> getValues(){
             return Arrays.asList(
-                    new OrderStateModel(1,"active"),
-                    new OrderStateModel(2, "cancel")
+                    new OrderStateModel(1,"waiting"),
+                    new OrderStateModel(2, "cancel"),
+                    new OrderStateModel(3, "paid")
             );
         }
     }

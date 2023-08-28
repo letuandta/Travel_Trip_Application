@@ -11,5 +11,6 @@ public class OrderTicketContracts {
         public static final String _ID = BaseColumns._ID;
         public static final String ORDER_ID = "order_id";
         public static final String TOUR_TICKET_ID = "tour_ticket_id";
+        public static final String QUANTITY = "quantity";
     }
 }

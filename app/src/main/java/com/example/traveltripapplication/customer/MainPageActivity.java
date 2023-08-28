@@ -23,7 +23,7 @@ public class MainPageActivity extends AppCompatActivity {
 
     ActivityMainPageBinding mActivityMainPageBinding;
 
-    private UserModel userModel;
+    public static UserModel userModel;
 
     public void setSearchModel(SearchModel searchModel) {
         this.searchModel = searchModel;
@@ -66,6 +66,9 @@ public class MainPageActivity extends AppCompatActivity {
     private Boolean isOtherSearch = false;
 
     private Boolean isCateSearch = false;
+
+    public MainPageActivity() {}
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -73,7 +76,7 @@ public class MainPageActivity extends AppCompatActivity {
         setContentView(mActivityMainPageBinding.getRoot());
         UserModel userModel;
         userModel = (UserModel) getIntent().getExtras().getSerializable("user");
-        this.userModel = userModel;
+        MainPageActivity.userModel = userModel;
         setupViewPager();
 
         mActivityMainPageBinding.bottomNav.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
@@ -85,7 +88,8 @@ public class MainPageActivity extends AppCompatActivity {
                 } else if (item.getItemId() == R.id.action_search_history) {
                     mActivityMainPageBinding.viewPager.setCurrentItem(1);
                     return true;
-                } else if (item.getItemId() == R.id.action_favorite) {
+                } else if (item.getItemId() == R.id.action_order) {
+                    mActivityMainPageBinding.viewPager.setCurrentItem(2);
                     return true;
                 } else {
                     return true;
@@ -95,7 +99,7 @@ public class MainPageActivity extends AppCompatActivity {
     }
 
     private void setupViewPager() {
-        ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager(), getLifecycle(), this.userModel);
+        ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager(), getLifecycle(), MainPageActivity.userModel);
         mActivityMainPageBinding.viewPager.setAdapter(viewPagerAdapter);
 
         mActivityMainPageBinding.viewPager.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
@@ -109,7 +113,7 @@ public class MainPageActivity extends AppCompatActivity {
                         mActivityMainPageBinding.bottomNav.getMenu().findItem(R.id.action_search_history).setChecked(true);
                         break;
                     case 2:
-                        mActivityMainPageBinding.bottomNav.getMenu().findItem(R.id.action_favorite).setChecked(true);
+                        mActivityMainPageBinding.bottomNav.getMenu().findItem(R.id.action_order).setChecked(true);
                         break;
                     case 3:
                         mActivityMainPageBinding.bottomNav.getMenu().findItem(R.id.action_setting).setChecked(true);

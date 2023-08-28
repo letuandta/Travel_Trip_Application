@@ -70,8 +70,7 @@ public class DetailTourActivity extends AppCompatActivity {
         currentTextView.setBackground(getDrawable(R.drawable.shape_button));
         textView.setBackground(getDrawable(R.drawable.shape_button_selected));
         currentSelected = position;
-        if(position == 0 || position == 1 || position == 2)
-            binding.viewPager.setCurrentItem(position);
+        binding.viewPager.setCurrentItem(position);
     }
 
     private void setupViewPager(ArrayList<TextView> tag) {
@@ -92,6 +91,7 @@ public class DetailTourActivity extends AppCompatActivity {
                         changeColor(tag.get(2), tag, 2);
                         break;
                     case 3:
+                        changeColor(tag.get(3), tag, 3);
                         break;
                 }
             }

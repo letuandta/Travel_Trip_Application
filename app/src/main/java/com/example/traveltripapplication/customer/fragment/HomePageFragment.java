@@ -35,17 +35,24 @@ public class HomePageFragment extends Fragment implements PlaceFamousAdapter.Pla
 
     FragmentHomePageBinding fragmentHomePageBinding;
     ArrayList<CategoryModel> categoryModels;
+    private UserModel userModel;
 
-    public HomePageFragment(UserModel userModel) {
-        this.userModel = userModel;
+
+    public static HomePageFragment newInstance(UserModel userModel) {
+        Bundle args = new Bundle();
+        args.putSerializable("usermodel", userModel);
+        HomePageFragment fragment = new HomePageFragment();
+        fragment.setArguments(args);
+        return fragment;
     }
 
-    private final UserModel userModel;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         fragmentHomePageBinding = FragmentHomePageBinding.inflate(inflater, container, false);
         fragmentHomePageBinding.setSearchHomePage(new SearchHomePageViewModel(this));
+        assert getArguments() != null;
+        userModel = (UserModel) getArguments().getSerializable("usermodel");
         return fragmentHomePageBinding.getRoot();
     }
 

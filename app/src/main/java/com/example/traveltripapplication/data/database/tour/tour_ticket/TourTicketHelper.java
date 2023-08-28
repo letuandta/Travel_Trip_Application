@@ -104,4 +104,33 @@ public class TourTicketHelper extends SQLiteOpenHelper {
         cursor.close();
         return tourTicketModels;
     }
+
+    @SuppressLint("Range")
+    public ArrayList<TourTicketModel> getTicketByOrderID(long orderID){
+        SQLiteDatabase db = getReadableDatabase();
+        ArrayList<TourTicketModel> tourTicketModels = new ArrayList<>();
+
+        Cursor cursor = db.rawQuery("SELECT t.*, o.quantity\n" +
+                        "FROM order_ticket as o\n" +
+                        "INNER JOIN tour_ticket as t\n" +
+                        "ON o.tour_ticket_id = t._id\n" +
+                        "WHERE o.order_id = ?",
+                new String[]{String.valueOf(orderID)});
+        while (cursor.moveToNext()){
+            TourTicketModel tourTicketModel = new TourTicketModel();
+            tourTicketModel.setId(cursor.getLong(cursor.getColumnIndex(TourTicketEntry._ID)));
+            tourTicketModel.setTitle(cursor.getString(cursor.getColumnIndex(TourTicketEntry.TITLE)));
+            tourTicketModel.setTour_date(cursor.getString(cursor.getColumnIndex(TourTicketEntry.TOUR_DATE)));
+            tourTicketModel.setDescription(cursor.getString(cursor.getColumnIndex(TourTicketEntry.DESCRIPTION)));
+            tourTicketModel.setActive(cursor.getInt(cursor.getColumnIndex(TourTicketEntry.ACTIVE)));
+            tourTicketModel.setAmount(cursor.getInt(cursor.getColumnIndex(TourTicketEntry.AMOUNT)));
+            tourTicketModel.setPrice(cursor.getString(cursor.getColumnIndex(TourTicketEntry.PRICE)));
+            tourTicketModel.setRemaining(cursor.getInt(cursor.getColumnIndex(TourTicketEntry.REMAINING)));
+            tourTicketModel.setTour_id(cursor.getLong(cursor.getColumnIndex(TourTicketEntry.TOUR_ID)));
+            tourTicketModel.setQuantity(cursor.getInt(cursor.getColumnIndex("quantity")));
+            tourTicketModels.add(tourTicketModel);
+        }
+        cursor.close();
+        return tourTicketModels;
+    }
 }

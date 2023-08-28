@@ -67,7 +67,9 @@ public class TourTicketFragment extends Fragment implements TourTicketAdapter.To
 
         //register event
         binding.btnOrder.setOnClickListener(v -> {
-            Toast.makeText(getContext(), "select " + adapter.getTicketCheckedModels().size(), Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(), "select " + adapter.getOrderTicket().size(), Toast.LENGTH_SHORT).show();
+            CompleteInfoCustomerDialogFragment dialog = CompleteInfoCustomerDialogFragment.newInstance(tour_id, adapter.getOrderTicket());
+            dialog.show(getParentFragmentManager(), "complete_customer_info");
         });
         //end
     }

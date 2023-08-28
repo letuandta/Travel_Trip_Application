@@ -14,6 +14,7 @@ import com.example.traveltripapplication.data.database.DatabaseInformation;
 import com.example.traveltripapplication.data.database.tour.tour.TourContracts;
 import com.example.traveltripapplication.data.database.user.user.UserContract;
 import com.example.traveltripapplication.model.RatingModel;
+import com.example.traveltripapplication.model.UserModel;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -73,23 +74,43 @@ public class RatingHelper extends SQLiteOpenHelper {
     public ArrayList<RatingModel> getRatingByTourId(long tourId, int currentPage){
         SQLiteDatabase db = getReadableDatabase();
         ArrayList<RatingModel> ratingModels = new ArrayList<>();
-        String whereClause = RatingEntry.TOUR_ID + " = ? ";
-        String[] whereArgs = new String[]{String.valueOf(tourId)};
-        String orderBy = RatingEntry._ID + " DESC ";
-        String limit = ((currentPage - 1) * 5) + " , 5";
-        Cursor cursor = db.query(TABLE_NAME, null, whereClause, whereArgs, null, null, null, limit);
+        Cursor cursor = db.rawQuery("SELECT r.*, u.full_name, u.avatar\n" +
+                "FROM rating r\n" +
+                "INNER JOIN user u\n" +
+                "ON r.user_id = u._id\n" +
+                "WHERE r.tour_id = ?\n" +
+                "ORDER BY r._id DESC\n" +
+                "LIMIT ?,?", new String[]{String.valueOf(tourId), String.valueOf(((currentPage - 1) * 2)), String.valueOf(2)});
         while (cursor.moveToNext()){
-            ratingModels.add(new RatingModel(
-                    cursor.getLong(cursor.getColumnIndex(RatingEntry._ID)),
-                    cursor.getLong(cursor.getColumnIndex(RatingEntry.TOUR_ID)),
-                    cursor.getLong(cursor.getColumnIndex(RatingEntry.USER_ID)),
-                    cursor.getDouble(cursor.getColumnIndex(RatingEntry.SCORES)),
-                    cursor.getString(cursor.getColumnIndex(RatingEntry.MESSAGE)),
-                    cursor.getString(cursor.getColumnIndex(RatingEntry.CREATED_DATE))
-            ));
+            RatingModel ratingModel = new RatingModel();
+            ratingModel.set_id(cursor.getLong(cursor.getColumnIndex(RatingEntry._ID)));
+            ratingModel.setTourId(cursor.getLong(cursor.getColumnIndex(RatingEntry.TOUR_ID)));
+            ratingModel.setScores(cursor.getDouble(cursor.getColumnIndex(RatingEntry.SCORES)));
+            ratingModel.setMessage(cursor.getString(cursor.getColumnIndex(RatingEntry.MESSAGE)));
+            ratingModel.setCreatedDate(cursor.getString(cursor.getColumnIndex(RatingEntry.CREATED_DATE)));
+            UserModel userModel = new UserModel();
+            userModel.set_ID(cursor.getLong(cursor.getColumnIndex(RatingEntry.USER_ID)));
+            userModel.setFull_name(cursor.getString(cursor.getColumnIndex(UserContract.UserEntry.FULL_NAME)));
+            userModel.setAvatar(cursor.getString(cursor.getColumnIndex(UserContract.UserEntry.AVATAR)));
+            ratingModel.setUserModel(userModel);
+            ratingModels.add(ratingModel);
         }
         cursor.close();
         return ratingModels;
+    }
+
+    @SuppressLint("Range")
+    public int getCommentCountByTourId(long tourId){
+        SQLiteDatabase db = getReadableDatabase();
+        int count = 0;
+        Cursor cursor = db.rawQuery("SELECT count(r.tour_id) as _count\n" +
+                "FROM rating r\n" +
+                "WHERE r.tour_id = ?", new String[]{String.valueOf(tourId)});
+        if(cursor.moveToFirst()){
+            count = cursor.getInt(cursor.getColumnIndex("_count"));
+        }
+        cursor.close();
+        return count;
     }
 
     @SuppressLint("Range")
